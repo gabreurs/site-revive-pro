@@ -4,7 +4,7 @@ import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SERVICES, BLOG_CATEGORIES, getExternalLinkTarget, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 import { motion, AnimatePresence } from "framer-motion";
-import logoSvg from "@/assets/logo-sms.svg";
+import logoDark from "@/assets/logo-sms-dark.svg";
 
 type DesktopDrop = "services" | "blog" | null;
 
@@ -28,7 +28,7 @@ export function Header() {
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border" : "bg-background border-b border-border/50"}`}>
       <div className="container-custom h-full">
         <div className="flex h-full items-center justify-between">
-          <Link to="/" className="shrink-0" aria-label="SMS Terraplenagem - Início"><img src={logoSvg} alt="SMS Terraplenagem" className="h-7 w-auto md:h-8" /></Link>
+          <Link to="/" className="shrink-0" aria-label="SMS Terraplenagem - Início"><img src={logoDark} alt="SMS Terraplenagem — Terraplanagem em São Paulo" className="h-7 w-auto md:h-8" /></Link>
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-7 lg:flex">
