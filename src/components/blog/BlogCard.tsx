@@ -12,7 +12,7 @@ export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-all hover:border-primary/30 hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-all hover:border-primary/30 hover:shadow-lg card-interactive tap-feedback"
     >
       {/* Cover */}
       <div className="aspect-[16/9] bg-muted overflow-hidden">
@@ -33,8 +33,8 @@ export function BlogCard({ post }: BlogCardProps) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+      <div className="flex flex-1 flex-col p-4 md:p-5">
+        <div className="flex items-center gap-2 md:gap-3 text-xs text-muted-foreground mb-2 md:mb-3">
           {category && (
             <span className="rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary">
               {category.label}
@@ -47,14 +47,14 @@ export function BlogCard({ post }: BlogCardProps) {
           <span>{post.readTime}</span>
         </div>
 
-        <h3 className="font-heading text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="font-heading text-base md:text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
           {post.title}
         </h3>
-        <p className="mt-2 text-sm text-muted-foreground line-clamp-2 flex-1">
+        <p className="mt-1.5 md:mt-2 text-xs md:text-sm text-muted-foreground line-clamp-2 flex-1">
           {post.excerpt}
         </p>
 
-        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+        <span className="mt-3 md:mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
           Ler artigo
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </span>

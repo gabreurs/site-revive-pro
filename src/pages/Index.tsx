@@ -40,25 +40,25 @@ const Index = () => {
       />
       <LocalBusinessJsonLd />
 
-      {/* ═══════════ HERO (dark, full-bleed image right) ═══════════ */}
+      {/* ═══════════ HERO ═══════════ */}
       <section className="relative overflow-hidden section-dark">
-        <div className="grid lg:grid-cols-2 min-h-[70vh]">
+        <div className="grid lg:grid-cols-2 min-h-[50vh] lg:min-h-[70vh]">
           {/* Left - Blue panel with text */}
           <div className="hero-blue-panel relative topo-pattern">
-            <div className="container-custom flex items-center h-full py-20 lg:py-28 lg:pr-16">
+            <div className="container-custom flex items-center h-full py-12 md:py-20 lg:py-28 lg:pr-16">
               <AnimatedSection>
-                <h1 className="font-heading text-4xl font-extrabold leading-[1.08] text-white md:text-5xl lg:text-[3.25rem]">
+                <h1 className="font-heading text-[1.75rem] font-extrabold leading-[1.1] text-white md:text-5xl lg:text-[3.25rem]">
                   Terraplanagem em São Paulo com equipamento próprio
                 </h1>
-                <p className="mt-6 max-w-xl text-base text-white/80 md:text-lg">
+                <p className="mt-4 md:mt-6 max-w-xl text-[0.94rem] text-white/80 md:text-lg leading-relaxed">
                   Movimentação de terra, nivelamento e preparo de terreno para obras comerciais e
                   industriais em toda a Grande São Paulo. Além disso, contamos com frota própria para garantir agilidade e cumprimento de prazo.
                 </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-6 md:mt-8 flex flex-col gap-3 sm:flex-row">
                   <WhatsAppCTA label="Solicitar cotação rápida" locationTag="hero" size="lg"
-                    className="bg-white text-primary hover:bg-white/90 rounded-full px-6" icon="message" />
+                    className="bg-white text-primary hover:bg-white/90 rounded-full px-6 w-full sm:w-auto tap-feedback" icon="message" />
                   <Button asChild variant="outline" size="lg"
-                    className="gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white rounded-full px-6">
+                    className="gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white rounded-full px-6 w-full sm:w-auto tap-feedback">
                     <Link to="/servicos">Ver serviços <ArrowRight className="h-4 w-4" /></Link>
                   </Button>
                 </div>
@@ -66,7 +66,7 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Right - Full image */}
+          {/* Right - Full image (desktop) */}
           <div className="relative hidden lg:block">
             <img src={heroImage} alt="Escavadeira realizando movimentação de terra em obra na Grande São Paulo"
               className="absolute inset-0 h-full w-full object-cover" loading="eager" width={960} height={720} />
@@ -75,27 +75,28 @@ const Index = () => {
         </div>
 
         {/* Mobile image */}
-        <div className="relative h-56 lg:hidden">
+        <div className="relative h-48 sm:h-56 lg:hidden">
           <img src={heroImage} alt="Máquinas de terraplanagem em obra na região de São Paulo" className="h-full w-full object-cover" loading="eager" width={800} height={400} />
           <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,30%,8%)] to-transparent" aria-hidden="true" />
         </div>
       </section>
 
-      {/* ═══════════ SERVIÇOS (light) ═══════════ */}
+      {/* ═══════════ SERVIÇOS ═══════════ */}
       <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection>
             <SectionHeading title="Nossos serviços" subtitle="Conheça as principais soluções que oferecemos para preparar seu terreno com segurança" centered />
           </AnimatedSection>
 
-          <div className="grid gap-5 md:grid-cols-2 mb-5">
+          {/* Desktop grid */}
+          <div className="hidden md:grid gap-5 md:grid-cols-2 mb-5">
             {SERVICES.slice(0, 2).map((s, i) => (
               <AnimatedSection key={s.id} delay={i * 0.08}>
                 <ServiceCard id={s.id} slug={s.slug} title={s.title} description={s.shortDescription} image={serviceImages[s.image]} variant="large" />
               </AnimatedSection>
             ))}
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="hidden md:grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SERVICES.slice(2).map((s, i) => (
               <AnimatedSection key={s.id} delay={i * 0.06}>
                 <ServiceCard id={s.id} slug={s.slug} title={s.title} description={s.shortDescription} image={serviceImages[s.image]} />
@@ -103,20 +104,29 @@ const Index = () => {
             ))}
           </div>
 
-          <AnimatedSection className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" className="rounded-full px-7">
+          {/* Mobile carousel */}
+          <div className="md:hidden carousel-snap -mx-4 px-4">
+            {SERVICES.map((s) => (
+              <div key={s.id} className="w-[75vw] max-w-[300px]">
+                <ServiceCard id={s.id} slug={s.slug} title={s.title} description={s.shortDescription} image={serviceImages[s.image]} />
+              </div>
+            ))}
+          </div>
+
+          <AnimatedSection className="mt-8 md:mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" className="rounded-full px-7 w-full sm:w-auto tap-feedback">
               <Link to="/servicos">Ver todos os serviços</Link>
             </Button>
-            <WhatsAppCTA label="Solicitar orçamento" locationTag="servicos-home" variant="outline" size="lg" className="rounded-full" />
+            <WhatsAppCTA label="Solicitar orçamento" locationTag="servicos-home" variant="outline" size="lg" className="rounded-full w-full sm:w-auto tap-feedback" />
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ═══════════ ÁREAS ATENDIDAS (neutral) ═══════════ */}
+      {/* ═══════════ ÁREAS ATENDIDAS ═══════════ */}
       <section className="section-padding section-neutral">
         <div className="container-custom">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch">
-            <AnimatedSection direction="left" className="lg:col-span-5">
+            <AnimatedSection direction="left" className="hidden lg:block lg:col-span-5">
               <div className="h-full min-h-[420px] overflow-hidden rounded-2xl shadow-sm">
                 <img src={heroImage} alt="Região metropolitana de São Paulo onde a SMS Terraplenagem atende" className="h-full w-full object-cover" loading="lazy" width={600} height={800} />
               </div>
@@ -125,9 +135,11 @@ const Index = () => {
             <AnimatedSection direction="right" className="lg:col-span-7">
               <SectionHeading title="Atendemos toda a Grande São Paulo"
                 subtitle="Capital e região metropolitana. Se tiver dúvida sobre sua cidade, chame no WhatsApp." />
-              <div className="space-y-3">
+
+              {/* Desktop: list cards */}
+              <div className="hidden md:block space-y-3">
                 {COVERAGE_AREAS.map((area) => (
-                  <div key={area.region} className="flex items-start gap-4 rounded-lg bg-card border border-border p-4 transition-colors hover:border-primary/20">
+                  <div key={area.region} className="flex items-start gap-4 rounded-lg bg-card border border-border p-4 transition-colors hover:border-primary/20 card-interactive">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                       <MapPin className="h-5 w-5 text-primary" />
                     </div>
@@ -138,24 +150,44 @@ const Index = () => {
                   </div>
                 ))}
               </div>
-              <div className="mt-7">
-                <WhatsAppCTA label="Chamar no WhatsApp" locationTag="coverage" className="rounded-full" />
+
+              {/* Mobile: accordion */}
+              <div className="md:hidden">
+                <Accordion type="single" collapsible className="w-full">
+                  {COVERAGE_AREAS.map((area, i) => (
+                    <AccordionItem key={i} value={`area-${i}`} className="border-border">
+                      <AccordionTrigger className="text-left text-sm font-semibold hover:text-primary font-heading gap-2">
+                        <span className="flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-primary shrink-0" />
+                          {area.region}
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="text-sm text-muted-foreground pl-6">
+                        {area.areas}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+
+              <div className="mt-6 md:mt-7">
+                <WhatsAppCTA label="Chamar no WhatsApp" locationTag="coverage" className="rounded-full w-full sm:w-auto tap-feedback" />
               </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* ═══════════ DIFERENCIAIS (dark) ═══════════ */}
+      {/* ═══════════ DIFERENCIAIS ═══════════ */}
       <section className="section-padding section-dark">
         <div className="container-custom">
           <AnimatedSection>
             <SectionHeading title="Por que escolher a SMS?" subtitle="Diferenciais que fazem a diferença na sua obra" centered />
           </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {DIFFERENTIALS.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.06}>
-                <div className="rounded-lg border border-white/10 bg-white/5 p-6 transition-all hover:border-primary/30">
+                <div className="rounded-lg border border-white/10 bg-white/5 p-5 md:p-6 transition-all hover:border-primary/30 card-interactive">
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                     <CheckCircle className="h-5 w-5 text-primary" />
                   </div>
@@ -168,32 +200,34 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══════════ DEPOIMENTOS (light) ═══════════ */}
+      {/* ═══════════ DEPOIMENTOS ═══════════ */}
       <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection>
             <SectionHeading title="O que nossos clientes dizem" subtitle="Avaliação 5.0 no Google" centered />
           </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-3">
+
+          {/* Desktop grid */}
+          <div className="hidden md:grid gap-6 md:grid-cols-3">
             {TESTIMONIALS.map((t, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
-                <div className="rounded-lg border border-border bg-card p-6">
-                  <div className="mb-4 flex gap-0.5">
-                    {[...Array(5)].map((_, j) => (<Star key={j} className="h-4 w-4 fill-yellow-400 text-yellow-400" />))}
-                  </div>
-                  <p className="text-sm text-muted-foreground italic leading-relaxed">"{t.text}"</p>
-                  <div className="mt-4 flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{t.name.charAt(0)}</div>
-                    <span className="text-sm font-medium text-foreground">{t.name}</span>
-                  </div>
-                </div>
+                <TestimonialCard t={t} />
               </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Mobile carousel */}
+          <div className="md:hidden carousel-snap -mx-4 px-4">
+            {TESTIMONIALS.map((t, i) => (
+              <div key={i} className="w-[80vw] max-w-[320px]">
+                <TestimonialCard t={t} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════ FAQ (neutral) ═══════════ */}
+      {/* ═══════════ FAQ ═══════════ */}
       <section className="section-padding section-neutral">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl">
@@ -204,8 +238,8 @@ const Index = () => {
               <Accordion type="single" collapsible className="w-full">
                 {FAQ_ITEMS.map((item, index) => (
                   <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                    <AccordionTrigger className="text-left text-base font-medium hover:text-primary font-heading">{item.question}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">{item.answer}</AccordionContent>
+                    <AccordionTrigger className="text-left text-sm md:text-base font-medium hover:text-primary font-heading">{item.question}</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground text-sm md:text-base">{item.answer}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -214,7 +248,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══════════ BLOG (light) ═══════════ */}
+      {/* ═══════════ BLOG ═══════════ */}
       <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection>
@@ -228,7 +262,7 @@ const Index = () => {
             ))}
           </div>
           <AnimatedSection className="mt-8 text-center">
-            <Button asChild variant="outline" size="lg" className="gap-2 rounded-full">
+            <Button asChild variant="outline" size="lg" className="gap-2 rounded-full tap-feedback">
               <Link to="/blog">Ver todos os artigos <ArrowRight className="h-4 w-4" /></Link>
             </Button>
           </AnimatedSection>
@@ -239,11 +273,11 @@ const Index = () => {
       <section className="section-padding cta-gradient section-dark">
         <div className="container-custom text-center">
           <AnimatedSection>
-            <h2 className="font-heading text-3xl font-bold text-white md:text-4xl">Pronto para começar seu projeto?</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">Entre em contato pelo WhatsApp e receba um orçamento personalizado sem compromisso.</p>
-            <div className="mt-8">
+            <h2 className="font-heading text-2xl font-bold text-white md:text-4xl">Pronto para começar seu projeto?</h2>
+            <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">Entre em contato pelo WhatsApp e receba um orçamento personalizado sem compromisso.</p>
+            <div className="mt-6 md:mt-8">
               <WhatsAppCTA label="Falar com um especialista" locationTag="cta-final"
-                className="bg-white text-primary hover:bg-white/90 rounded-full px-8" size="lg" />
+                className="bg-white text-primary hover:bg-white/90 rounded-full px-8 w-full sm:w-auto tap-feedback" size="lg" />
             </div>
           </AnimatedSection>
         </div>
@@ -251,5 +285,24 @@ const Index = () => {
     </Layout>
   );
 };
+
+function TestimonialCard({ t }: { t: { name: string; text: string } }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-5 md:p-6 h-full">
+      <div className="mb-3 md:mb-4 flex gap-0.5">
+        {[...Array(5)].map((_, j) => (
+          <Star key={j} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+        ))}
+      </div>
+      <p className="text-sm text-muted-foreground italic leading-relaxed">"{t.text}"</p>
+      <div className="mt-4 flex items-center gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+          {t.name.charAt(0)}
+        </div>
+        <span className="text-sm font-medium text-foreground">{t.name}</span>
+      </div>
+    </div>
+  );
+}
 
 export default Index;

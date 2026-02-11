@@ -10,13 +10,16 @@ interface AnimatedSectionProps {
 
 export function AnimatedSection({ children, className = "", delay = 0, direction = "up" }: AnimatedSectionProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  // Smaller translate on mobile (8px vs 16px)
+  const dist = typeof window !== "undefined" && window.innerWidth < 768 ? 8 : 16;
 
   const variants = {
     hidden: {
       opacity: 0,
-      y: direction === "up" ? 16 : 0,
-      x: direction === "left" ? -16 : direction === "right" ? 16 : 0,
+      y: direction === "up" ? dist : 0,
+      x: direction === "left" ? -dist : direction === "right" ? dist : 0,
     },
     visible: {
       opacity: 1,
@@ -31,7 +34,7 @@ export function AnimatedSection({ children, className = "", delay = 0, direction
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={variants}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      transition={{ duration: 0.4, delay, ease: "easeOut" }}
       className={className}
     >
       {children}

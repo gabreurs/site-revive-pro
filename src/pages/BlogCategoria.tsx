@@ -31,15 +31,15 @@ const BlogCategoria = () => {
         canonical={`https://smsterraplenagem.com.br/blog/categoria/${slug}`}
       />
 
-      <section className="section-dark py-16 md:py-24 topo-pattern">
+      <section className="section-dark py-12 md:py-24 topo-pattern">
         <div className="container-custom">
           <AnimatedSection>
-            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary mb-6 transition-colors">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary mb-4 md:mb-6 transition-colors">
               <ArrowLeft className="h-4 w-4" />
               Voltar ao Blog
             </Link>
-            <h1 className="font-heading text-4xl font-extrabold text-white md:text-5xl">{category.label}</h1>
-            <p className="mt-3 text-lg text-gray-300">{posts.length} artigo{posts.length !== 1 ? "s" : ""} nesta categoria</p>
+            <h1 className="font-heading text-[1.75rem] font-extrabold text-white md:text-5xl">{category.label}</h1>
+            <p className="mt-2 md:mt-3 text-base md:text-lg text-gray-300">{posts.length} artigo{posts.length !== 1 ? "s" : ""} nesta categoria</p>
           </AnimatedSection>
         </div>
       </section>
@@ -47,9 +47,9 @@ const BlogCategoria = () => {
       <section className="section-padding">
         <div className="container-custom">
           {posts.length === 0 ? (
-            <p className="text-center text-muted-foreground py-20">Nenhum artigo nesta categoria.</p>
+            <p className="text-center text-muted-foreground py-16 md:py-20">Nenhum artigo nesta categoria.</p>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((post, i) => (
                 <AnimatedSection key={post.slug} delay={i * 0.05}>
                   <BlogCard post={post} />

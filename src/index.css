@@ -58,14 +58,29 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground antialiased font-sans;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold tracking-tight;
+  }
+
+  /* Focus visible for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+/* Reduced motion: keep count-up but make it faster; reduce other animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.15s !important;
+    transition-duration: 0.15s !important;
   }
 }
 
@@ -87,15 +102,31 @@
   }
 
   .whatsapp-float {
-    @apply fixed bottom-6 right-6 z-40;
+    @apply fixed bottom-20 right-4 z-40 lg:bottom-6 lg:right-6;
   }
 
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-12 md:py-24;
   }
 
   .container-custom {
-    @apply max-w-[1216px] mx-auto px-5 sm:px-6 lg:px-8;
+    @apply max-w-[1216px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Safe area for iOS bottom */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Bottom bar spacer on mobile */
+  .has-bottom-bar {
+    padding-bottom: 56px;
+  }
+
+  @media (min-width: 1024px) {
+    .has-bottom-bar {
+      padding-bottom: 0;
+    }
   }
 
   /* DARK section override (hero, footer, alternating dark blocks) */
@@ -123,5 +154,67 @@
 
   .topo-pattern {
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 50 Q 25 30, 50 50 T 90 50' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='0.5'/%3E%3Cpath d='M10 30 Q 25 10, 50 30 T 90 30' fill='none' stroke='rgba(255,255,255,0.02)' stroke-width='0.5'/%3E%3Cpath d='M10 70 Q 25 50, 50 70 T 90 70' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='0.5'/%3E%3C/svg%3E");
+  }
+
+  /* ——— BUTTON MICRO-INTERACTIONS ——— */
+
+  /* Desktop: paint-fill hover on primary buttons */
+  .btn-fill {
+    @apply relative overflow-hidden;
+  }
+  .btn-fill::before {
+    content: "";
+    @apply absolute inset-0 z-0;
+    background: hsl(var(--primary-foreground) / 0.12);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 250ms ease-out;
+  }
+  .btn-fill:hover::before {
+    transform: scaleX(1);
+  }
+  .btn-fill > * {
+    @apply relative z-10;
+  }
+
+  /* Mobile: tap / active feedback */
+  .tap-feedback {
+    @apply transition-transform duration-100;
+  }
+  .tap-feedback:active {
+    transform: scale(0.97);
+  }
+
+  /* Card hover (desktop) + tap (mobile) */
+  .card-interactive {
+    @apply transition-all duration-200;
+  }
+  .card-interactive:hover {
+    @apply shadow-md border-primary/20;
+  }
+  .card-interactive:active {
+    @apply scale-[0.99];
+  }
+
+  /* ——— MOBILE DRAWER ——— */
+  .drawer-overlay {
+    @apply fixed inset-0 z-50 bg-black/50 backdrop-blur-sm;
+  }
+
+  .drawer-panel {
+    @apply fixed top-0 right-0 z-50 h-full w-[85vw] max-w-sm bg-background shadow-2xl flex flex-col;
+  }
+
+  /* ——— CARROSSEL SNAP ——— */
+  .carousel-snap {
+    @apply flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .carousel-snap::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-snap > * {
+    @apply snap-start shrink-0;
   }
 }
