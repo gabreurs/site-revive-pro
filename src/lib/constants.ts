@@ -1,6 +1,14 @@
 export const WHATSAPP_NUMBER = "5511943521043";
-export const WHATSAPP_MESSAGE = "Olá, gostaria de receber um orçamento!";
-export const WHATSAPP_URL = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+export function buildWhatsAppUrl(phone: string, text?: string): string {
+  let url = `https://api.whatsapp.com/send?phone=${phone}`;
+  if (text && text.trim()) {
+    url += `&text=${encodeURIComponent(text)}`;
+  }
+  return url;
+}
+
+export const WHATSAPP_URL = buildWhatsAppUrl(WHATSAPP_NUMBER);
 
 export const COMPANY_INFO = {
   name: "SMS Terraplenagem",
@@ -12,10 +20,22 @@ export const COMPANY_INFO = {
   hours: "Segunda a Sexta: 7h às 18h | Sábado: 7h às 12h",
 };
 
-export function getWhatsAppUrl(message?: string, locationTag?: string) {
-  const msg = message || WHATSAPP_MESSAGE;
-  const url = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(msg)}`;
-  return url;
+export function getWhatsAppUrl(message?: string) {
+  return buildWhatsAppUrl(WHATSAPP_NUMBER, message);
+}
+
+// Google Ads conversion helper
+export function trackWhatsAppConversion() {
+  if (typeof window !== "undefined" && (window as any).dataLayer) {
+    (window as any).dataLayer.push({ event: "whatsapp_click" });
+  }
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("event", "conversion", {
+      send_to: "AW-17287450407/vWT2CP6t_5sbEKeeprNA",
+      value: 1.0,
+      currency: "BRL",
+    });
+  }
 }
 
 export const SERVICES = [

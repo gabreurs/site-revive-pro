@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { COMPANY_INFO, SERVICES, BLOG_POSTS, getWhatsAppUrl } from "@/lib/constants";
+import { COMPANY_INFO, SERVICES, BLOG_POSTS, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
+import logoSvg from "@/assets/logo-sms.svg";
 
 export function Footer() {
   return (
@@ -10,19 +11,14 @@ export function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="mb-4">
-              <span className="text-2xl font-extrabold">
-                SMS<span className="text-primary">TERRA</span>
-              </span>
-              <span className="ml-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                PLENAGEM
-              </span>
+              <img src={logoSvg} alt="SMS Terraplenagem" className="h-7 w-auto" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Terraplanagem em São Paulo com qualidade e segurança garantidas.
               Atendemos obras comerciais e industriais em toda a Grande São Paulo.
             </p>
             <div className="mt-6 space-y-2">
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-cta="whatsapp" data-location="footer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-cta="whatsapp" data-location="footer" onClick={trackWhatsAppConversion} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="h-4 w-4 shrink-0" />
                 {COMPANY_INFO.phone}
               </a>
