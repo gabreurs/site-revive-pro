@@ -2,85 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-/* SMS Terraplenagem Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 10%;
+    /* Dark theme as default (matching PDF) */
+    --background: 222 30% 8%;
+    --foreground: 210 20% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card: 222 25% 12%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover: 222 25% 12%;
+    --popover-foreground: 210 20% 95%;
 
     /* Primary - SMS Blue */
-    --primary: 212 100% 47%;
+    --primary: 217 91% 55%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Dark Blue */
-    --secondary: 220 50% 15%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Slightly lighter dark */
+    --secondary: 222 25% 14%;
+    --secondary-foreground: 210 20% 90%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 40%;
+    --muted: 222 20% 16%;
+    --muted-foreground: 215 15% 55%;
 
-    --accent: 212 100% 47%;
+    --accent: 217 91% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 212 100% 47%;
+    --border: 222 20% 18%;
+    --input: 222 20% 18%;
+    --ring: 217 91% 55%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     /* Custom SMS Colors */
-    --sms-blue: 212 100% 47%;
-    --sms-dark: 220 50% 8%;
-    --sms-navy: 220 50% 15%;
+    --sms-blue: 217 91% 55%;
+    --sms-blue-light: 217 91% 65%;
+    --sms-dark: 222 30% 6%;
+    --sms-navy: 222 25% 14%;
     --sms-gold: 45 100% 50%;
     --whatsapp: 142 70% 45%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(220 50% 8%) 0%, hsl(220 50% 15%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(212 100% 47%) 0%, hsl(212 100% 35%) 100%);
-    --gradient-card-overlay: linear-gradient(180deg, transparent 0%, hsla(220, 50%, 8%, 0.9) 100%);
-  }
-
-  .dark {
-    --background: 220 50% 8%;
-    --foreground: 0 0% 98%;
-
-    --card: 220 50% 12%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 220 50% 12%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 212 100% 55%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 50% 20%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 220 30% 18%;
-    --muted-foreground: 220 10% 65%;
-
-    --accent: 212 100% 55%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 220 30% 20%;
-    --input: 220 30% 20%;
-    --ring: 212 100% 55%;
+    --gradient-hero-blue: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(217 91% 40%) 100%);
+    --gradient-hero-dark: linear-gradient(135deg, hsl(222 30% 6%) 0%, hsl(222 25% 12%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(230 80% 45%) 100%);
+    --gradient-card-overlay: linear-gradient(180deg, transparent 0%, hsla(222, 30%, 6%, 0.85) 100%);
   }
 }
 
@@ -94,18 +65,23 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
     @apply font-bold tracking-tight;
   }
 }
 
 @layer components {
-  .hero-section {
-    background: var(--gradient-hero);
+  .hero-blue-panel {
+    background: var(--gradient-hero-blue);
+  }
+
+  .hero-dark {
+    background: var(--gradient-hero-dark);
   }
 
   .service-card-overlay {
@@ -117,7 +93,7 @@
   }
 
   .whatsapp-float {
-    @apply fixed bottom-6 right-6 z-50;
+    @apply fixed bottom-6 right-6 z-40;
   }
 
   .section-padding {
@@ -126,5 +102,10 @@
 
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Subtle topographic pattern for hero */
+  .topo-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 50 Q 25 30, 50 50 T 90 50' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='0.5'/%3E%3Cpath d='M10 30 Q 25 10, 50 30 T 90 30' fill='none' stroke='rgba(255,255,255,0.02)' stroke-width='0.5'/%3E%3Cpath d='M10 70 Q 25 50, 50 70 T 90 70' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='0.5'/%3E%3C/svg%3E");
   }
 }

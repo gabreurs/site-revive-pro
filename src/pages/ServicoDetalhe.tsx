@@ -1,8 +1,18 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Phone, CheckCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Wrench, ShieldCheck, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { ServiceJsonLd } from "@/components/seo/JsonLd";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Layout } from "@/components/layout/Layout";
-import { SERVICES, WHATSAPP_URL } from "@/lib/constants";
+import { SERVICES } from "@/lib/constants";
 
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
 import demolicaoImg from "@/assets/demolicao.jpg";
@@ -22,7 +32,7 @@ const serviceImages: Record<string, string> = {
 
 const ServicoDetalhe = () => {
   const { slug } = useParams<{ slug: string }>();
-  const service = SERVICES.find((s) => s.id === slug);
+  const service = SERVICES.find((s) => s.slug === slug);
 
   if (!service) {
     return (
@@ -37,106 +47,169 @@ const ServicoDetalhe = () => {
     );
   }
 
-  const otherServices = SERVICES.filter((s) => s.id !== slug).slice(0, 3);
+  const otherServices = SERVICES.filter((s) => s.slug !== slug);
 
   return (
     <Layout>
+      <SEOHead
+        title={service.seoTitle}
+        description={service.seoDescription}
+        keywords={service.seoKeyword}
+      />
+      <ServiceJsonLd name={service.title} description={service.fullDescription} />
+
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[400px]">
+      <section className="relative h-[45vh] min-h-[360px]">
         <img
           src={serviceImages[service.image]}
           alt={service.title}
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-        <div className="container-custom absolute inset-0 flex flex-col justify-end pb-12">
-          <Link
-            to="/servicos"
-            className="mb-4 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Voltar aos Serviços
-          </Link>
-          <h1 className="text-4xl font-extrabold text-white md:text-5xl">{service.title}</h1>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div className="container-custom absolute inset-0 flex flex-col justify-end pb-10">
+          <AnimatedSection>
+            {/* Breadcrumb */}
+            <nav className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
+              <Link to="/" className="hover:text-primary transition-colors">Início</Link>
+              <span>/</span>
+              <Link to="/servicos" className="hover:text-primary transition-colors">Serviços</Link>
+              <span>/</span>
+              <span className="text-foreground">{service.title}</span>
+            </nav>
+            <h1 className="text-3xl font-extrabold text-foreground md:text-4xl lg:text-5xl">{service.title}</h1>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Content */}
-      <section className="section-padding bg-background">
+      <section className="section-padding">
         <div className="container-custom">
           <div className="grid gap-12 lg:grid-cols-3">
-            {/* Main Content */}
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold">Sobre o Serviço</h2>
-              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                {service.fullDescription}
-              </p>
+            {/* Main */}
+            <div className="lg:col-span-2 space-y-10">
+              <AnimatedSection>
+                <h2 className="text-2xl font-bold">Sobre o Serviço</h2>
+                <p className="mt-4 text-muted-foreground leading-relaxed">{service.fullDescription}</p>
+              </AnimatedSection>
 
-              <h3 className="mt-10 text-xl font-bold">Benefícios</h3>
-              <ul className="mt-4 space-y-3">
-                {service.benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-primary" />
-                    <span className="text-muted-foreground">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+              <AnimatedSection>
+                <h3 className="text-xl font-bold">Para quem é este serviço?</h3>
+                <p className="mt-3 text-muted-foreground leading-relaxed">{service.whoIsItFor}</p>
+              </AnimatedSection>
 
-              <div className="mt-10">
-                <Button asChild size="lg" className="gap-2">
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                    <Phone className="h-5 w-5" />
-                    Solicitar Orçamento
-                  </a>
-                </Button>
-              </div>
-            </div>
+              <AnimatedSection>
+                <h3 className="text-xl font-bold">Como Executamos</h3>
+                <ol className="mt-4 space-y-3">
+                  {service.howWeExecute.map((step, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+                        {i + 1}
+                      </span>
+                      <span className="text-muted-foreground pt-0.5">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </AnimatedSection>
 
-            {/* Sidebar */}
-            <div>
-              <div className="rounded-lg bg-muted p-6">
-                <h3 className="text-lg font-bold">Outros Serviços</h3>
-                <ul className="mt-4 space-y-3">
-                  {otherServices.map((s) => (
-                    <li key={s.id}>
-                      <Link
-                        to={`/servicos/${s.id}`}
-                        className="flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-background"
-                      >
-                        <img
-                          src={serviceImages[s.image]}
-                          alt={s.title}
-                          className="h-12 w-12 rounded object-cover"
-                        />
-                        <span className="text-sm font-medium">{s.title}</span>
-                      </Link>
+              <AnimatedSection>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <Wrench className="h-5 w-5 text-primary" />
+                  Equipamentos Utilizados
+                </h3>
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                  {service.equipment.map((eq, i) => (
+                    <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      {eq}
                     </li>
                   ))}
                 </ul>
-                <Link
-                  to="/servicos"
-                  className="mt-4 inline-block text-sm font-medium text-primary hover:underline"
-                >
-                  Ver todos os serviços →
-                </Link>
-              </div>
+              </AnimatedSection>
 
-              <div className="mt-6 rounded-lg bg-primary p-6 text-white">
-                <h3 className="text-lg font-bold">Precisa de ajuda?</h3>
-                <p className="mt-2 text-sm text-white/80">
-                  Nossa equipe está pronta para esclarecer suas dúvidas e oferecer a melhor solução.
-                </p>
-                <Button
-                  asChild
-                  variant="secondary"
-                  className="mt-4 w-full gap-2 bg-white text-primary hover:bg-white/90"
-                >
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                    <Phone className="h-4 w-4" />
-                    Fale Conosco
-                  </a>
-                </Button>
-              </div>
+              <AnimatedSection>
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-primary" />
+                  Segurança e Qualidade
+                </h3>
+                <ul className="mt-4 space-y-2">
+                  {service.benefits.map((b, i) => (
+                    <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </AnimatedSection>
+
+              {/* Service FAQ */}
+              {service.faq.length > 0 && (
+                <AnimatedSection>
+                  <h3 className="text-xl font-bold">Perguntas Frequentes</h3>
+                  <Accordion type="single" collapsible className="mt-4">
+                    {service.faq.map((item, i) => (
+                      <AccordionItem key={i} value={`faq-${i}`} className="border-border/30">
+                        <AccordionTrigger className="text-left text-sm font-medium hover:text-primary">
+                          {item.q}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-muted-foreground text-sm">
+                          {item.a}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </AnimatedSection>
+              )}
+
+              <AnimatedSection>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <WhatsAppCTA
+                    label="Solicitar Orçamento"
+                    message={`Olá, gostaria de um orçamento para ${service.title}!`}
+                    locationTag="servico-interno"
+                    size="lg"
+                    className="rounded-full"
+                  />
+                  <Button asChild variant="outline" size="lg" className="gap-2 rounded-full">
+                    <Link to="/contato">Formulário de Contato</Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <AnimatedSection direction="right">
+                <div className="rounded-lg border border-border/30 bg-card p-5">
+                  <h3 className="text-base font-bold mb-4">Outros Serviços</h3>
+                  <ul className="space-y-2">
+                    {otherServices.map((s) => (
+                      <li key={s.id}>
+                        <Link
+                          to={`/servicos/${s.slug}`}
+                          className="flex items-center gap-3 rounded-md p-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                        >
+                          <img src={serviceImages[s.image]} alt={s.title} className="h-10 w-10 rounded object-cover" loading="lazy" />
+                          {s.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection direction="right" delay={0.1}>
+                <div className="rounded-lg bg-primary p-6 text-white">
+                  <h3 className="text-lg font-bold">Precisa de ajuda?</h3>
+                  <p className="mt-2 text-sm text-white/80">
+                    Nossa equipe está pronta para esclarecer suas dúvidas.
+                  </p>
+                  <WhatsAppCTA
+                    label="Fale Conosco"
+                    locationTag="servico-sidebar"
+                    className="mt-4 w-full bg-white text-primary hover:bg-white/90 rounded-full"
+                  />
+                </div>
+              </AnimatedSection>
             </div>
           </div>
         </div>
