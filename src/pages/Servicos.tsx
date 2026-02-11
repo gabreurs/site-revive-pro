@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
@@ -14,149 +14,116 @@ import escavacaoImg from "@/assets/escavacao.jpg";
 import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
 import perfuracaoImg from "@/assets/perfuracao.jpg";
 import transporteImg from "@/assets/transporte-locacao.jpg";
-import { MapPin } from "lucide-react";
 
 const serviceImages: Record<string, string> = {
-  "limpeza-terreno": limpezaImg,
-  demolicao: demolicaoImg,
-  escavacao: escavacaoImg,
-  "movimentacao-terra": movimentacaoImg,
-  perfuracao: perfuracaoImg,
-  "transporte-locacao": transporteImg,
+  "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
+  "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
 };
 
-const Servicos = () => {
-  return (
-    <Layout>
-      <SEOHead
-        title="Serviços de Terraplanagem em SP | SMS Terraplenagem"
-        description="Conheça nossos serviços de terraplanagem em São Paulo: limpeza de terreno, demolição, escavação, corte e aterro, perfuração e locação de máquinas."
-        keywords="serviços terraplanagem sp, limpeza de terreno, demolição, escavação, movimentação de terra"
-      />
+const Servicos = () => (
+  <Layout>
+    <SEOHead
+      title="Serviços de Terraplanagem em SP | SMS Terraplenagem"
+      description="Conheça nossos serviços: limpeza de terreno, demolição, escavação, corte e aterro, perfuração e locação de máquinas em São Paulo."
+      keywords="serviços terraplanagem sp, limpeza terreno, demolição, escavação"
+    />
 
-      {/* Hero */}
-      <section className="hero-dark py-20 md:py-28 topo-pattern">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="text-4xl font-extrabold text-white md:text-5xl">
-                Terraplanagem em SP: <span className="text-primary">Serviços</span>
-              </h1>
-              <p className="mt-4 text-lg text-white/70">
-                Oferecemos soluções completas em terraplanagem para obras de todos os portes. Equipamento próprio e equipe qualificada.
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Intro */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-2xl font-bold md:text-3xl">Como Trabalhamos</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                Da avaliação inicial à entrega final, seguimos um processo estruturado para garantir qualidade, segurança e cumprimento de prazos em cada projeto.
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Services Grid */}
-      <section className="pb-16 md:pb-24">
-        <div className="container-custom">
-          <div className="grid gap-6 md:grid-cols-2">
-            {SERVICES.map((service, i) => (
-              <AnimatedSection key={service.id} delay={i * 0.08}>
-                <ServiceCard
-                  id={service.id}
-                  slug={service.slug}
-                  title={service.title}
-                  description={service.shortDescription}
-                  image={serviceImages[service.image]}
-                  variant="large"
-                />
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="section-padding bg-card">
-        <div className="container-custom">
-          <AnimatedSection>
-            <SectionHeading title="Nosso Processo" subtitle="Etapas simplificadas para sua comodidade" centered />
-          </AnimatedSection>
-          <div className="grid gap-8 md:grid-cols-4">
-            {[
-              { step: "01", title: "Contato", desc: "Entre em contato pelo WhatsApp ou telefone" },
-              { step: "02", title: "Avaliação", desc: "Analisamos seu projeto e terreno" },
-              { step: "03", title: "Orçamento", desc: "Enviamos orçamento detalhado e transparente" },
-              { step: "04", title: "Execução", desc: "Realizamos o serviço com qualidade" },
-            ].map((item, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="relative text-center">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">
-                    {item.step}
-                  </div>
-                  <h3 className="text-base font-semibold">{item.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{item.desc}</p>
-                  {i < 3 && (
-                    <ArrowRight className="absolute right-0 top-7 hidden h-5 w-5 -translate-x-1/2 text-muted-foreground/40 md:block" />
-                  )}
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Coverage */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <AnimatedSection>
-            <SectionHeading title="Áreas Atendidas" subtitle="Presença em toda a Grande São Paulo" centered />
-          </AnimatedSection>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {COVERAGE_AREAS.map((area, i) => (
-              <AnimatedSection key={area.region} delay={i * 0.06}>
-                <div className="flex items-start gap-3 rounded-lg border border-border/30 bg-card p-4">
-                  <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="font-semibold text-foreground text-sm">{area.region}</h3>
-                    <p className="text-xs text-muted-foreground">{area.areas}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding cta-gradient">
-        <div className="container-custom text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Precisa de um orçamento?</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-              Fale com nossa equipe e receba uma proposta personalizada para seu projeto.
+    {/* ── Hero curta (dark) ── */}
+    <section className="section-dark py-16 md:py-22 topo-pattern">
+      <div className="container-custom">
+        <AnimatedSection>
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="font-heading text-4xl font-extrabold text-white md:text-5xl">
+              Serviços de terraplanagem em São Paulo
+            </h1>
+            <p className="mt-4 text-lg text-white/70">
+              Soluções completas para preparar, nivelar e executar sua obra com segurança e equipamento próprio.
             </p>
-            <div className="mt-8">
-              <WhatsAppCTA
-                label="Solicitar Orçamento"
-                locationTag="servicos-cta"
-                className="bg-white text-primary hover:bg-white/90 rounded-full px-8"
-                size="lg"
-              />
-            </div>
-          </AnimatedSection>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+
+    {/* ── Grid de serviços (light) ── */}
+    <section className="section-padding">
+      <div className="container-custom">
+        <AnimatedSection>
+          <SectionHeading title="Escolha o serviço" subtitle="Clique para ver detalhes, equipamentos e como executamos cada etapa" centered />
+        </AnimatedSection>
+        <div className="grid gap-6 md:grid-cols-2">
+          {SERVICES.map((s, i) => (
+            <AnimatedSection key={s.id} delay={i * 0.06}>
+              <ServiceCard id={s.id} slug={s.slug} title={s.title} description={s.shortDescription} image={serviceImages[s.image]} variant="large" />
+            </AnimatedSection>
+          ))}
         </div>
-      </section>
-    </Layout>
-  );
-};
+        <AnimatedSection className="mt-10 text-center">
+          <WhatsAppCTA label="Solicitar cotação no WhatsApp" locationTag="servicos" size="lg" className="rounded-full" />
+        </AnimatedSection>
+      </div>
+    </section>
+
+    {/* ── Como trabalhamos (neutral) ── */}
+    <section className="section-padding section-neutral">
+      <div className="container-custom">
+        <AnimatedSection>
+          <SectionHeading title="Como trabalhamos" subtitle="Um processo simples, transparente e com foco em prazo" centered />
+        </AnimatedSection>
+        <div className="grid gap-8 md:grid-cols-4">
+          {[
+            { step: "01", title: "Contato", desc: "Você chama no WhatsApp e alinhamos a necessidade" },
+            { step: "02", title: "Avaliação", desc: "Entendemos o terreno, acesso e volumes" },
+            { step: "03", title: "Orçamento", desc: "Proposta objetiva com escopo, prazos e logística" },
+            { step: "04", title: "Execução", desc: "Equipe e equipamento em campo com segurança" },
+          ].map((item, i) => (
+            <AnimatedSection key={i} delay={i * 0.08}>
+              <div className="relative text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl font-bold text-white">{item.step}</div>
+                <h3 className="font-heading text-base font-semibold">{item.title}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">{item.desc}</p>
+                {i < 3 && <ArrowRight className="absolute right-0 top-7 hidden h-5 w-5 -translate-x-1/2 text-muted-foreground/30 md:block" />}
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── Áreas atendidas (light) ── */}
+    <section className="section-padding">
+      <div className="container-custom">
+        <AnimatedSection>
+          <SectionHeading title="Áreas atendidas" subtitle="Presença em toda a Grande São Paulo" centered />
+        </AnimatedSection>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {COVERAGE_AREAS.map((area, i) => (
+            <AnimatedSection key={area.region} delay={i * 0.05}>
+              <div className="flex items-start gap-3 rounded-lg border border-border bg-card p-4">
+                <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-heading font-semibold text-foreground text-sm">{area.region}</h3>
+                  <p className="text-xs text-muted-foreground">{area.areas}</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── CTA ── */}
+    <section className="section-padding cta-gradient section-dark">
+      <div className="container-custom text-center">
+        <AnimatedSection>
+          <h2 className="font-heading text-3xl font-bold text-white md:text-4xl">Precisa de um orçamento?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">Fale com nossa equipe e receba uma proposta personalizada.</p>
+          <div className="mt-8">
+            <WhatsAppCTA label="Solicitar orçamento" locationTag="servicos-cta" className="bg-white text-primary hover:bg-white/90 rounded-full px-8" size="lg" />
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  </Layout>
+);
 
 export default Servicos;

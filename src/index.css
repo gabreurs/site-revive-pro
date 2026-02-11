@@ -2,30 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts are loaded via <link> in index.html for better performance */
+/* Fonts loaded via <link> in index.html */
 
 @layer base {
   :root {
-    /* Dark theme as default (matching PDF) */
-    --background: 222 30% 8%;
-    --foreground: 210 20% 95%;
+    /* LIGHT theme as default — dark sections use .section-dark */
+    --background: 210 20% 97%;
+    --foreground: 222 30% 12%;
 
-    --card: 222 25% 12%;
-    --card-foreground: 210 20% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 30% 12%;
 
-    --popover: 222 25% 12%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 30% 12%;
 
-    /* Primary - SMS Blue */
     --primary: 217 91% 55%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Slightly lighter dark */
-    --secondary: 222 25% 14%;
-    --secondary-foreground: 210 20% 90%;
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 222 25% 18%;
 
-    --muted: 222 20% 16%;
-    --muted-foreground: 215 15% 55%;
+    --muted: 210 18% 93%;
+    --muted-foreground: 222 15% 40%;
 
     --accent: 217 91% 55%;
     --accent-foreground: 0 0% 100%;
@@ -33,13 +31,12 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 20% 18%;
-    --input: 222 20% 18%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
     --ring: 217 91% 55%;
 
     --radius: 0.5rem;
 
-    /* Custom SMS Colors */
     --sms-blue: 217 91% 55%;
     --sms-blue-light: 217 91% 65%;
     --sms-dark: 222 30% 6%;
@@ -47,7 +44,6 @@
     --sms-gold: 45 100% 50%;
     --whatsapp: 142 70% 45%;
 
-    /* Gradients */
     --gradient-hero-blue: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(217 91% 40%) 100%);
     --gradient-hero-dark: linear-gradient(135deg, hsl(222 30% 6%) 0%, hsl(222 25% 12%) 100%);
     --gradient-cta: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(230 80% 45%) 100%);
@@ -65,13 +61,11 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Manrope', system-ui, sans-serif;
+    @apply bg-background text-foreground antialiased font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', system-ui, sans-serif;
-    @apply font-bold tracking-tight;
+    @apply font-heading font-bold tracking-tight;
   }
 }
 
@@ -104,22 +98,29 @@
     @apply max-w-[1216px] mx-auto px-5 sm:px-6 lg:px-8;
   }
 
-  /* Light section utility (overrides tokens locally for readability) */
-  .section-light {
-    --background: 210 20% 97%;
-    --foreground: 222 30% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 30% 12%;
-    --muted: 210 20% 94%;
-    --muted-foreground: 222 15% 40%;
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
+  /* DARK section override (hero, footer, alternating dark blocks) */
+  .section-dark {
+    --background: 222 30% 8%;
+    --foreground: 210 20% 95%;
+    --card: 222 25% 12%;
+    --card-foreground: 210 20% 95%;
+    --muted: 222 20% 16%;
+    --muted-foreground: 215 15% 55%;
+    --border: 222 20% 18%;
+    --input: 222 20% 18%;
+    --popover: 222 25% 12%;
+    --popover-foreground: 210 20% 95%;
 
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
 
-  /* Subtle topographic pattern for hero */
+  /* Neutral light-gray alternate */
+  .section-neutral {
+    --background: 210 15% 95%;
+    background-color: hsl(var(--background));
+  }
+
   .topo-pattern {
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 50 Q 25 30, 50 50 T 90 50' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='0.5'/%3E%3Cpath d='M10 30 Q 25 10, 50 30 T 90 30' fill='none' stroke='rgba(255,255,255,0.02)' stroke-width='0.5'/%3E%3Cpath d='M10 70 Q 25 50, 50 70 T 90 70' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='0.5'/%3E%3C/svg%3E");
   }
