@@ -42,20 +42,24 @@ const Contato = () => {
 
   return (
     <Layout>
-      <SEOHead title="Contato | SMS Terraplenagem" description="Entre em contato com a SMS Terraplenagem. Solicite orçamento para terraplanagem em São Paulo via WhatsApp, e-mail ou formulário." />
+      <SEOHead
+        title="Contato | SMS Terraplenagem — WhatsApp e Orçamento"
+        description="Fale com a SMS Terraplenagem: WhatsApp (11) 94352-1043. Atendemos São Paulo e Grande SP. Solicite orçamento."
+        canonical="https://smsterraplenagem.com.br/contato"
+      />
 
       <section className="section-dark py-16 md:py-24 topo-pattern">
         <div className="container-custom"><AnimatedSection><div className="mx-auto max-w-3xl text-center">
           <h1 className="font-heading text-4xl font-extrabold text-white md:text-5xl">Entre em <span className="text-primary">contato</span></h1>
-          <p className="mt-4 text-lg text-white/70">Estamos prontos para atender sua demanda.</p>
+          <p className="mt-4 text-lg text-gray-300">Estamos prontos para atender sua demanda de terraplanagem na Grande São Paulo.</p>
         </div></AnimatedSection></div>
       </section>
 
       <section className="section-padding">
         <div className="container-custom"><div className="grid gap-12 lg:grid-cols-2">
           <AnimatedSection direction="left">
-            <h2 className="font-heading text-2xl font-bold">Envie sua mensagem</h2>
-            <p className="mt-2 text-muted-foreground">Preencha o formulário abaixo.</p>
+            <h2 className="font-heading text-2xl font-bold text-foreground">Envie sua mensagem</h2>
+            <p className="mt-2 text-muted-foreground">Preencha o formulário abaixo e retornamos em até 24h.</p>
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <input type="hidden" name="serviceType" value={serviceType} />
               <div className="grid gap-4 sm:grid-cols-2">
@@ -76,25 +80,25 @@ const Contato = () => {
           </AnimatedSection>
 
           <AnimatedSection direction="right">
-            <h2 className="font-heading text-2xl font-bold">Informações de contato</h2>
+            <h2 className="font-heading text-2xl font-bold text-foreground">Informações de contato</h2>
             <p className="mt-2 text-muted-foreground">Ou entre em contato diretamente.</p>
             <div className="mt-6 space-y-4">
               <a href={getWhatsAppUrl()} target={target} rel="noopener noreferrer" data-cta="whatsapp" data-location="contato" onClick={trackWhatsAppConversion}
                 className="flex items-start gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-green-50"><MessageCircle className="h-5 w-5 text-green-600" /></div>
-                <div><h3 className="font-heading font-semibold text-sm">WhatsApp</h3><p className="text-primary font-medium">{COMPANY_INFO.phone}</p><p className="text-xs text-muted-foreground">Atendimento rápido</p></div>
+                <div><h3 className="font-heading font-semibold text-sm text-foreground">WhatsApp</h3><p className="text-primary font-medium">{COMPANY_INFO.phone}</p><p className="text-xs text-muted-foreground">Atendimento rápido</p></div>
               </a>
               <a href={`mailto:${COMPANY_INFO.email}`} className="flex items-start gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/30">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50"><Mail className="h-5 w-5 text-primary" /></div>
-                <div><h3 className="font-heading font-semibold text-sm">E-mail</h3><p className="text-primary font-medium">{COMPANY_INFO.email}</p></div>
+                <div><h3 className="font-heading font-semibold text-sm text-foreground">E-mail</h3><p className="text-primary font-medium">{COMPANY_INFO.email}</p></div>
               </a>
               <div className="flex items-start gap-4 rounded-lg border border-border bg-card p-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50"><MapPin className="h-5 w-5 text-primary" /></div>
-                <div><h3 className="font-heading font-semibold text-sm">Localização</h3><p className="font-medium">{COMPANY_INFO.address}</p><p className="text-xs text-muted-foreground">Atendemos toda a Grande SP</p></div>
+                <div><h3 className="font-heading font-semibold text-sm text-foreground">Localização</h3><p className="font-medium text-foreground">{COMPANY_INFO.address}</p><p className="text-xs text-muted-foreground">Atendemos toda a Grande SP</p></div>
               </div>
               <div className="flex items-start gap-4 rounded-lg border border-border bg-card p-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50"><Clock className="h-5 w-5 text-primary" /></div>
-                <div><h3 className="font-heading font-semibold text-sm">Horário</h3><p className="text-sm text-muted-foreground">{COMPANY_INFO.hoursWeekday}</p><p className="text-sm text-muted-foreground">{COMPANY_INFO.hoursSaturday}</p></div>
+                <div><h3 className="font-heading font-semibold text-sm text-foreground">Horário</h3><p className="text-sm text-muted-foreground">{COMPANY_INFO.hoursWeekday}</p><p className="text-sm text-muted-foreground">{COMPANY_INFO.hoursSaturday}</p></div>
               </div>
             </div>
             <div className="mt-6 rounded-lg bg-green-600 p-6 text-white">

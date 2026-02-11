@@ -51,6 +51,8 @@ export function LocalBusinessJsonLd() {
     "priceRange": "$$",
     "@id": "https://smsterraplenagem.com.br",
     "url": "https://smsterraplenagem.com.br",
+    "sameAs": ["https://www.instagram.com/smsterraplenagem/"],
+    "image": "https://smsterraplenagem.com.br/og-image.jpg",
   };
 
   return <JsonLd data={data} />;
@@ -65,9 +67,10 @@ export function ServiceJsonLd({ name, description }: { name: string; description
     "provider": {
       "@type": "LocalBusiness",
       "name": COMPANY_INFO.name,
+      "url": "https://smsterraplenagem.com.br",
     },
     "areaServed": {
-      "@type": "City",
+      "@type": "State",
       "name": "São Paulo",
     },
   };
@@ -75,20 +78,30 @@ export function ServiceJsonLd({ name, description }: { name: string; description
   return <JsonLd data={data} />;
 }
 
-export function ArticleJsonLd({ title, date, description }: { title: string; date: string; description: string }) {
+export function ArticleJsonLd({ title, date, description, image }: { title: string; date: string; description: string; image?: string }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": title,
     "datePublished": date,
     "description": description,
+    "image": image || "https://smsterraplenagem.com.br/og-image.jpg",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+    },
     "author": {
       "@type": "Organization",
       "name": COMPANY_INFO.name,
+      "url": "https://smsterraplenagem.com.br",
     },
     "publisher": {
       "@type": "Organization",
       "name": COMPANY_INFO.name,
+      "url": "https://smsterraplenagem.com.br",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://smsterraplenagem.com.br/favicon.svg",
+      },
     },
   };
 

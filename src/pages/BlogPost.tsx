@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { ArticleJsonLd } from "@/components/seo/JsonLd";
 import { Layout } from "@/components/layout/Layout";
-import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/constants";
+import { BLOG_POSTS, BLOG_CATEGORIES, SERVICES } from "@/lib/constants";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -28,6 +28,9 @@ const BlogPost = () => {
     related.push(...BLOG_POSTS.filter((p) => p.slug !== slug && p.category !== post.category).slice(0, 3 - related.length));
   }
 
+  // Pick 2 related services for internal linking
+  const relatedServices = SERVICES.slice(0, 2);
+
   const renderContent = (content: string) =>
     content
       .replace(/^### (.*$)/gim, '<h3 class="font-heading text-lg font-bold mt-8 mb-3 text-foreground">$1</h3>')
@@ -41,22 +44,58 @@ const BlogPost = () => {
 
   return (
     <Layout>
-      <SEOHead title={`${post.title} | SMS Terraplenagem`} description={post.excerpt} keywords={`${post.title.toLowerCase()}, terraplanagem sp`} />
+      <SEOHead
+        title={`${post.title} | Blog SMS Terraplenagem`}
+        description={post.excerpt}
+        canonical={`https://smsterraplenagem.com.br/blog/${post.slug}`}
+        ogImage={typeof post.coverImage === "string" && post.coverImage.startsWith("http") ? post.coverImage : undefined}
+        ogType="article"
+        keywords={`${post.title.toLowerCase()}, terraplanagem sp`}
+      />
       <ArticleJsonLd title={post.title} date={post.date} description={post.excerpt} />
 
-      {/* Hero dark */}
-      <section className="section-dark py-14 md:py-20 topo-pattern">
-        <div className="container-custom">
+      {/* Hero with cover image */}
+      <section className="relative section-dark overflow-hidden">
+        {/* Cover image as background */}
+        {post.coverImage && (
+          <>
+            <div className="absolute inset-0">
+              <img
+                src={post.coverImage}
+                alt={`Imagem ilustrativa do artigo: ${post.title}`}
+                className="h-full w-full object-cover"
+                loading="eager"
+                width={1200}
+                height={630}
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,30%,6%)] via-[hsl(222,30%,6%)]/70 to-[hsl(222,30%,6%)]/40" aria-hidden="true" />
+          </>
+        )}
+
+        <div className="relative container-custom py-20 md:py-28">
           <AnimatedSection>
-            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary mb-6 transition-colors">
-              <ArrowLeft className="h-4 w-4" /> Voltar ao Blog
-            </Link>
+            {/* Breadcrumb */}
+            <nav className="mb-6 flex items-center gap-2 text-xs text-gray-300" aria-label="Breadcrumb">
+              <Link to="/" className="hover:text-white transition-colors">Início</Link>
+              <span>/</span>
+              <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
+              {category && (
+                <>
+                  <span>/</span>
+                  <Link to={`/blog/categoria/${post.category}`} className="hover:text-white transition-colors">{category.label}</Link>
+                </>
+              )}
+              <span>/</span>
+              <span className="text-white/60 truncate max-w-[200px]">{post.title}</span>
+            </nav>
+
             <div className="max-w-3xl">
               {category && (
-                <Link to={`/blog/categoria/${post.category}`} className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-4">{category.label}</Link>
+                <Link to={`/blog/categoria/${post.category}`} className="inline-block rounded-full bg-primary/20 backdrop-blur-sm px-3 py-1 text-xs font-medium text-primary mb-4">{category.label}</Link>
               )}
               <h1 className="font-heading text-3xl font-extrabold text-white md:text-4xl lg:text-5xl">{post.title}</h1>
-              <div className="mt-4 flex items-center gap-4 text-sm text-gray-400">
+              <div className="mt-4 flex items-center gap-4 text-sm text-gray-300">
                 <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{new Date(post.date).toLocaleDateString("pt-BR")}</span>
                 <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{post.readTime}</span>
               </div>
@@ -65,40 +104,52 @@ const BlogPost = () => {
         </div>
       </section>
 
-      {/* Cover image + Content (light) */}
+      {/* Content (light) */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl">
-            {/* Cover image */}
-            {post.coverImage && (
-              <AnimatedSection>
-                <div className="mb-10 overflow-hidden rounded-2xl border border-border">
-                  <div className="aspect-[16/9] max-h-[420px]">
-                    <img src={post.coverImage} alt={`Imagem de capa: ${post.title}`} className="h-full w-full object-cover" loading="lazy" />
-                  </div>
-                </div>
-              </AnimatedSection>
-            )}
-
             <AnimatedSection>
               <div className="prose max-w-none" dangerouslySetInnerHTML={{
                 __html: `<p class="text-muted-foreground leading-relaxed mb-4">${renderContent(post.content)}</p>`,
               }} />
             </AnimatedSection>
 
+            {/* Internal links to services */}
+            <AnimatedSection>
+              <div className="my-8 rounded-lg border border-border bg-card p-5">
+                <h3 className="font-heading text-base font-bold text-foreground mb-3">Serviços relacionados</h3>
+                <ul className="space-y-2">
+                  {relatedServices.map((s) => (
+                    <li key={s.id}>
+                      <Link to={`/servicos/${s.slug}`} className="text-sm text-primary hover:underline">
+                        Conheça nosso serviço de {s.title.toLowerCase()} →
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
+                    <Link to="/contato" className="text-sm text-primary hover:underline">
+                      Solicite um orçamento pelo formulário de contato →
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </AnimatedSection>
+
+            {/* Mid CTA */}
             <AnimatedSection>
               <div className="my-10 rounded-lg border border-primary/20 bg-primary/5 p-6 text-center">
-                <h3 className="font-heading text-lg font-bold">Precisa de orçamento?</h3>
+                <h3 className="font-heading text-lg font-bold text-foreground">Precisa de orçamento?</h3>
                 <p className="mt-1 text-sm text-muted-foreground">Fale com a SMS Terraplenagem pelo WhatsApp.</p>
                 <div className="mt-4"><WhatsAppCTA label="Chamar no WhatsApp" locationTag="blog-mid" className="rounded-full" /></div>
               </div>
             </AnimatedSection>
 
+            {/* End CTA */}
             <AnimatedSection>
               <div className="mt-10 rounded-lg cta-gradient p-8 text-center section-dark">
                 <h3 className="font-heading text-xl font-bold text-white">Quer cotar seu projeto?</h3>
                 <p className="mt-2 text-sm text-white/80">Solicite um orçamento sem compromisso.</p>
-                <div className="mt-4"><WhatsAppCTA label="Solicitar orçamento" locationTag="blog-end" className="bg-white text-primary hover:bg-white/90 rounded-full" /></div>
+                <div className="mt-4"><WhatsAppCTA label="Solicitar orçamento no WhatsApp" locationTag="blog-end" className="bg-white text-primary hover:bg-white/90 rounded-full" /></div>
               </div>
             </AnimatedSection>
           </div>
@@ -108,7 +159,7 @@ const BlogPost = () => {
       {related.length > 0 && (
         <section className="pb-16 md:pb-24 section-neutral">
           <div className="container-custom pt-16">
-            <h2 className="font-heading text-2xl font-bold mb-8">Artigos relacionados</h2>
+            <h2 className="font-heading text-2xl font-bold text-foreground mb-8">Artigos relacionados</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => (<BlogCard key={p.slug} post={p} />))}
             </div>

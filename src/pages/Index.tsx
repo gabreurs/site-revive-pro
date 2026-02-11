@@ -33,61 +33,51 @@ const Index = () => {
   return (
     <Layout>
       <SEOHead
-        title="SMS Terraplenagem | Terraplanagem em SP | Orçamento Rápido"
-        description="Empresa de terraplanagem em São Paulo. Limpeza de terreno, demolição, escavação, corte e aterro, perfuração e locação de máquinas. Equipamento próprio."
+        title="Terraplanagem em SP | SMS Terraplenagem — Grande São Paulo"
+        description="Serviços de terraplanagem, escavação, corte e aterro e demolição em São Paulo e Grande SP. Orçamento rápido pelo WhatsApp."
+        canonical="https://smsterraplenagem.com.br"
         keywords="terraplanagem em sp, terraplanagem são paulo, movimentação de terra"
       />
       <LocalBusinessJsonLd />
 
-      {/* ═══════════ HERO (dark, full-bleed bg, content in container) ═══════════ */}
+      {/* ═══════════ HERO (dark, full-bleed image right) ═══════════ */}
       <section className="relative overflow-hidden section-dark">
-        <div className="absolute inset-0 hidden lg:grid lg:grid-cols-2" aria-hidden>
-          <div className="hero-blue-panel topo-pattern" />
-          <div />
-        </div>
-        <div className="absolute inset-0 hero-blue-panel topo-pattern lg:hidden" aria-hidden />
-
-        <div className="relative">
-          <div className="container-custom">
-            <div className="grid lg:grid-cols-2 lg:items-stretch">
-              {/* Left text */}
-              <div className="flex items-center py-20 lg:py-28">
-                <AnimatedSection>
-                  <h1 className="font-heading text-4xl font-extrabold leading-[1.08] text-white md:text-5xl lg:text-[3.25rem]">
-                    Terraplanagem em São Paulo com equipamento próprio
-                  </h1>
-                  <p className="mt-6 max-w-xl text-base text-white/80 md:text-lg">
-                    Movimentação de terra, nivelamento e preparo de terreno para obras comerciais e
-                    industriais em toda a Grande São Paulo.
-                  </p>
-                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <WhatsAppCTA label="Solicitar cotação rápida" locationTag="hero" size="lg"
-                      className="bg-white text-primary hover:bg-white/90 rounded-full px-6" icon="message" />
-                    <Button asChild variant="outline" size="lg"
-                      className="gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white rounded-full px-6">
-                      <Link to="/servicos">Ver serviços <ArrowRight className="h-4 w-4" /></Link>
-                    </Button>
-                  </div>
-                </AnimatedSection>
-              </div>
-
-              {/* Right image */}
-              <div className="relative hidden lg:flex lg:items-center lg:justify-end py-16">
-                <div className="w-full max-w-[620px] overflow-hidden rounded-2xl shadow-lg">
-                  <div className="aspect-[16/10] max-h-[540px]">
-                    <img src={heroImage} alt="Escavadeira em obra de terraplanagem na Grande São Paulo"
-                      className="h-full w-full object-cover" loading="eager" />
-                  </div>
+        <div className="grid lg:grid-cols-2 min-h-[70vh]">
+          {/* Left - Blue panel with text */}
+          <div className="hero-blue-panel relative topo-pattern">
+            <div className="container-custom flex items-center h-full py-20 lg:py-28 lg:pr-16">
+              <AnimatedSection>
+                <h1 className="font-heading text-4xl font-extrabold leading-[1.08] text-white md:text-5xl lg:text-[3.25rem]">
+                  Terraplanagem em São Paulo com equipamento próprio
+                </h1>
+                <p className="mt-6 max-w-xl text-base text-white/80 md:text-lg">
+                  Movimentação de terra, nivelamento e preparo de terreno para obras comerciais e
+                  industriais em toda a Grande São Paulo. Além disso, contamos com frota própria para garantir agilidade e cumprimento de prazo.
+                </p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <WhatsAppCTA label="Solicitar cotação rápida" locationTag="hero" size="lg"
+                    className="bg-white text-primary hover:bg-white/90 rounded-full px-6" icon="message" />
+                  <Button asChild variant="outline" size="lg"
+                    className="gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white rounded-full px-6">
+                    <Link to="/servicos">Ver serviços <ArrowRight className="h-4 w-4" /></Link>
+                  </Button>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
           </div>
 
-          {/* Mobile image */}
-          <div className="relative h-56 lg:hidden">
-            <img src={heroImage} alt="Terraplanagem em São Paulo" className="h-full w-full object-cover" loading="eager" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,30%,8%)] to-transparent" />
+          {/* Right - Full image */}
+          <div className="relative hidden lg:block">
+            <img src={heroImage} alt="Escavadeira realizando movimentação de terra em obra na Grande São Paulo"
+              className="absolute inset-0 h-full w-full object-cover" loading="eager" width={960} height={720} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[hsl(217,91%,50%)]/20 to-transparent" aria-hidden="true" />
           </div>
+        </div>
+
+        {/* Mobile image */}
+        <div className="relative h-56 lg:hidden">
+          <img src={heroImage} alt="Máquinas de terraplanagem em obra na região de São Paulo" className="h-full w-full object-cover" loading="eager" width={800} height={400} />
+          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,30%,8%)] to-transparent" aria-hidden="true" />
         </div>
       </section>
 
@@ -95,7 +85,7 @@ const Index = () => {
       <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection>
-            <SectionHeading title="Nossos serviços" subtitle="Conheça as soluções que oferecemos para preparar seu terreno" centered />
+            <SectionHeading title="Nossos serviços" subtitle="Conheça as principais soluções que oferecemos para preparar seu terreno com segurança" centered />
           </AnimatedSection>
 
           <div className="grid gap-5 md:grid-cols-2 mb-5">
@@ -126,14 +116,12 @@ const Index = () => {
       <section className="section-padding section-neutral">
         <div className="container-custom">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch">
-            {/* Image */}
             <AnimatedSection direction="left" className="lg:col-span-5">
               <div className="h-full min-h-[420px] overflow-hidden rounded-2xl shadow-sm">
-                <img src={heroImage} alt="Atendimento em São Paulo e região metropolitana" className="h-full w-full object-cover" loading="lazy" />
+                <img src={heroImage} alt="Região metropolitana de São Paulo onde a SMS Terraplenagem atende" className="h-full w-full object-cover" loading="lazy" width={600} height={800} />
               </div>
             </AnimatedSection>
 
-            {/* Areas */}
             <AnimatedSection direction="right" className="lg:col-span-7">
               <SectionHeading title="Atendemos toda a Grande São Paulo"
                 subtitle="Capital e região metropolitana. Se tiver dúvida sobre sua cidade, chame no WhatsApp." />
@@ -171,8 +159,8 @@ const Index = () => {
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                     <CheckCircle className="h-5 w-5 text-primary" />
                   </div>
-                  <h3 className="font-heading text-base font-semibold">{item.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{item.desc}</p>
+                  <h3 className="font-heading text-base font-semibold text-white">{item.title}</h3>
+                  <p className="mt-1.5 text-sm text-gray-400">{item.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -196,7 +184,7 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground italic leading-relaxed">"{t.text}"</p>
                   <div className="mt-4 flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{t.name.charAt(0)}</div>
-                    <span className="text-sm font-medium">{t.name}</span>
+                    <span className="text-sm font-medium text-foreground">{t.name}</span>
                   </div>
                 </div>
               </AnimatedSection>
@@ -210,7 +198,7 @@ const Index = () => {
         <div className="container-custom">
           <div className="mx-auto max-w-3xl">
             <AnimatedSection>
-              <SectionHeading title="Perguntas frequentes" subtitle="Tire suas dúvidas sobre terraplanagem" centered />
+              <SectionHeading title="Perguntas frequentes" subtitle="Tire suas dúvidas sobre terraplanagem em São Paulo" centered />
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
               <Accordion type="single" collapsible className="w-full">
@@ -252,7 +240,7 @@ const Index = () => {
         <div className="container-custom text-center">
           <AnimatedSection>
             <h2 className="font-heading text-3xl font-bold text-white md:text-4xl">Pronto para começar seu projeto?</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">Entre em contato e receba um orçamento personalizado sem compromisso.</p>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">Entre em contato pelo WhatsApp e receba um orçamento personalizado sem compromisso.</p>
             <div className="mt-8">
               <WhatsAppCTA label="Falar com um especialista" locationTag="cta-final"
                 className="bg-white text-primary hover:bg-white/90 rounded-full px-8" size="lg" />

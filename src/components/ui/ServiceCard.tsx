@@ -24,14 +24,16 @@ export function ServiceCard({ slug, title, description, image, variant = "defaul
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={image}
-          alt={`Serviço de ${title} em São Paulo - SMS Terraplenagem`}
+          alt={`Serviço de ${title.toLowerCase()} em São Paulo — SMS Terraplenagem`}
           loading="lazy"
+          width={640}
+          height={400}
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
         />
       </div>
-      {/* Overlay */}
-      <div className="service-card-overlay absolute inset-0 flex flex-col justify-end p-5 md:p-6 transition-all">
-        <h3 className={`font-bold text-white ${isLarge ? "text-xl md:text-2xl" : "text-lg"}`}>
+      {/* Overlay — pointer-events-none so it never blocks clicks */}
+      <div className="service-card-overlay absolute inset-0 flex flex-col justify-end p-5 md:p-6 pointer-events-none">
+        <h3 className={`font-heading font-bold text-white ${isLarge ? "text-xl md:text-2xl" : "text-lg"}`}>
           {title}
         </h3>
         <p className="mt-1.5 text-sm text-gray-300 line-clamp-2">{description}</p>
