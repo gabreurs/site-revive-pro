@@ -1,6 +1,6 @@
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getWhatsAppUrl } from "@/lib/constants";
+import { getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 interface WhatsAppCTAProps {
@@ -39,6 +39,7 @@ export function WhatsAppCTA({
         rel="noopener noreferrer"
         data-cta="whatsapp"
         data-location={locationTag}
+        onClick={trackWhatsAppConversion}
       >
         <Icon className="h-4 w-4" />
         {label}

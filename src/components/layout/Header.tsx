@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SERVICES, getWhatsAppUrl } from "@/lib/constants";
+import { SERVICES, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 import { motion, AnimatePresence } from "framer-motion";
+import logoSvg from "@/assets/logo-sms.svg";
 
 const navLinks = [
   { label: "Início", href: "/" },
   { label: "Serviços", href: "/servicos", hasDropdown: true },
   { label: "Sobre nós", href: "/sobre" },
   { label: "Contato", href: "/contato" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function Header() {
@@ -48,15 +50,12 @@ export function Header() {
       <div className="container-custom h-full">
         <div className="flex h-full items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-1.5 shrink-0">
-            <div className="flex items-baseline gap-0">
-              <span className="text-xl font-extrabold tracking-tight text-foreground md:text-2xl">
-                SMS<span className="text-primary">TERRA</span>
-              </span>
-              <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-muted-foreground md:text-[10px] ml-0.5">
-                PLENAGEM
-              </span>
-            </div>
+          <Link to="/" className="shrink-0" aria-label="SMS Terraplenagem - Página inicial">
+            <img
+              src={logoSvg}
+              alt="SMS Terraplenagem"
+              className="h-7 w-auto md:h-8"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -80,7 +79,6 @@ export function Header() {
                   )}
                 </Link>
 
-                {/* Dropdown */}
                 {link.hasDropdown && (
                   <AnimatePresence>
                     {isServicesOpen && (
@@ -113,9 +111,16 @@ export function Header() {
           {/* CTA Button */}
           <div className="hidden lg:flex">
             <Button asChild className="gap-2 bg-whatsapp hover:bg-whatsapp/90 text-white rounded-full px-5">
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-cta="whatsapp" data-location="header">
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="whatsapp"
+                data-location="header"
+                onClick={trackWhatsAppConversion}
+              >
                 <MessageCircle className="h-4 w-4" />
-                Contato
+                Solicitar orçamento
               </a>
             </Button>
           </div>
@@ -124,7 +129,7 @@ export function Header() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex h-10 w-10 items-center justify-center rounded-md lg:hidden"
-            aria-label="Toggle menu"
+            aria-label="Abrir menu"
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -199,7 +204,14 @@ export function Header() {
               ))}
               <div className="mt-2 px-3">
                 <Button asChild className="w-full gap-2 bg-whatsapp hover:bg-whatsapp/90 text-white rounded-full">
-                  <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-cta="whatsapp" data-location="header-mobile">
+                  <a
+                    href={getWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cta="whatsapp"
+                    data-location="header-mobile"
+                    onClick={trackWhatsAppConversion}
+                  >
                     <MessageCircle className="h-4 w-4" />
                     Fale Conosco
                   </a>

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getWhatsAppUrl } from "@/lib/constants";
+import { getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 
 const POPUP_DISMISS_KEY = "sms_whatsapp_popup_dismissed";
 const DISMISS_DURATION = 24 * 60 * 60 * 1000; // 24h
@@ -15,7 +15,6 @@ export function WhatsAppPopup() {
 
     const timer = setTimeout(() => {
       setShowPopup(true);
-      // Track popup view
       if (typeof window !== "undefined" && (window as any).dataLayer) {
         (window as any).dataLayer.push({ event: "whatsapp_popup_view" });
       }
@@ -29,27 +28,28 @@ export function WhatsAppPopup() {
     localStorage.setItem(POPUP_DISMISS_KEY, Date.now().toString());
   };
 
-  const handleClick = () => {
+  const togglePopup = useCallback(() => {
+    setShowPopup((prev) => !prev);
+  }, []);
+
+  const handleCTAClick = () => {
     if (typeof window !== "undefined" && (window as any).dataLayer) {
       (window as any).dataLayer.push({ event: "whatsapp_popup_click" });
     }
+    trackWhatsAppConversion();
   };
 
   return (
     <>
-      {/* Floating button */}
-      <a
-        href={getWhatsAppUrl()}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-cta="whatsapp"
-        data-location="float"
+      {/* Floating BUTTON (toggle, NOT a link) */}
+      <button
+        type="button"
+        onClick={togglePopup}
         className="whatsapp-float flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:h-16 md:w-16"
-        aria-label="Fale conosco pelo WhatsApp"
-        onClick={handleClick}
+        aria-label="Abrir chat do WhatsApp"
       >
         <MessageCircle className="h-7 w-7 md:h-8 md:w-8" />
-      </a>
+      </button>
 
       {/* Popup card */}
       <AnimatePresence>
@@ -61,13 +61,13 @@ export function WhatsAppPopup() {
             transition={{ duration: 0.3 }}
             className="fixed bottom-24 right-4 z-50 w-72 overflow-hidden rounded-xl bg-[#1a2332] shadow-2xl border border-border/30 md:right-6 md:w-80"
           >
-            {/* Header */}
             <div className="flex items-center justify-between bg-whatsapp px-4 py-3">
               <div className="flex items-center gap-2">
                 <MessageCircle className="h-5 w-5 text-white" />
                 <span className="font-semibold text-white">WhatsApp</span>
               </div>
               <button
+                type="button"
                 onClick={dismiss}
                 className="rounded-full p-1 text-white/80 hover:bg-white/20 hover:text-white transition-colors"
                 aria-label="Fechar"
@@ -76,14 +76,13 @@ export function WhatsAppPopup() {
               </button>
             </div>
 
-            {/* Body */}
             <div className="p-4">
               <div className="mb-3 rounded-lg bg-[#0d1520] p-3">
                 <p className="text-sm text-foreground/90">
-                  Olá, somos a SMS Terraplenagem 👋
+                  Precisa de orçamento? 👋
                 </p>
                 <p className="mt-1 text-sm text-foreground/90">
-                  Fale conosco diretamente pelo WhatsApp!
+                  Fale com a SMS no WhatsApp.
                 </p>
               </div>
               <a
@@ -92,10 +91,10 @@ export function WhatsAppPopup() {
                 rel="noopener noreferrer"
                 data-cta="whatsapp"
                 data-location="popup"
-                onClick={handleClick}
+                onClick={handleCTAClick}
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-whatsapp/90"
               >
-                Abrir bate-papo
+                Chamar no WhatsApp
                 <MessageCircle className="h-4 w-4" />
               </a>
             </div>
