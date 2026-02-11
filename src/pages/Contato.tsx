@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,8 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { WhatsAppCTA } from "@/components/WhatsAppCTA";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
-import { COMPANY_INFO, SERVICES, WHATSAPP_URL } from "@/lib/constants";
+import { COMPANY_INFO, SERVICES, getWhatsAppUrl } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 
 const Contato = () => {
@@ -23,7 +26,7 @@ const Contato = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
+    // Placeholder: replace with Formspree/Getform/Basin or serverless endpoint
     setTimeout(() => {
       toast({
         title: "Mensagem enviada!",
@@ -36,169 +39,146 @@ const Contato = () => {
 
   return (
     <Layout>
+      <SEOHead
+        title="Contato | SMS Terraplenagem | Terraplanagem em SP"
+        description="Entre em contato com a SMS Terraplenagem. Solicite orçamento para terraplanagem em São Paulo via WhatsApp, e-mail ou formulário."
+        keywords="contato sms terraplenagem, orçamento terraplanagem sp"
+      />
+
       {/* Hero */}
-      <section className="hero-section py-20 md:py-28">
+      <section className="hero-dark py-20 md:py-28 topo-pattern">
         <div className="container-custom">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="text-4xl font-extrabold text-white md:text-5xl">
-              Entre em <span className="text-primary">Contato</span>
-            </h1>
-            <p className="mt-4 text-lg text-gray-300">
-              Estamos prontos para atender sua demanda. Envie uma mensagem ou fale conosco pelo
-              WhatsApp.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="mx-auto max-w-3xl text-center">
+              <h1 className="text-4xl font-extrabold text-white md:text-5xl">
+                Entre em <span className="text-primary">Contato</span>
+              </h1>
+              <p className="mt-4 text-lg text-white/70">
+                Estamos prontos para atender sua demanda. Envie uma mensagem ou fale pelo WhatsApp.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="section-padding bg-background">
+      <section className="section-padding">
         <div className="container-custom">
           <div className="grid gap-12 lg:grid-cols-2">
-            {/* Contact Form */}
-            <div>
+            {/* Form */}
+            <AnimatedSection direction="left">
               <h2 className="text-2xl font-bold">Envie sua mensagem</h2>
-              <p className="mt-2 text-muted-foreground">
-                Preencha o formulário abaixo e entraremos em contato.
-              </p>
+              <p className="mt-2 text-muted-foreground">Preencha o formulário abaixo.</p>
 
-              <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+              <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name">Nome completo</Label>
-                    <Input id="name" placeholder="Seu nome" required />
+                    <Input id="name" placeholder="Seu nome" required className="bg-card" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Telefone</Label>
-                    <Input id="phone" type="tel" placeholder="(11) 99999-9999" required />
+                    <Input id="phone" type="tel" placeholder="(11) 99999-9999" required className="bg-card" />
                   </div>
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="email">E-mail</Label>
-                  <Input id="email" type="email" placeholder="seu@email.com" required />
+                  <Input id="email" type="email" placeholder="seu@email.com" required className="bg-card" />
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="location">Local da obra</Label>
-                  <Input id="location" placeholder="Cidade / Bairro" />
+                  <Input id="location" placeholder="Cidade / Bairro" className="bg-card" />
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="service">Tipo de serviço</Label>
                   <Select>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-card">
                       <SelectValue placeholder="Selecione o serviço" />
                     </SelectTrigger>
                     <SelectContent>
-                      {SERVICES.map((service) => (
-                        <SelectItem key={service.id} value={service.id}>
-                          {service.title}
-                        </SelectItem>
+                      {SERVICES.map((s) => (
+                        <SelectItem key={s.id} value={s.id}>{s.title}</SelectItem>
                       ))}
                       <SelectItem value="outro">Outro</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="message">Como podemos te ajudar?</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Descreva sua necessidade..."
-                    rows={5}
-                    required
-                  />
+                  <Textarea id="message" placeholder="Descreva sua necessidade..." rows={5} required className="bg-card" />
                 </div>
-
-                <Button type="submit" size="lg" className="w-full gap-2" disabled={isSubmitting}>
-                  <Send className="h-5 w-5" />
+                <Button type="submit" size="lg" className="w-full gap-2 rounded-full" disabled={isSubmitting}>
+                  <Send className="h-4 w-4" />
                   {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
                 </Button>
               </form>
-            </div>
+            </AnimatedSection>
 
-            {/* Contact Info */}
-            <div>
+            {/* Info */}
+            <AnimatedSection direction="right">
               <h2 className="text-2xl font-bold">Informações de Contato</h2>
-              <p className="mt-2 text-muted-foreground">
-                Você também pode entrar em contato diretamente pelos canais abaixo.
-              </p>
+              <p className="mt-2 text-muted-foreground">Ou entre em contato diretamente.</p>
 
-              <div className="mt-8 space-y-6">
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-4 rounded-lg border p-4 transition-colors hover:bg-muted"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-whatsapp/10">
-                    <Phone className="h-6 w-6 text-whatsapp" />
+              <div className="mt-6 space-y-4">
+                <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-cta="whatsapp" data-location="contato" className="flex items-start gap-4 rounded-lg border border-border/30 bg-card p-4 transition-colors hover:border-primary/30">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-whatsapp/10">
+                    <MessageCircle className="h-5 w-5 text-whatsapp" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Telefone / WhatsApp</h3>
-                    <p className="text-lg text-primary">{COMPANY_INFO.phone}</p>
-                    <p className="text-sm text-muted-foreground">Atendimento rápido pelo WhatsApp</p>
+                    <h3 className="font-semibold text-sm">Telefone / WhatsApp</h3>
+                    <p className="text-primary font-medium">{COMPANY_INFO.phone}</p>
+                    <p className="text-xs text-muted-foreground">Atendimento rápido</p>
                   </div>
                 </a>
 
-                <a
-                  href={`mailto:${COMPANY_INFO.email}`}
-                  className="flex items-start gap-4 rounded-lg border p-4 transition-colors hover:bg-muted"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                    <Mail className="h-6 w-6 text-primary" />
+                <a href={`mailto:${COMPANY_INFO.email}`} className="flex items-start gap-4 rounded-lg border border-border/30 bg-card p-4 transition-colors hover:border-primary/30">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
+                    <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">E-mail</h3>
-                    <p className="text-lg text-primary">{COMPANY_INFO.email}</p>
-                    <p className="text-sm text-muted-foreground">Respondemos em até 24 horas</p>
+                    <h3 className="font-semibold text-sm">E-mail</h3>
+                    <p className="text-primary font-medium">{COMPANY_INFO.email}</p>
+                    <p className="text-xs text-muted-foreground">Respondemos em até 24h</p>
                   </div>
                 </a>
 
-                <div className="flex items-start gap-4 rounded-lg border p-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                    <MapPin className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-4 rounded-lg border border-border/30 bg-card p-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
+                    <MapPin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Localização</h3>
-                    <p className="text-lg">{COMPANY_INFO.address}</p>
-                    <p className="text-sm text-muted-foreground">
-                      Atendemos toda a Grande São Paulo
-                    </p>
+                    <h3 className="font-semibold text-sm">Localização</h3>
+                    <p className="font-medium">{COMPANY_INFO.address}</p>
+                    <p className="text-xs text-muted-foreground">Atendemos toda a Grande SP</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-lg border p-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                    <Clock className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-4 rounded-lg border border-border/30 bg-card p-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10">
+                    <Clock className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">Horário de Atendimento</h3>
-                    <p className="text-muted-foreground">Segunda a Sexta: 7h às 18h</p>
-                    <p className="text-muted-foreground">Sábado: 7h às 12h</p>
+                    <h3 className="font-semibold text-sm">Horário de Atendimento</h3>
+                    <p className="text-sm text-muted-foreground">{COMPANY_INFO.hoursWeekday}</p>
+                    <p className="text-sm text-muted-foreground">{COMPANY_INFO.hoursSaturday}</p>
                   </div>
                 </div>
               </div>
 
               {/* WhatsApp CTA */}
-              <div className="mt-8 rounded-lg bg-whatsapp p-6 text-white">
-                <h3 className="text-xl font-bold">Prefere o WhatsApp?</h3>
-                <p className="mt-2 text-white/80">
-                  Fale diretamente com nossa equipe e receba atendimento imediato.
+              <div className="mt-6 rounded-lg bg-whatsapp p-6 text-white">
+                <h3 className="text-lg font-bold">Prefere o WhatsApp?</h3>
+                <p className="mt-1 text-sm text-white/80">
+                  Fale diretamente com nossa equipe.
                 </p>
-                <Button
-                  asChild
-                  variant="secondary"
-                  className="mt-4 w-full gap-2 bg-white text-whatsapp hover:bg-white/90"
-                >
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                    <Phone className="h-5 w-5" />
-                    Abrir WhatsApp
-                  </a>
-                </Button>
+                <WhatsAppCTA
+                  label="Abrir WhatsApp"
+                  locationTag="contato-whatsapp"
+                  className="mt-4 w-full bg-white text-whatsapp hover:bg-white/90 rounded-full"
+                  icon="message"
+                />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>

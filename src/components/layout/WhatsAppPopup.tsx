@@ -1,0 +1,107 @@
+import { useState, useEffect } from "react";
+import { X, MessageCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { getWhatsAppUrl } from "@/lib/constants";
+
+const POPUP_DISMISS_KEY = "sms_whatsapp_popup_dismissed";
+const DISMISS_DURATION = 24 * 60 * 60 * 1000; // 24h
+
+export function WhatsAppPopup() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const dismissed = localStorage.getItem(POPUP_DISMISS_KEY);
+    if (dismissed && Date.now() - parseInt(dismissed) < DISMISS_DURATION) return;
+
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+      // Track popup view
+      if (typeof window !== "undefined" && (window as any).dataLayer) {
+        (window as any).dataLayer.push({ event: "whatsapp_popup_view" });
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const dismiss = () => {
+    setShowPopup(false);
+    localStorage.setItem(POPUP_DISMISS_KEY, Date.now().toString());
+  };
+
+  const handleClick = () => {
+    if (typeof window !== "undefined" && (window as any).dataLayer) {
+      (window as any).dataLayer.push({ event: "whatsapp_popup_click" });
+    }
+  };
+
+  return (
+    <>
+      {/* Floating button */}
+      <a
+        href={getWhatsAppUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-cta="whatsapp"
+        data-location="float"
+        className="whatsapp-float flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:h-16 md:w-16"
+        aria-label="Fale conosco pelo WhatsApp"
+        onClick={handleClick}
+      >
+        <MessageCircle className="h-7 w-7 md:h-8 md:w-8" />
+      </a>
+
+      {/* Popup card */}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-24 right-4 z-50 w-72 overflow-hidden rounded-xl bg-[#1a2332] shadow-2xl border border-border/30 md:right-6 md:w-80"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between bg-whatsapp px-4 py-3">
+              <div className="flex items-center gap-2">
+                <MessageCircle className="h-5 w-5 text-white" />
+                <span className="font-semibold text-white">WhatsApp</span>
+              </div>
+              <button
+                onClick={dismiss}
+                className="rounded-full p-1 text-white/80 hover:bg-white/20 hover:text-white transition-colors"
+                aria-label="Fechar"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="p-4">
+              <div className="mb-3 rounded-lg bg-[#0d1520] p-3">
+                <p className="text-sm text-foreground/90">
+                  Olá, somos a SMS Terraplenagem 👋
+                </p>
+                <p className="mt-1 text-sm text-foreground/90">
+                  Fale conosco diretamente pelo WhatsApp!
+                </p>
+              </div>
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="whatsapp"
+                data-location="popup"
+                onClick={handleClick}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-whatsapp/90"
+              >
+                Abrir bate-papo
+                <MessageCircle className="h-4 w-4" />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
