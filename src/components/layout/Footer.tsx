@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { COMPANY_INFO, SERVICES, BLOG_POSTS, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
+import {
+  COMPANY_INFO,
+  SERVICES,
+  BLOG_POSTS,
+  getExternalLinkTarget,
+  getWhatsAppUrl,
+  trackWhatsAppConversion,
+} from "@/lib/constants";
 import logoSvg from "@/assets/logo-sms.svg";
 
 export function Footer() {
@@ -18,7 +25,15 @@ export function Footer() {
               Atendemos obras comerciais e industriais em toda a Grande São Paulo.
             </p>
             <div className="mt-6 space-y-2">
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" data-cta="whatsapp" data-location="footer" onClick={trackWhatsAppConversion} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href={getWhatsAppUrl()}
+                target={getExternalLinkTarget()}
+                rel="noopener noreferrer"
+                data-cta="whatsapp"
+                data-location="footer"
+                onClick={trackWhatsAppConversion}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Phone className="h-4 w-4 shrink-0" />
                 {COMPANY_INFO.phone}
               </a>

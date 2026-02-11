@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://smsterraplenagem.com.br/</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/sobre</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/servicos</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/contato</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/politica-de-privacidade</loc></url>
+
+  <!-- Serviços -->
+  <url><loc>https://smsterraplenagem.com.br/servicos/limpeza-de-terreno</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/servicos/demolicao</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/servicos/escavacao</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/servicos/movimentacao-de-terra-corte-e-aterro</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/servicos/perfuracao</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/servicos/transportes-e-locacao-de-maquinas</loc></url>
+
+  <!-- Blog (posts + categorias) -->
+  <url><loc>https://smsterraplenagem.com.br/blog/como-funciona-a-terraplanagem</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/locacao-de-maquinas-para-obras</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/eficiencia-na-movimentacao-de-terra</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/licencas-para-terraplanagem-sp</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/seguranca-em-obras-de-terraplanagem</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/corte-e-aterro-como-funciona</loc></url>
+
+  <url><loc>https://smsterraplenagem.com.br/blog/categoria/terraplanagem</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/categoria/maquinas</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/categoria/dicas</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/blog/categoria/seguranca</loc></url>
+</urlset>

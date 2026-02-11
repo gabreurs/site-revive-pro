@@ -1,3 +1,9 @@
+import heroCover from "@/assets/hero-terraplanagem.jpg";
+import maquinasCover from "@/assets/transporte-locacao.jpg";
+import terraplanagemCover from "@/assets/movimentacao-terra.jpg";
+import segurancaCover from "@/assets/demolicao.jpg";
+import escavacaoCover from "@/assets/escavacao.jpg";
+
 export const WHATSAPP_NUMBER = "5511943521043";
 
 export function buildWhatsAppUrl(phone: string, text?: string): string {
@@ -24,17 +30,24 @@ export function getWhatsAppUrl(message?: string) {
   return buildWhatsAppUrl(WHATSAPP_NUMBER, message);
 }
 
-// Google Ads conversion helper
-export function trackWhatsAppConversion() {
-  if (typeof window !== "undefined" && (window as any).dataLayer) {
-    (window as any).dataLayer.push({ event: "whatsapp_click" });
+export function getExternalLinkTarget(): "_blank" | "_top" {
+  if (typeof window === "undefined") return "_blank";
+  try {
+    return window.self !== window.top ? "_top" : "_blank";
+  } catch {
+    return "_top";
   }
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", "conversion", {
-      send_to: "AW-17287450407/vWT2CP6t_5sbEKeeprNA",
-      value: 1.0,
-      currency: "BRL",
-    });
+}
+
+// Tracking helper (GTM dataLayer). NEVER preventDefault here.
+export function trackWhatsAppConversion(e?: unknown) {
+  const el = (e as any)?.currentTarget as HTMLElement | undefined;
+  const location = el?.dataset?.location;
+  const href = (el as any)?.href as string | undefined;
+
+  if (typeof window !== "undefined") {
+    const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+    dl.push({ event: "whatsapp_click", location, href });
   }
 }
 
@@ -156,6 +169,7 @@ export const SERVICES = [
 ];
 
 export const COVERAGE_AREAS = [
+  { region: "Grande São Paulo", areas: "Atendemos a Capital e toda a região metropolitana. Consulte disponibilidade para sua cidade.", icon: "📍" },
   { region: "Capital São Paulo", areas: "Todas as zonas (Norte, Sul, Leste, Oeste, Centro)", icon: "📍" },
   { region: "Região Norte", areas: "Guarulhos, Franco da Rocha, Caieiras, Mairiporã", icon: "📍" },
   { region: "Região Oeste", areas: "Osasco, Barueri, Carapicuíba, Cotia", icon: "📍" },
@@ -233,61 +247,61 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "como-funciona-a-terraplanagem",
     title: "Como Funciona a Terraplanagem: Guia Completo",
-    excerpt: "Entenda o processo de terraplanagem, desde o levantamento topográfico até a compactação final do solo.",
+    excerpt: "Entenda o processo de terraplanagem — do levantamento topográfico à compactação final — e evite retrabalho na sua obra.",
     category: "terraplanagem",
     date: "2025-12-10",
     readTime: "5 min",
-    coverImage: "",
+    coverImage: heroCover,
     content: `## O que é Terraplanagem?\n\nA terraplanagem é o conjunto de operações de escavação, transporte, compactação e nivelamento de terra, com o objetivo de preparar o terreno para receber uma construção, estrada ou qualquer outro tipo de obra civil.\n\n## Etapas da Terraplanagem\n\n### 1. Levantamento Topográfico\nAntes de qualquer movimentação, é essencial realizar o levantamento topográfico do terreno. Esse estudo identifica as características do solo, relevo e define os volumes de corte e aterro necessários.\n\n### 2. Limpeza do Terreno\nA etapa seguinte envolve a remoção de vegetação, entulhos e qualquer obstáculo que possa interferir nos trabalhos.\n\n### 3. Corte e Aterro\nO corte consiste na retirada de terra dos pontos mais altos, enquanto o aterro é o preenchimento das áreas mais baixas. O objetivo é nivelar o terreno conforme o projeto.\n\n### 4. Compactação\nApós o nivelamento, o solo é compactado com rolos compactadores para garantir estabilidade e resistência.\n\n## Quanto custa a terraplanagem em SP?\n\nO custo varia conforme o tamanho do terreno, volume de terra a ser movimentado, tipo de solo e acessibilidade do local. Solicite um orçamento personalizado com a SMS Terraplenagem.`,
   },
   {
     slug: "locacao-de-maquinas-para-obras",
     title: "Locação de Máquinas para Obras: Quando Vale a Pena?",
-    excerpt: "Descubra quando é mais vantajoso alugar máquinas para sua obra ao invés de comprar.",
+    excerpt: "Locação de máquinas pode reduzir custo e acelerar prazos. Veja quando alugar é mais inteligente do que comprar.",
     category: "maquinas",
     date: "2025-11-25",
     readTime: "4 min",
-    coverImage: "",
+    coverImage: maquinasCover,
     content: `## Locação vs. Compra de Máquinas\n\nA decisão entre locar ou comprar máquinas para obras depende de diversos fatores. Neste artigo, ajudamos você a entender quando a locação é a melhor opção.\n\n## Vantagens da Locação\n\n- **Sem custo de manutenção:** A responsabilidade de manter os equipamentos em dia é da locadora.\n- **Flexibilidade:** Alugue apenas pelo período necessário.\n- **Acesso a equipamentos modernos:** Máquinas sempre atualizadas e bem mantidas.\n- **Sem depreciação:** O equipamento não perde valor no seu patrimônio.\n\n## Quando Locar?\n\n1. Obras pontuais ou de curta duração\n2. Quando não se justifica o investimento em compra\n3. Necessidade de equipamentos especializados\n4. Projetos com variação de demanda\n\n## Máquinas Disponíveis na SMS Terraplenagem\n\nOferecemos escavadeiras, retroescavadeiras, pás carregadeiras, caminhões basculantes e muito mais. Todos com operadores qualificados.`,
   },
   {
     slug: "eficiencia-na-movimentacao-de-terra",
     title: "Como Aumentar a Eficiência na Movimentação de Terra",
-    excerpt: "Técnicas e boas práticas para otimizar a movimentação de terra e reduzir custos na sua obra.",
+    excerpt: "Planejamento, escolha correta de máquinas e controle de compactação: o trio que mais impacta custo e prazo na obra.",
     category: "dicas",
     date: "2025-11-15",
     readTime: "6 min",
-    coverImage: "",
+    coverImage: terraplanagemCover,
     content: `## Eficiência na Movimentação de Terra\n\nA movimentação de terra é uma das etapas mais importantes e custosas de uma obra. Otimizar esse processo pode gerar economia significativa.\n\n## Planejamento é Fundamental\n\nUm bom projeto de terraplenagem considera:\n- Volume de corte e aterro balanceado\n- Distância de transporte minimizada\n- Aproveitamento do solo do próprio terreno\n- Condições climáticas favoráveis\n\n## Escolha dos Equipamentos\n\nUtilizar o equipamento adequado para cada tipo de solo e volume de terra faz toda a diferença. Equipamentos superdimensionados geram custos desnecessários, enquanto subdimensionados atrasam o cronograma.\n\n## Dicas Práticas\n\n1. **Planeje antes de executar:** Invista em levantamento topográfico detalhado\n2. **Monitore o clima:** Evite movimentações em períodos de chuva intensa\n3. **Controle de qualidade:** Verifique a compactação regularmente\n4. **Equipe qualificada:** Operadores experientes aumentam a produtividade`,
   },
   {
     slug: "licencas-para-terraplanagem-sp",
     title: "Licenças Necessárias para Terraplanagem em SP",
-    excerpt: "Conheça as principais licenças e autorizações exigidas para realizar terraplanagem em São Paulo.",
+    excerpt: "O básico que você precisa checar antes de iniciar: alvará, responsabilidade técnica e controle de transporte de resíduos.",
     category: "terraplanagem",
     date: "2025-10-20",
     readTime: "5 min",
-    coverImage: "",
+    coverImage: escavacaoCover,
     content: `## Licenças para Terraplanagem em São Paulo\n\nAntes de iniciar qualquer obra de terraplanagem em SP, é fundamental estar em conformidade com a legislação. Conheça as principais licenças necessárias.\n\n## Alvará de Execução\n\nO alvará é emitido pela prefeitura e autoriza a realização dos serviços de terraplanagem. Para obtê-lo, é necessário apresentar o projeto aprovado e a ART (Anotação de Responsabilidade Técnica).\n\n## Licença Ambiental\n\nEm terrenos com vegetação significativa ou próximos a áreas de preservação, pode ser necessária licença ambiental da CETESB.\n\n## CTR (Controle de Transporte de Resíduos)\n\nPara o transporte de terra e entulhos, é obrigatório o CTR, que documenta a origem e destino dos materiais.\n\n## Documentação Necessária\n\n- Projeto de terraplenagem aprovado\n- ART do engenheiro responsável\n- Alvará de execução\n- Licença ambiental (quando aplicável)\n- CTR para transporte de materiais\n\nA SMS Terraplenagem orienta seus clientes sobre toda a documentação necessária.`,
   },
   {
     slug: "seguranca-em-obras-de-terraplanagem",
     title: "Segurança em Obras de Terraplanagem: Normas e Boas Práticas",
-    excerpt: "As principais normas de segurança e boas práticas para garantir a integridade da equipe e da obra.",
+    excerpt: "Sinalização, EPIs, manutenção e operadores treinados: o que não dá para negociar em obra com máquinas pesadas.",
     category: "seguranca",
     date: "2025-10-05",
     readTime: "5 min",
-    coverImage: "",
+    coverImage: segurancaCover,
     content: `## Segurança em Terraplanagem\n\nA segurança é prioridade absoluta em qualquer obra de terraplanagem. Conheça as principais normas e práticas que adotamos.\n\n## Normas Regulamentadoras\n\n### NR-18 - Condições e Meio Ambiente de Trabalho\nEstabelece diretrizes de segurança para a indústria da construção, incluindo escavações e movimentação de terra.\n\n### NR-11 - Transporte e Movimentação de Materiais\nRegula a operação de equipamentos de transporte e movimentação de materiais.\n\n## Boas Práticas de Segurança\n\n1. **EPIs obrigatórios:** Capacete, botinas, luvas, óculos e protetor auricular\n2. **Sinalização:** Isolamento adequado da área de trabalho\n3. **Manutenção preventiva:** Equipamentos sempre revisados\n4. **Treinamento:** Operadores certificados e atualizados\n5. **Comunicação:** Rádios e sinalizadores para coordenação\n\n## Compromisso SMS\n\nNa SMS Terraplenagem, segurança não é opcional. Seguimos rigorosamente todas as normas e investimos continuamente em treinamento.`,
   },
   {
     slug: "corte-e-aterro-como-funciona",
     title: "Corte e Aterro: Como Funciona e Quando é Necessário",
-    excerpt: "Entenda a técnica de corte e aterro utilizada na terraplanagem e sua importância para obras civis.",
+    excerpt: "Quando o terreno é irregular, corte e aterro nivelam e estabilizam. Entenda o processo e quando ele é indispensável.",
     category: "terraplanagem",
     date: "2025-09-18",
     readTime: "4 min",
-    coverImage: "",
+    coverImage: terraplanagemCover,
     content: `## O que é Corte e Aterro?\n\nCorte e aterro é a técnica de terraplanagem que consiste em retirar terra de locais mais elevados (corte) e depositá-la em locais mais baixos (aterro), com o objetivo de nivelar o terreno.\n\n## Quando é Necessário?\n\n- Terrenos com topografia irregular\n- Preparação para loteamentos\n- Construção de estradas e acessos\n- Implantação de áreas industriais\n- Construção de edifícios em terrenos acidentados\n\n## O Processo\n\n### 1. Estudo Topográfico\nIdentifica os volumes de corte e aterro necessários para atingir o nível desejado.\n\n### 2. Planejamento de Volumes\nO ideal é equilibrar os volumes de corte e aterro, minimizando a necessidade de importar ou exportar terra.\n\n### 3. Execução\nMáquinas como escavadeiras e motoniveladoras realizam a movimentação, enquanto rolos compactadores garantem a firmeza do aterro.\n\n### 4. Controle de Qualidade\nEnsaios de compactação verificam se o solo atingiu a resistência especificada no projeto.\n\nA SMS Terraplenagem executa serviços de corte e aterro em toda a Grande São Paulo.`,
   },
 ];

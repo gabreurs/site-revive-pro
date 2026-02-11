@@ -21,20 +21,55 @@ import { useToast } from "@/hooks/use-toast";
 const Contato = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [serviceType, setServiceType] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Placeholder: replace with Formspree/Getform/Basin or serverless endpoint
-    setTimeout(() => {
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    const payload = {
+      name: String(fd.get("name") || "").trim(),
+      phone: String(fd.get("phone") || "").trim(),
+      email: String(fd.get("email") || "").trim(),
+      location: String(fd.get("location") || "").trim(),
+      serviceType: serviceType || String(fd.get("serviceType") || "").trim(),
+      message: String(fd.get("message") || "").trim(),
+      source: "site",
+    };
+
+    const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT || "/api/contato";
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(text || `HTTP ${res.status}`);
+      }
+
       toast({
         title: "Mensagem enviada!",
-        description: "Entraremos em contato em breve.",
+        description: "Recebemos seu contato e vamos retornar em breve.",
       });
+      form.reset();
+      setServiceType("");
+    } catch (err) {
+      toast({
+        title: "Não foi possível enviar",
+        description:
+          "No momento, o envio do formulário está indisponível. Você pode chamar no WhatsApp que atendemos rapidinho.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
+    }
   };
 
   return (
@@ -71,41 +106,46 @@ const Contato = () => {
               <p className="mt-2 text-muted-foreground">Preencha o formulário abaixo.</p>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+                {/* Hidden field so Select value can be submitted */}
+                <input type="hidden" name="serviceType" value={serviceType} />
+
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name">Nome completo</Label>
-                    <Input id="name" placeholder="Seu nome" required className="bg-card" />
+                    <Input id="name" name="name" placeholder="Seu nome" required className="bg-card" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Telefone</Label>
-                    <Input id="phone" type="tel" placeholder="(11) 99999-9999" required className="bg-card" />
+                    <Input id="phone" name="phone" type="tel" placeholder="(11) 99999-9999" required className="bg-card" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">E-mail</Label>
-                  <Input id="email" type="email" placeholder="seu@email.com" required className="bg-card" />
+                  <Input id="email" name="email" type="email" placeholder="seu@email.com" required className="bg-card" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="location">Local da obra</Label>
-                  <Input id="location" placeholder="Cidade / Bairro" className="bg-card" />
+                  <Input id="location" name="location" placeholder="Cidade / Bairro" className="bg-card" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="service">Tipo de serviço</Label>
-                  <Select>
+                  <Select value={serviceType} onValueChange={setServiceType}>
                     <SelectTrigger className="bg-card">
                       <SelectValue placeholder="Selecione o serviço" />
                     </SelectTrigger>
                     <SelectContent>
                       {SERVICES.map((s) => (
-                        <SelectItem key={s.id} value={s.id}>{s.title}</SelectItem>
+                        <SelectItem key={s.id} value={s.title}>
+                          {s.title}
+                        </SelectItem>
                       ))}
-                      <SelectItem value="outro">Outro</SelectItem>
+                      <SelectItem value="Outro">Outro</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Como podemos te ajudar?</Label>
-                  <Textarea id="message" placeholder="Descreva sua necessidade..." rows={5} required className="bg-card" />
+                  <Textarea id="message" name="message" placeholder="Descreva sua necessidade..." rows={5} required className="bg-card" />
                 </div>
                 <Button type="submit" size="lg" className="w-full gap-2 rounded-full" disabled={isSubmitting}>
                   <Send className="h-4 w-4" />
