@@ -16,7 +16,7 @@ const BlogCategoria = () => {
     return (
       <Layout>
         <div className="container-custom section-padding text-center">
-          <h1 className="text-2xl font-bold">Categoria não encontrada</h1>
+          <h1 className="font-heading text-2xl font-bold text-foreground">Categoria não encontrada</h1>
           <Button asChild className="mt-4"><Link to="/blog">Voltar ao Blog</Link></Button>
         </div>
       </Layout>
@@ -27,18 +27,19 @@ const BlogCategoria = () => {
     <Layout>
       <SEOHead
         title={`${category.label} | Blog SMS Terraplenagem`}
-        description={`Artigos sobre ${category.label.toLowerCase()} da SMS Terraplenagem.`}
+        description={`Artigos sobre ${category.label.toLowerCase()} — dicas e informações práticas da SMS Terraplenagem para obras em São Paulo.`}
+        canonical={`https://smsterraplenagem.com.br/blog/categoria/${slug}`}
       />
 
-      <section className="hero-dark py-16 md:py-24 topo-pattern">
+      <section className="section-dark py-16 md:py-24 topo-pattern">
         <div className="container-custom">
           <AnimatedSection>
-            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6 transition-colors">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-primary mb-6 transition-colors">
               <ArrowLeft className="h-4 w-4" />
               Voltar ao Blog
             </Link>
-            <h1 className="text-4xl font-extrabold text-white md:text-5xl">{category.label}</h1>
-            <p className="mt-3 text-lg text-white/70">{posts.length} artigo{posts.length !== 1 ? "s" : ""}</p>
+            <h1 className="font-heading text-4xl font-extrabold text-white md:text-5xl">{category.label}</h1>
+            <p className="mt-3 text-lg text-gray-300">{posts.length} artigo{posts.length !== 1 ? "s" : ""} nesta categoria</p>
           </AnimatedSection>
         </div>
       </section>

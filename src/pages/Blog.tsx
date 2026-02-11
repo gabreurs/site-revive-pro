@@ -31,18 +31,18 @@ const Blog = () => {
   return (
     <Layout>
       <SEOHead
-        title="Blog | SMS Terraplenagem | Dicas e Artigos sobre Terraplanagem"
-        description="Artigos, dicas e informações sobre terraplanagem, movimentação de terra, locação de máquinas e construção civil em São Paulo."
-        keywords="blog terraplanagem, dicas terraplanagem, artigos construção civil"
+        title="Blog | Dicas e Conteúdos de Terraplanagem em SP"
+        description="Conteúdos sobre terraplanagem, escavação, corte e aterro, locação de máquinas e boas práticas para obras na Grande São Paulo."
+        canonical="https://smsterraplenagem.com.br/blog"
       />
 
-      <section className="hero-dark py-16 md:py-24 topo-pattern">
+      <section className="section-dark py-16 md:py-24 topo-pattern">
         <div className="container-custom">
           <AnimatedSection>
             <div className="mx-auto max-w-3xl text-center">
-              <h1 className="text-4xl font-extrabold text-white md:text-5xl">Blog</h1>
-              <p className="mt-3 text-lg text-white/70">
-                Artigos e dicas sobre terraplanagem e construção civil
+              <h1 className="font-heading text-4xl font-extrabold text-white md:text-5xl">Blog</h1>
+              <p className="mt-3 text-lg text-gray-300">
+                Artigos, dicas e informações sobre terraplanagem e construção civil em São Paulo
               </p>
             </div>
           </AnimatedSection>
@@ -51,14 +51,13 @@ const Blog = () => {
 
       <section className="section-padding">
         <div className="container-custom">
-          {/* Filters */}
           <AnimatedSection>
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-10">
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => { setSelectedCategory(null); setPage(1); }}
                   className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                    !selectedCategory ? "bg-primary text-white" : "bg-card border border-border/30 text-muted-foreground hover:text-foreground"
+                    !selectedCategory ? "bg-primary text-white" : "bg-card border border-border text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   Todos
@@ -68,7 +67,7 @@ const Blog = () => {
                     key={cat.slug}
                     onClick={() => { setSelectedCategory(cat.slug); setPage(1); }}
                     className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                      selectedCategory === cat.slug ? "bg-primary text-white" : "bg-card border border-border/30 text-muted-foreground hover:text-foreground"
+                      selectedCategory === cat.slug ? "bg-primary text-white" : "bg-card border border-border text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {cat.label}
@@ -81,13 +80,12 @@ const Blog = () => {
                   placeholder="Buscar artigos..."
                   value={search}
                   onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-                  className="pl-9 bg-card"
+                  className="pl-9"
                 />
               </div>
             </div>
           </AnimatedSection>
 
-          {/* Posts */}
           {filtered.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-muted-foreground">Nenhum artigo encontrado.</p>
@@ -106,7 +104,7 @@ const Blog = () => {
                 <div className="mt-10 text-center">
                   <button
                     onClick={() => setPage((p) => p + 1)}
-                    className="rounded-full bg-card border border-border/30 px-8 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                    className="rounded-full bg-card border border-border px-8 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
                   >
                     Ver mais artigos
                   </button>
