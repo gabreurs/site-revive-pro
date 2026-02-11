@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
+import { getExternalLinkTarget, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 
 const POPUP_DISMISS_KEY = "sms_whatsapp_popup_dismissed";
 const DISMISS_DURATION = 24 * 60 * 60 * 1000; // 24h
@@ -87,7 +87,7 @@ export function WhatsAppPopup() {
               </div>
               <a
                 href={getWhatsAppUrl()}
-                target="_blank"
+                target={getExternalLinkTarget()}
                 rel="noopener noreferrer"
                 data-cta="whatsapp"
                 data-location="popup"

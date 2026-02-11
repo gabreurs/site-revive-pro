@@ -1,6 +1,6 @@
 import { Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
+import { getExternalLinkTarget, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 interface WhatsAppCTAProps {
@@ -25,17 +25,13 @@ export function WhatsAppCTA({
   fullWidth = false,
 }: WhatsAppCTAProps) {
   const Icon = icon === "message" ? MessageCircle : Phone;
+  const target = getExternalLinkTarget();
 
   return (
-    <Button
-      asChild
-      variant={variant}
-      size={size}
-      className={cn("gap-2", fullWidth && "w-full", className)}
-    >
+    <Button asChild variant={variant} size={size} className={cn("gap-2", fullWidth && "w-full", className)}>
       <a
         href={getWhatsAppUrl(message)}
-        target="_blank"
+        target={target}
         rel="noopener noreferrer"
         data-cta="whatsapp"
         data-location={locationTag}
