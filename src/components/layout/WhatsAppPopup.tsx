@@ -41,12 +41,12 @@ export function WhatsAppPopup() {
 
   return (
     <>
-      {/* Floating BUTTON (toggle, NOT a link) */}
+      {/* Floating button (toggle) */}
       <button
         type="button"
         onClick={togglePopup}
         className="whatsapp-float flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:h-16 md:w-16"
-        aria-label="Abrir chat do WhatsApp"
+        aria-label="Abrir conversa no WhatsApp"
       >
         <MessageCircle className="h-7 w-7 md:h-8 md:w-8" />
       </button>
@@ -59,7 +59,7 @@ export function WhatsAppPopup() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-24 right-4 z-50 w-72 overflow-hidden rounded-xl bg-[#1a2332] shadow-2xl border border-border/30 md:right-6 md:w-80"
+            className="fixed bottom-36 right-4 z-50 w-72 overflow-hidden rounded-xl bg-[#1a2332] shadow-2xl border border-white/10 md:bottom-24 md:right-6 md:w-80"
           >
             <div className="flex items-center justify-between bg-whatsapp px-4 py-3">
               <div className="flex items-center gap-2">
@@ -78,10 +78,10 @@ export function WhatsAppPopup() {
 
             <div className="p-4">
               <div className="mb-3 rounded-lg bg-[#0d1520] p-3">
-                <p className="text-sm text-foreground/90">
+                <p className="text-sm text-white/90">
                   Precisa de orçamento? 👋
                 </p>
-                <p className="mt-1 text-sm text-foreground/90">
+                <p className="mt-1 text-sm text-white/70">
                   Fale com a SMS no WhatsApp.
                 </p>
               </div>
