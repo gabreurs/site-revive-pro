@@ -59,7 +59,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Serviços</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Serviços</h4>
             <ul className="space-y-2">
               {SERVICES.map((service) => (
                 <li key={service.id}>
@@ -73,7 +73,7 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Links</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Links</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Início</Link></li>
               <li><Link to="/servicos" className="text-sm text-muted-foreground hover:text-primary transition-colors">Serviços</Link></li>
@@ -86,7 +86,7 @@ export function Footer() {
 
           {/* Blog */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Blog</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Blog</h4>
             <ul className="space-y-2">
               {BLOG_POSTS.slice(0, 4).map((post) => (
                 <li key={post.slug}>
