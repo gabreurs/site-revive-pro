@@ -230,6 +230,9 @@ export function Header() {
                 <Link to="/contato" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground">
                   Contato
                 </Link>
+                <a href="#areas-atendimento" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-muted">
+                  Onde atuamos
+                </a>
 
                 {/* Blog accordion */}
                 <div>
