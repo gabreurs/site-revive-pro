@@ -27,10 +27,17 @@ const serviceImages: Record<string, string> = {
 };
 
 const Bairro = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: paramSlug } = useParams<{ slug: string }>();
+  const { pathname } = useLocation();
+  const prefix = "/terraplanagem-";
+  const derivedSlug = pathname.startsWith(prefix)
+    ? pathname.slice(prefix.length).replace(/\/$/, "")
+    : undefined;
+  const slug = paramSlug || derivedSlug;
   const bairro = slug ? findBairroBySlug(slug) : undefined;
 
   if (!bairro) return <NotFound />;
+
 
   const { name, region, path } = bairro;
   const isCidade = region.key === "outras";
