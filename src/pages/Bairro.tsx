@@ -8,7 +8,7 @@ import { ServiceCard } from "@/components/ui/ServiceCard";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { SERVICES } from "@/lib/constants";
 import { findBairroBySlug } from "@/lib/bairros";
-import NotFound from "./NotFound";
+
 
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
 import demolicaoImg from "@/assets/demolicao.jpg";
