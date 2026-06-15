@@ -13,6 +13,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BlogCategoria from "./pages/BlogCategoria";
 import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
+import Bairro from "./pages/Bairro";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/blog/categoria/:slug" element={<BlogCategoria />} />
           <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
+          <Route path="/terraplanagem-:slug" element={<Bairro />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
