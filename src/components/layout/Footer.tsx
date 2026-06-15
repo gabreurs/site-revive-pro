@@ -104,7 +104,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} SMS Terraplenagem. Todos os direitos reservados.
           </p>
