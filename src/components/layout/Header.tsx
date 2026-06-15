@@ -106,6 +106,7 @@ export function Header() {
 
               <Link to="/sobre" className={linkCls("/sobre")}>Sobre nós</Link>
               <Link to="/contato" className={linkCls("/contato")}>Contato</Link>
+              <a href="#areas-atendimento" className="text-xs font-medium text-muted-foreground/70 transition-colors hover:text-primary">Onde atuamos</a>
 
               {/* Blog dropdown */}
               <div className="relative" onMouseEnter={() => setDeskDrop("blog")} onMouseLeave={() => setDeskDrop(null)}>
