@@ -9,10 +9,12 @@ import {
   trackWhatsAppConversion,
 } from "@/lib/constants";
 import logoSvg from "@/assets/logo-sms.svg";
+import { AreasFooter } from "./AreasFooter";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/30 bg-[hsl(222,30%,6%)]">
+    <footer className="bg-[hsl(222,30%,6%)]">
+      <AreasFooter />
       <div className="container-custom section-padding">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
