@@ -42,7 +42,9 @@ const App = () => (
           <Route path="/blog/categoria/:slug" element={<BlogCategoria />} />
           <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
           <Route path="/terraplanagem-:slug" element={<Bairro />} />
+          <Route path="/terraplanagem-*" element={<Bairro />} />
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
