@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { ArrowRight, MapPin, CheckCircle2 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/seo/SEOHead";
@@ -8,7 +8,7 @@ import { ServiceCard } from "@/components/ui/ServiceCard";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { SERVICES } from "@/lib/constants";
 import { findBairroBySlug } from "@/lib/bairros";
-import NotFound from "./NotFound";
+
 
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
 import demolicaoImg from "@/assets/demolicao.jpg";
@@ -27,10 +27,27 @@ const serviceImages: Record<string, string> = {
 };
 
 const Bairro = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: paramSlug } = useParams<{ slug: string }>();
+  const { pathname } = useLocation();
+  const prefix = "/terraplanagem-";
+  const derivedSlug = pathname.startsWith(prefix)
+    ? pathname.slice(prefix.length).replace(/\/$/, "")
+    : undefined;
+  const slug = paramSlug || derivedSlug;
   const bairro = slug ? findBairroBySlug(slug) : undefined;
 
-  if (!bairro) return <NotFound />;
+  if (!bairro) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-muted">
+        <div className="text-center">
+          <h1 className="mb-4 text-4xl font-bold">404</h1>
+          <p className="mb-4 text-xl text-muted-foreground">Bairro não encontrado</p>
+          <a href="/" className="text-primary underline hover:text-primary/90">Voltar para o início</a>
+        </div>
+      </div>
+    );
+  }
+
 
   const { name, region, path } = bairro;
   const isCidade = region.key === "outras";

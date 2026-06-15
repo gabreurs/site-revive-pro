@@ -9,10 +9,12 @@ import {
   trackWhatsAppConversion,
 } from "@/lib/constants";
 import logoSvg from "@/assets/logo-sms.svg";
+import { AreasFooter } from "./AreasFooter";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/30 bg-[hsl(222,30%,6%)]">
+    <footer className="bg-[hsl(222,30%,6%)]">
+      <AreasFooter />
       <div className="container-custom section-padding">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Company Info */}
@@ -57,7 +59,7 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Serviços</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Serviços</h4>
             <ul className="space-y-2">
               {SERVICES.map((service) => (
                 <li key={service.id}>
@@ -71,7 +73,7 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Links</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Links</h4>
             <ul className="space-y-2">
               <li><Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Início</Link></li>
               <li><Link to="/servicos" className="text-sm text-muted-foreground hover:text-primary transition-colors">Serviços</Link></li>
@@ -84,7 +86,7 @@ export function Footer() {
 
           {/* Blog */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Blog</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">Blog</h4>
             <ul className="space-y-2">
               {BLOG_POSTS.slice(0, 4).map((post) => (
                 <li key={post.slug}>
@@ -102,7 +104,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} SMS Terraplenagem. Todos os direitos reservados.
           </p>
