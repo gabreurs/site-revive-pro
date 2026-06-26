@@ -90,15 +90,16 @@ export function HeroCarousel() {
             fetchPriority="high"
           />
         </AnimatePresence>
-        {/* Layered overlays for contrast + brand tint */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222_30%_6%)]/95 via-[hsl(222_30%_6%)]/70 to-[hsl(222_30%_6%)]/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222_30%_6%)] via-transparent to-[hsl(222_30%_6%)]/40" />
-        <div className="absolute inset-0 topo-pattern opacity-60" aria-hidden="true" />
+        {/* Layered overlays — heavy scrim on the left, image breathes on the right */}
+        <div className="absolute inset-0 bg-[hsl(222_30%_4%)]/65" />
+        <div className="absolute inset-y-0 left-0 w-full lg:w-[70%] bg-gradient-to-r from-[hsl(222_30%_4%)] via-[hsl(222_30%_4%)]/92 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[hsl(222_30%_5%)] via-[hsl(222_30%_5%)]/40 to-transparent" />
+        <div className="absolute inset-0 topo-pattern opacity-40" aria-hidden="true" />
       </div>
 
       <div className="container-custom relative flex flex-col justify-end min-h-[88vh] lg:min-h-[92vh] pt-32 pb-12 lg:pt-40 lg:pb-20">
         {/* Eyebrow + headline */}
-        <div className="max-w-4xl">
+        <div className="max-w-[640px] lg:max-w-[680px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={`txt-${i}`}
@@ -107,13 +108,16 @@ export function HeroCarousel() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
             >
-              <span className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase text-primary/90 border border-primary/40 px-3 py-1.5">
+              <span className="inline-flex items-center gap-2 text-[11px] tracking-[0.24em] uppercase text-primary border border-primary/50 px-3 py-1.5 bg-[hsl(222_30%_5%)]/60 backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 bg-primary" /> {slide.eyebrow}
               </span>
-              <h1 className="mt-6 font-heading font-medium text-white leading-[1.02] text-[2.2rem] sm:text-5xl lg:text-[4.5rem] xl:text-[5rem]">
+              <h1
+                className="mt-7 font-heading font-medium text-white text-[2.1rem] sm:text-[2.8rem] lg:text-[3.6rem] xl:text-[4rem]"
+                style={{ lineHeight: 1.1, textWrap: "balance" as any }}
+              >
                 {slide.title}
               </h1>
-              <p className="mt-5 max-w-2xl text-base md:text-lg lg:text-xl text-white/75 leading-relaxed">
+              <p className="mt-5 max-w-[560px] text-base md:text-lg text-white/90 leading-relaxed">
                 {slide.subtitle}
               </p>
             </motion.div>
