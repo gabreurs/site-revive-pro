@@ -13,6 +13,8 @@ import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
 import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride } from "@/data/locationProfiles";
+import { getRegionHub } from "@/data/regionHubs";
+import { ExpandableText } from "@/components/ui/ExpandableText";
 
 import heroImg from "@/assets/hero-terraplanagem.jpg";
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
@@ -110,13 +112,16 @@ const Bairro = () => {
   const nearbyBairros = region.bairros.filter((n) => n !== name).slice(0, 12);
 
   // ---------- JSON-LD ----------
+  const regionHub = getRegionHub(region.key);
+  const regionHubUrl = `https://smsterraplenagem.com.br/onde-atuamos/${regionHub.slug}`;
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Início", item: "https://smsterraplenagem.com.br/" },
-      { "@type": "ListItem", position: 2, name: region.label },
-      { "@type": "ListItem", position: 3, name: `Terraplanagem ${phrase}`, item: canonical },
+      { "@type": "ListItem", position: 2, name: "Onde atuamos", item: "https://smsterraplenagem.com.br/onde-atuamos" },
+      { "@type": "ListItem", position: 3, name: regionHub.shortLabel, item: regionHubUrl },
+      { "@type": "ListItem", position: 4, name: `Terraplanagem ${phrase}`, item: canonical },
     ],
   };
   const localBusinessLd = {
@@ -165,7 +170,9 @@ const Bairro = () => {
             <nav aria-label="breadcrumb" className="mb-4 text-xs text-gray-400">
               <Link to="/" className="hover:text-primary">Início</Link>
               <span className="mx-2">/</span>
-              <span className="text-gray-300">{region.label}</span>
+              <Link to="/onde-atuamos" className="hover:text-primary">Onde atuamos</Link>
+              <span className="mx-2">/</span>
+              <Link to={`/onde-atuamos/${regionHub.slug}`} className="hover:text-primary">{regionHub.shortLabel}</Link>
               <span className="mx-2">/</span>
               <span className="text-white">{name}</span>
             </nav>
@@ -219,23 +226,21 @@ const Bairro = () => {
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
               Terraplanagem {phrase}: contexto local e tipos de obra atendidos
             </h2>
-            <div className="mt-4 space-y-4 text-base text-muted-foreground leading-relaxed">
-              <p>{introSentence}</p>
-              {override.localContext && (
-                <p>{override.localContext}</p>
-              )}
-              <p>
-                {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes — o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
-              </p>
-              <details className="group rounded-xl border border-border bg-card/40 p-4">
-                <summary className="cursor-pointer text-sm font-medium text-primary list-none flex items-center justify-between">
-                  <span>Continuar lendo sobre o atendimento {phrase}</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-open:rotate-90" />
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed">
-                  Cada projeto começa com uma avaliação do terreno e do escopo da obra. Só depois apresentamos o orçamento, com clareza sobre serviços, prazos e logística específicos para {name}. Em obras que pedem mais de uma frente — por exemplo, demolição seguida de limpeza e movimentação de terra —, a equipe organiza a sequência para não deixar o canteiro parado entre etapas.
-                </p>
-              </details>
+            <div className="mt-4 text-base text-muted-foreground leading-relaxed">
+              <ExpandableText
+                preview={<p>{introSentence}</p>}
+                more={
+                  <>
+                    {override.localContext && <p>{override.localContext}</p>}
+                    <p>
+                      {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes —, o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
+                    </p>
+                    <p>
+                      Cada projeto começa por uma avaliação do terreno e do escopo da obra. Em obras que pedem mais de uma frente — por exemplo, demolição seguida de limpeza e movimentação de terra —, a equipe organiza a sequência para não deixar o canteiro parado entre etapas.
+                    </p>
+                  </>
+                }
+              />
             </div>
 
             <ul className="mt-6 grid gap-2 sm:grid-cols-2">

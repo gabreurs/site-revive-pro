@@ -14,6 +14,8 @@ import BlogPost from "./pages/BlogPost";
 import BlogCategoria from "./pages/BlogCategoria";
 import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
 import Bairro from "./pages/Bairro";
+import OndeAtuamos from "./pages/OndeAtuamos";
+import RegiaoHub from "./pages/RegiaoHub";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +45,8 @@ const App = () => (
           <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
           <Route path="/terraplanagem-:slug" element={<Bairro />} />
           <Route path="/terraplanagem-*" element={<Bairro />} />
+          <Route path="/onde-atuamos" element={<OndeAtuamos />} />
+          <Route path="/onde-atuamos/:slug" element={<RegiaoHub />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>

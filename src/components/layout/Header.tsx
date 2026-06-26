@@ -3,14 +3,16 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SERVICES, BLOG_CATEGORIES, getExternalLinkTarget, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
+import { REGION_HUB_LIST } from "@/data/regionHubs";
 import { motion, AnimatePresence } from "framer-motion";
 import logoDark from "@/assets/logo-sms-dark.svg";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [deskDrop, setDeskDrop] = useState<"services" | "blog" | null>(null);
+  const [deskDrop, setDeskDrop] = useState<"services" | "blog" | "areas" | null>(null);
   const [mobServices, setMobServices] = useState(false);
   const [mobBlog, setMobBlog] = useState(false);
+  const [mobAreas, setMobAreas] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -26,6 +28,7 @@ export function Header() {
     setDeskDrop(null);
     setMobServices(false);
     setMobBlog(false);
+    setMobAreas(false);
   }, [location.pathname]);
 
   // Lock body scroll when drawer is open
@@ -105,6 +108,31 @@ export function Header() {
               </div>
 
               <Link to="/sobre" className={linkCls("/sobre")}>Sobre nós</Link>
+
+              {/* Onde atuamos dropdown */}
+              <div className="relative" onMouseEnter={() => setDeskDrop("areas")} onMouseLeave={() => setDeskDrop(null)}>
+                <Link to="/onde-atuamos" className={linkCls("/onde-atuamos")}>
+                  Onde atuamos <ChevronDown className={`h-3.5 w-3.5 transition-transform ${deskDrop === "areas" ? "rotate-180" : ""}`} />
+                </Link>
+                <AnimatePresence>
+                  {deskDrop === "areas" && (
+                    <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }} transition={{ duration: 0.15 }} className="absolute left-0 top-full pt-2 w-72">
+                      <div className="rounded-lg border border-border bg-card p-2 shadow-xl">
+                        <Link to="/onde-atuamos" className="block rounded-md px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted">
+                          Ver todas as regiões
+                        </Link>
+                        <div className="my-1 h-px bg-border" />
+                        {REGION_HUB_LIST.map((h) => (
+                          <Link key={h.slug} to={`/onde-atuamos/${h.slug}`} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+                            {h.shortLabel}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <Link to="/contato" className={linkCls("/contato")}>Contato</Link>
               
 
@@ -227,6 +255,38 @@ export function Header() {
                 <Link to="/sobre" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground">
                   Sobre nós
                 </Link>
+
+                {/* Onde atuamos accordion */}
+                <div>
+                  <button
+                    onClick={() => setMobAreas(!mobAreas)}
+                    aria-expanded={mobAreas}
+                    className="flex w-full items-center justify-between rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground"
+                  >
+                    Onde atuamos
+                    <ChevronDown className={`h-4 w-4 transition-transform ${mobAreas ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {mobAreas && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden pl-4"
+                      >
+                        <Link to="/onde-atuamos" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted">
+                          Ver todas as regiões
+                        </Link>
+                        {REGION_HUB_LIST.map((h) => (
+                          <Link key={h.slug} to={`/onde-atuamos/${h.slug}`} onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted">
+                            {h.shortLabel}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <Link to="/contato" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground">
                   Contato
                 </Link>
