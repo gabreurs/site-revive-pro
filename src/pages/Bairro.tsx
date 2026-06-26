@@ -170,7 +170,9 @@ const Bairro = () => {
             <nav aria-label="breadcrumb" className="mb-4 text-xs text-gray-400">
               <Link to="/" className="hover:text-primary">Início</Link>
               <span className="mx-2">/</span>
-              <span className="text-gray-300">{region.label}</span>
+              <Link to="/onde-atuamos" className="hover:text-primary">Onde atuamos</Link>
+              <span className="mx-2">/</span>
+              <Link to={`/onde-atuamos/${regionHub.slug}`} className="hover:text-primary">{regionHub.shortLabel}</Link>
               <span className="mx-2">/</span>
               <span className="text-white">{name}</span>
             </nav>
