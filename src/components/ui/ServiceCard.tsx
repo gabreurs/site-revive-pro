@@ -33,7 +33,7 @@ export function ServiceCard({ slug, title, description, image, variant = "defaul
       </div>
       {/* Overlay — pointer-events-none so it never blocks clicks */}
       <div className="service-card-overlay absolute inset-0 flex flex-col justify-end p-4 md:p-6 pointer-events-none">
-        <h3 className={`font-heading font-bold text-white ${isLarge ? "text-lg md:text-2xl" : "text-base md:text-lg"}`}>
+        <h3 className={`font-heading font-medium text-white ${isLarge ? "text-lg md:text-2xl" : "text-base md:text-lg"}`}>
           {title}
         </h3>
         <p className="mt-1 text-xs md:text-sm text-gray-300 line-clamp-2">{description}</p>

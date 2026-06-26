@@ -19,7 +19,7 @@ export function AreasFooter() {
         <div className="mb-8 md:mb-10 max-w-3xl">
           <h2
             id="areas-atendimento-title"
-            className="font-heading text-xl md:text-2xl font-bold text-white"
+            className="font-heading text-xl md:text-2xl font-medium text-white"
           >
             Onde atuamos
           </h2>

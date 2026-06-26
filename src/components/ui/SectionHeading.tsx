@@ -8,7 +8,7 @@ interface SectionHeadingProps {
 export function SectionHeading({ title, subtitle, centered = false, light = false }: SectionHeadingProps) {
   return (
     <div className={`mb-8 md:mb-12 ${centered ? "text-center" : ""}`}>
-      <h2 className={`font-heading text-2xl font-bold md:text-4xl ${light ? "text-white" : "text-foreground"}`}>
+      <h2 className={`font-heading text-2xl font-medium md:text-4xl ${light ? "text-white" : "text-foreground"}`}>
         {title}
       </h2>
       {subtitle && (

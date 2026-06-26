@@ -31,7 +31,7 @@ const ServicoDetalhe = () => {
     return (
       <Layout>
         <div className="container-custom section-padding text-center">
-          <h1 className="font-heading text-2xl font-bold text-foreground">Serviço não encontrado</h1>
+          <h1 className="font-heading text-2xl font-medium text-foreground">Serviço não encontrado</h1>
           <Button asChild className="mt-4"><Link to="/servicos">Voltar aos Serviços</Link></Button>
         </div>
       </Layout>
@@ -73,7 +73,7 @@ const ServicoDetalhe = () => {
               <span>/</span>
               <span className="text-white truncate max-w-[150px] sm:max-w-none">{service.title}</span>
             </nav>
-            <h1 className="font-heading text-2xl font-extrabold text-white md:text-4xl lg:text-5xl">{service.title}</h1>
+            <h1 className="font-heading text-2xl font-medium text-white md:text-4xl lg:text-5xl">{service.title}</h1>
           </AnimatedSection>
         </div>
       </section>
@@ -84,13 +84,13 @@ const ServicoDetalhe = () => {
           <div className="grid gap-8 md:gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2 space-y-8 md:space-y-10">
               <AnimatedSection>
-                <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground">Sobre o serviço</h2>
+                <h2 className="font-heading text-xl md:text-2xl font-medium text-foreground">Sobre o serviço</h2>
                 <p className="mt-3 md:mt-4 text-sm md:text-base text-muted-foreground leading-relaxed">{service.fullDescription}</p>
               </AnimatedSection>
 
               {service.slug === "abertura-de-piscina" && (
                 <AnimatedSection>
-                  <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Veja em obra</h3>
+                  <h3 className="font-heading text-lg md:text-xl font-medium text-foreground">Veja em obra</h3>
                   <p className="mt-2 text-sm text-muted-foreground">Registros reais de abertura de cava executada pela equipe SMS com mini escavadeira em terreno residencial.</p>
                   <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {PISCINA_VIDEOS.map((v) => (
@@ -112,12 +112,12 @@ const ServicoDetalhe = () => {
               )}
 
               <AnimatedSection>
-                <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Para quem é?</h3>
+                <h3 className="font-heading text-lg md:text-xl font-medium text-foreground">Para quem é?</h3>
                 <p className="mt-2 md:mt-3 text-sm md:text-base text-muted-foreground leading-relaxed">{service.whoIsItFor}</p>
               </AnimatedSection>
 
               <AnimatedSection>
-                <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Como executamos</h3>
+                <h3 className="font-heading text-lg md:text-xl font-medium text-foreground">Como executamos</h3>
                 <ol className="mt-3 md:mt-4 space-y-3">
                   {service.howWeExecute.map((step, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -129,7 +129,7 @@ const ServicoDetalhe = () => {
               </AnimatedSection>
 
               <AnimatedSection>
-                <h3 className="font-heading text-lg md:text-xl font-bold text-foreground flex items-center gap-2"><Wrench className="h-5 w-5 text-primary" /> Equipamentos</h3>
+                <h3 className="font-heading text-lg md:text-xl font-medium text-foreground flex items-center gap-2"><Wrench className="h-5 w-5 text-primary" /> Equipamentos</h3>
                 <ul className="mt-3 md:mt-4 grid gap-2 sm:grid-cols-2">
                   {service.equipment.map((eq, i) => (
                     <li key={i} className="flex items-center gap-2 text-sm md:text-base text-muted-foreground"><CheckCircle className="h-4 w-4 text-primary shrink-0" />{eq}</li>
@@ -138,7 +138,7 @@ const ServicoDetalhe = () => {
               </AnimatedSection>
 
               <AnimatedSection>
-                <h3 className="font-heading text-lg md:text-xl font-bold text-foreground flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-primary" /> Segurança e qualidade</h3>
+                <h3 className="font-heading text-lg md:text-xl font-medium text-foreground flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-primary" /> Segurança e qualidade</h3>
                 <ul className="mt-3 md:mt-4 space-y-2">
                   {service.benefits.map((b, i) => (
                     <li key={i} className="flex items-center gap-2 text-sm md:text-base text-muted-foreground"><CheckCircle className="h-4 w-4 text-primary shrink-0" />{b}</li>
@@ -148,7 +148,7 @@ const ServicoDetalhe = () => {
 
               {service.faq.length > 0 && (
                 <AnimatedSection>
-                  <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Perguntas frequentes</h3>
+                  <h3 className="font-heading text-lg md:text-xl font-medium text-foreground">Perguntas frequentes</h3>
                   <Accordion type="single" collapsible className="mt-3 md:mt-4">
                     {service.faq.map((item, i) => (
                       <AccordionItem key={i} value={`faq-${i}`} className="border-border">
@@ -163,7 +163,7 @@ const ServicoDetalhe = () => {
               {/* Internal links */}
               <AnimatedSection>
                 <div className="rounded-lg border border-border bg-card p-4 md:p-5">
-                  <h3 className="font-heading text-sm md:text-base font-bold text-foreground mb-3">Artigos relacionados</h3>
+                  <h3 className="font-heading text-sm md:text-base font-medium text-foreground mb-3">Artigos relacionados</h3>
                   <ul className="space-y-2">
                     {relatedPosts.map((post) => (
                       <li key={post.slug}>
@@ -187,7 +187,7 @@ const ServicoDetalhe = () => {
             <div className="space-y-5 md:space-y-6">
               <AnimatedSection direction="right">
                 <div className="rounded-lg border border-border bg-card p-4 md:p-5">
-                  <h3 className="font-heading text-sm md:text-base font-bold text-foreground mb-3 md:mb-4">Outros serviços</h3>
+                  <h3 className="font-heading text-sm md:text-base font-medium text-foreground mb-3 md:mb-4">Outros serviços</h3>
                   <ul className="space-y-2">
                     {otherServices.map((s) => (
                       <li key={s.id}>
@@ -203,7 +203,7 @@ const ServicoDetalhe = () => {
 
               <AnimatedSection direction="right" delay={0.1}>
                 <div className="rounded-lg bg-primary p-5 md:p-6 text-white">
-                  <h3 className="font-heading text-lg font-bold">Precisa de ajuda?</h3>
+                  <h3 className="font-heading text-lg font-medium">Precisa de ajuda?</h3>
                   <p className="mt-2 text-sm text-white/80">Nossa equipe está pronta para esclarecer suas dúvidas sobre {service.title.toLowerCase()}.</p>
                   <WhatsAppCTA label="Fale conosco" locationTag="servico-sidebar" className="mt-4 w-full bg-white text-primary hover:bg-white/90 rounded-full tap-feedback" />
                 </div>

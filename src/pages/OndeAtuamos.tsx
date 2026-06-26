@@ -51,7 +51,7 @@ export default function OndeAtuamos() {
               <span className="mx-2">/</span>
               <span className="text-white">Onde atuamos</span>
             </nav>
-            <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-white leading-tight">
+            <h1 className="font-heading text-3xl md:text-5xl font-medium text-white leading-tight">
               Onde a SMS Terraplenagem atende em São Paulo e região
             </h1>
             <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-300">

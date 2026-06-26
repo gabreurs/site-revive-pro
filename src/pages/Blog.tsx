@@ -40,7 +40,7 @@ const Blog = () => {
         <div className="container-custom">
           <AnimatedSection>
             <div className="mx-auto max-w-3xl text-center">
-              <h1 className="font-heading text-[1.75rem] font-extrabold text-white md:text-5xl">Blog</h1>
+              <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">Blog</h1>
               <p className="mt-2 md:mt-3 text-base md:text-lg text-gray-300">
                 Artigos, dicas e informações sobre terraplanagem e construção civil em São Paulo
               </p>

@@ -16,7 +16,7 @@ const BlogCategoria = () => {
     return (
       <Layout>
         <div className="container-custom section-padding text-center">
-          <h1 className="font-heading text-2xl font-bold text-foreground">Categoria não encontrada</h1>
+          <h1 className="font-heading text-2xl font-medium text-foreground">Categoria não encontrada</h1>
           <Button asChild className="mt-4"><Link to="/blog">Voltar ao Blog</Link></Button>
         </div>
       </Layout>
@@ -38,7 +38,7 @@ const BlogCategoria = () => {
               <ArrowLeft className="h-4 w-4" />
               Voltar ao Blog
             </Link>
-            <h1 className="font-heading text-[1.75rem] font-extrabold text-white md:text-5xl">{category.label}</h1>
+            <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">{category.label}</h1>
             <p className="mt-2 md:mt-3 text-base md:text-lg text-gray-300">{posts.length} artigo{posts.length !== 1 ? "s" : ""} nesta categoria</p>
           </AnimatedSection>
         </div>

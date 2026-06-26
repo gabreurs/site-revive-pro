@@ -29,7 +29,7 @@ const Servicos = () => (
       <div className="container-custom">
         <AnimatedSection>
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="font-heading text-[1.75rem] font-extrabold text-white md:text-5xl">
+            <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">
               Serviços de terraplanagem em São Paulo
             </h1>
             <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-300">
@@ -131,7 +131,7 @@ const Servicos = () => (
     <section className="section-padding cta-gradient section-dark">
       <div className="container-custom text-center">
         <AnimatedSection>
-          <h2 className="font-heading text-2xl font-bold text-white md:text-4xl">Precisa de um orçamento?</h2>
+          <h2 className="font-heading text-2xl font-medium text-white md:text-4xl">Precisa de um orçamento?</h2>
           <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">Fale com nossa equipe e receba uma proposta personalizada para sua obra.</p>
           <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <WhatsAppCTA label="Solicitar orçamento" locationTag="servicos-cta" className="bg-white text-primary hover:bg-white/90 rounded-full px-8 w-full sm:w-auto tap-feedback" size="lg" />
