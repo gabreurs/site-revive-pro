@@ -47,7 +47,7 @@ export function BlogCard({ post }: BlogCardProps) {
           <span>{post.readTime}</span>
         </div>
 
-        <h3 className="font-heading text-base md:text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="font-heading text-base md:text-lg font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
           {post.title}
         </h3>
         <p className="mt-1.5 md:mt-2 text-xs md:text-sm text-muted-foreground line-clamp-2 flex-1">

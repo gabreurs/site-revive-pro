@@ -50,7 +50,7 @@ const Contato = () => {
 
       <section className="section-dark py-12 md:py-24 topo-pattern">
         <div className="container-custom"><AnimatedSection><div className="mx-auto max-w-3xl text-center">
-          <h1 className="font-heading text-[1.75rem] font-extrabold text-white md:text-5xl">Entre em <span className="text-primary">contato</span></h1>
+          <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">Entre em <span className="text-primary">contato</span></h1>
           <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-300">Estamos prontos para atender sua demanda de terraplanagem na Grande São Paulo.</p>
         </div></AnimatedSection></div>
       </section>
@@ -58,7 +58,7 @@ const Contato = () => {
       <section className="section-padding">
         <div className="container-custom"><div className="grid gap-8 md:gap-12 lg:grid-cols-2">
           <AnimatedSection direction="left">
-            <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground">Envie sua mensagem</h2>
+            <h2 className="font-heading text-xl md:text-2xl font-medium text-foreground">Envie sua mensagem</h2>
             <p className="mt-2 text-sm md:text-base text-muted-foreground">Preencha o formulário abaixo e retornamos em até 24h.</p>
             <form onSubmit={handleSubmit} className="mt-5 md:mt-6 space-y-4 md:space-y-5">
               <input type="hidden" name="serviceType" value={serviceType} />
@@ -80,7 +80,7 @@ const Contato = () => {
           </AnimatedSection>
 
           <AnimatedSection direction="right">
-            <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground">Informações de contato</h2>
+            <h2 className="font-heading text-xl md:text-2xl font-medium text-foreground">Informações de contato</h2>
             <p className="mt-2 text-sm md:text-base text-muted-foreground">Ou entre em contato diretamente.</p>
             <div className="mt-5 md:mt-6 space-y-3 md:space-y-4">
               <a href={getWhatsAppUrl()} target={target} rel="noopener noreferrer" data-cta="whatsapp" data-location="contato" onClick={trackWhatsAppConversion}
@@ -102,7 +102,7 @@ const Contato = () => {
               </div>
             </div>
             <div className="mt-5 md:mt-6 rounded-lg bg-green-600 p-5 md:p-6 text-white">
-              <h3 className="font-heading text-lg font-bold">Prefere o WhatsApp?</h3>
+              <h3 className="font-heading text-lg font-medium">Prefere o WhatsApp?</h3>
               <p className="mt-1 text-sm text-white/80">Fale diretamente com nossa equipe.</p>
               <WhatsAppCTA label="Abrir WhatsApp" locationTag="contato-whatsapp" className="mt-4 w-full bg-white text-green-700 hover:bg-white/90 rounded-full tap-feedback" icon="message" />
             </div>

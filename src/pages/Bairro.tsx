@@ -77,7 +77,7 @@ const Bairro = () => {
     return (
       <div className="flex min-h-screen items-center justify-center bg-muted">
         <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold">404</h1>
+          <h1 className="mb-4 text-4xl font-medium">404</h1>
           <p className="mb-4 text-xl text-muted-foreground">Localidade não encontrada</p>
           <a href="/" className="text-primary underline hover:text-primary/90">Voltar para o início</a>
         </div>
@@ -179,7 +179,7 @@ const Bairro = () => {
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                   <MapPin className="h-3.5 w-3.5" /> {region.label} · {cityLabel}
                 </span>
-                <h1 className="mt-3 font-heading text-[1.75rem] font-extrabold text-white md:text-5xl leading-tight">
+                <h1 className="mt-3 font-heading text-[1.75rem] font-medium text-white md:text-5xl leading-tight">
                   {h1}
                 </h1>
                 <p className="mt-4 text-base md:text-lg text-gray-300">
@@ -220,7 +220,7 @@ const Bairro = () => {
       <section className="section-padding">
         <div className="container-custom max-w-3xl">
           <AnimatedSection>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+            <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground">
               Terraplanagem {phrase}: contexto local e tipos de obra atendidos
             </h2>
             <div className="mt-4 text-base text-muted-foreground leading-relaxed">
@@ -261,7 +261,7 @@ const Bairro = () => {
       <section className="section-padding section-neutral">
         <div className="container-custom grid gap-8 lg:grid-cols-2 items-start">
           <AnimatedSection>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+            <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground">
               Atendimento de terraplanagem {phrase} e entorno
             </h2>
             <p className="mt-3 text-muted-foreground">
@@ -370,7 +370,7 @@ const Bairro = () => {
                       />
                     </div>
                     <div>
-                      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+                      <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground">
                         {meta.title} {phrase}
                       </h2>
                       <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -415,7 +415,7 @@ const Bairro = () => {
             <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-xs font-medium text-primary">
               <Truck className="h-3.5 w-3.5" /> Frota própria
             </span>
-            <h2 className="mt-3 font-heading text-2xl md:text-3xl font-bold text-white">
+            <h2 className="mt-3 font-heading text-2xl md:text-3xl font-medium text-white">
               Frota própria para terraplanagem {phrase}
             </h2>
             <p className="mt-4 text-gray-300">
@@ -538,7 +538,7 @@ const Bairro = () => {
       <section className="section-padding cta-gradient section-dark">
         <div className="container-custom text-center">
           <AnimatedSection>
-            <h2 className="font-heading text-2xl font-bold text-white md:text-4xl">
+            <h2 className="font-heading text-2xl font-medium text-white md:text-4xl">
               Obra {phrase}? Vamos conversar.
             </h2>
             <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">

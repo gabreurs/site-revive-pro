@@ -62,7 +62,7 @@ const Index = () => {
           <div className="hero-blue-panel relative topo-pattern">
             <div className="container-custom flex items-center h-full py-12 md:py-20 lg:py-28 lg:pr-16">
               <AnimatedSection>
-                <h1 className="font-heading text-[1.75rem] font-extrabold leading-[1.1] text-white md:text-5xl lg:text-[3.25rem]">
+                <h1 className="font-heading text-[1.75rem] font-medium leading-[1.1] text-white md:text-5xl lg:text-[3.25rem]">
                   Terraplanagem em São Paulo com equipamento próprio
                 </h1>
                 <p className="mt-4 md:mt-6 max-w-xl text-[0.94rem] text-white/80 md:text-lg leading-relaxed">
@@ -453,7 +453,7 @@ const Index = () => {
       <section className="section-padding cta-gradient section-dark">
         <div className="container-custom text-center">
           <AnimatedSection>
-            <h2 className="font-heading text-2xl font-bold text-white md:text-4xl">Pronto para começar seu projeto?</h2>
+            <h2 className="font-heading text-2xl font-medium text-white md:text-4xl">Pronto para começar seu projeto?</h2>
             <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">Entre em contato pelo WhatsApp e receba um orçamento personalizado sem compromisso.</p>
             <div className="mt-6 md:mt-8">
               <WhatsAppCTA label="Falar com um especialista" locationTag="cta-final"

@@ -46,7 +46,7 @@ export default function RegiaoHub() {
               <span className="mx-2">/</span>
               <span className="text-white">{hub.shortLabel}</span>
             </nav>
-            <h1 className="font-heading text-3xl md:text-5xl font-extrabold text-white leading-tight">
+            <h1 className="font-heading text-3xl md:text-5xl font-medium text-white leading-tight">
               {hub.h1}
             </h1>
             <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-300">{hub.intro}</p>
@@ -67,7 +67,7 @@ export default function RegiaoHub() {
       <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+            <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground">
               Localidades atendidas — {hub.shortLabel}
             </h2>
             <p className="mt-3 max-w-3xl text-muted-foreground">
@@ -100,7 +100,7 @@ export default function RegiaoHub() {
       <section className="section-padding section-neutral">
         <div className="container-custom">
           <AnimatedSection>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
+            <h2 className="font-heading text-2xl md:text-3xl font-medium text-foreground">
               Serviços disponíveis — {hub.shortLabel}
             </h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
