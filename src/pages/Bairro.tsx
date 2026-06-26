@@ -3,6 +3,7 @@ import {
   ArrowRight, MapPin, CheckCircle2, Truck, Building2, ShieldCheck, ClipboardList, ExternalLink,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -160,61 +161,39 @@ const Bairro = () => {
       <JsonLd data={serviceLd} />
       <JsonLd data={faqLd} />
 
-      {/* HERO */}
-      <section className="section-dark py-12 md:py-20 topo-pattern">
-        <div className="container-custom">
-          <AnimatedSection>
-            <nav aria-label="breadcrumb" className="mb-4 text-xs text-gray-400">
-              <Link to="/" className="hover:text-primary">Início</Link>
-              <span className="mx-2">/</span>
-              <Link to="/onde-atuamos" className="hover:text-primary">Onde atuamos</Link>
-              <span className="mx-2">/</span>
-              <Link to={`/onde-atuamos/${regionHub.slug}`} className="hover:text-primary">{regionHub.shortLabel}</Link>
-              <span className="mx-2">/</span>
-              <span className="text-white">{name}</span>
-            </nav>
+      <PageHero
+        eyebrow={`${region.label} · ${cityLabel}`}
+        title={h1}
+        subtitle={firstSentence}
+        image={heroImg}
+        imageAlt={`Escavadeira em serviço de terraplanagem ${phrase} pela SMS Terraplenagem`}
+        breadcrumbs={[
+          { label: "Início", to: "/" },
+          { label: "Onde atuamos", to: "/onde-atuamos" },
+          { label: regionHub.shortLabel, to: `/onde-atuamos/${regionHub.slug}` },
+          { label: name },
+        ]}
+        actions={
+          <>
+            <WhatsAppCTA
+              label={`Orçamento ${phrase}`}
+              message={whatsappMsg}
+              locationTag={`bairro-hero-${bairro.slug}`}
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+              icon="message"
+            />
+            <a
+              href="#servicos-locais"
+              className="inline-flex items-center justify-center border border-white/25 px-7 py-3 text-sm uppercase tracking-wider text-white hover:bg-white/10 transition-colors"
+            >
+              Ver serviços {phrase}
+            </a>
+          </>
+        }
+      />
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  <MapPin className="h-3.5 w-3.5" /> {region.label} · {cityLabel}
-                </span>
-                <h1 className="mt-3 font-heading text-[1.75rem] font-medium text-white md:text-5xl leading-tight">
-                  {h1}
-                </h1>
-                <p className="mt-4 text-base md:text-lg text-gray-300">
-                  {firstSentence}
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                  <WhatsAppCTA
-                    label={`Orçamento ${phrase}`}
-                    message={whatsappMsg}
-                    locationTag={`bairro-hero-${bairro.slug}`}
-                    size="lg"
-                    className="bg-whatsapp hover:bg-whatsapp/90 text-white rounded-full"
-                    icon="message"
-                  />
-                  <a
-                    href="#servicos-locais"
-                    className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-white hover:bg-white/10 transition-colors"
-                  >
-                    Ver serviços atendidos {phrase}
-                  </a>
-                </div>
-              </div>
 
-              <div className="hidden lg:block">
-                <img
-                  src={heroImg}
-                  alt={`Escavadeira em serviço de terraplanagem ${phrase} pela SMS Terraplenagem`}
-                  className="w-full h-[360px] object-cover rounded-md shadow-2xl"
-                  loading="eager"
-                />
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* INTRO ESPECÍFICA POR PERFIL */}
       <section className="section-padding">
