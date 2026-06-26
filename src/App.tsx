@@ -17,12 +17,19 @@ import Bairro from "./pages/Bairro";
 import OndeAtuamos from "./pages/OndeAtuamos";
 import RegiaoHub from "./pages/RegiaoHub";
 import NotFound from "./pages/NotFound";
+import { IntroLoader } from "./components/IntroLoader";
+import { useGsapReveal } from "./hooks/useGsapReveal";
 
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
+function GlobalReveal() {
+  useGsapReveal();
   return null;
 }
 
