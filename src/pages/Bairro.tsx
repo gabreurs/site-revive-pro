@@ -288,7 +288,7 @@ const Bairro = () => {
             <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
               <div className="relative h-48">
                 <img
-                  src={escavacaoImg}
+                  src={SERVICE_IMAGE_BY_KEY["movimentacao-terra"].src}
                   alt={`Terraplanagem e preparo de terreno para obras ${phrase} e região`}
                   className="h-full w-full object-cover"
                   loading="lazy"
