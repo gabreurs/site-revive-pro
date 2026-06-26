@@ -45,7 +45,7 @@ const Sobre = () => (
         </AnimatedSection>
         <AnimatedSection direction="right">
           <div className="overflow-hidden rounded-lg">
-            <img src={heroImage} alt="Equipe da SMS Terraplenagem em obra de movimentação de terra na Grande São Paulo" className="rounded-lg w-full" loading="lazy" width={600} height={400} />
+            <img src={SUPPORT_OBRAS.frota.src} alt="Frota da SMS Terraplenagem no pátio próprio" className="rounded-md w-full" loading="lazy" width={600} height={400} />
           </div>
         </AnimatedSection>
       </div></div>
