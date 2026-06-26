@@ -112,13 +112,16 @@ const Bairro = () => {
   const nearbyBairros = region.bairros.filter((n) => n !== name).slice(0, 12);
 
   // ---------- JSON-LD ----------
+  const regionHub = getRegionHub(region.key);
+  const regionHubUrl = `https://smsterraplenagem.com.br/onde-atuamos/${regionHub.slug}`;
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Início", item: "https://smsterraplenagem.com.br/" },
-      { "@type": "ListItem", position: 2, name: region.label },
-      { "@type": "ListItem", position: 3, name: `Terraplanagem ${phrase}`, item: canonical },
+      { "@type": "ListItem", position: 2, name: "Onde atuamos", item: "https://smsterraplenagem.com.br/onde-atuamos" },
+      { "@type": "ListItem", position: 3, name: regionHub.shortLabel, item: regionHubUrl },
+      { "@type": "ListItem", position: 4, name: `Terraplanagem ${phrase}`, item: canonical },
     ],
   };
   const localBusinessLd = {
