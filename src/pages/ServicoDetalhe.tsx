@@ -88,6 +88,29 @@ const ServicoDetalhe = () => {
                 <p className="mt-3 md:mt-4 text-sm md:text-base text-muted-foreground leading-relaxed">{service.fullDescription}</p>
               </AnimatedSection>
 
+              {service.slug === "abertura-de-piscina" && (
+                <AnimatedSection>
+                  <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Veja em obra</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">Registros reais de abertura de cava executada pela equipe SMS com mini escavadeira em terreno residencial.</p>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {PISCINA_VIDEOS.map((v) => (
+                      <div key={v.src} className="overflow-hidden rounded-md border border-border bg-card aspect-video">
+                        <video
+                          src={v.src}
+                          poster={v.poster}
+                          aria-label={v.label}
+                          controls
+                          playsInline
+                          muted
+                          preload="none"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              )}
+
               <AnimatedSection>
                 <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Para quem é?</h3>
                 <p className="mt-2 md:mt-3 text-sm md:text-base text-muted-foreground leading-relaxed">{service.whoIsItFor}</p>
