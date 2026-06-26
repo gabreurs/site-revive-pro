@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SERVICES, BLOG_CATEGORIES, getExternalLinkTarget, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
+import { REGION_HUB_LIST } from "@/data/regionHubs";
 import { motion, AnimatePresence } from "framer-motion";
 import logoDark from "@/assets/logo-sms-dark.svg";
 
