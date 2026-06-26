@@ -454,6 +454,10 @@ export interface LocationOverride {
   metaDescription?: string;
   firstSentence?: string;
   introSentence?: string;
+  /** Frase locativa explícita: usar para nomes ambíguos (ex: "em Anhanguera" em vez de "no Anhanguera"). */
+  phrase?: string;
+  /** Parágrafo extra com contexto local específico (avenidas, perfil de obra, vizinhança). */
+  localContext?: string;
 }
 
 export const LOCATION_OVERRIDES: Record<string, LocationOverride> = {
