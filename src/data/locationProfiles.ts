@@ -506,9 +506,9 @@ export const LOCATION_OVERRIDES: Record<string, LocationOverride> = {
     introSentence: "O Brás concentra galpões antigos, lojas e prédios em retrofit, com obras que costumam começar por demolição parcial e retirada de entulho.",
   },
   "anhanguera": {
-    title: "Terraplanagem em Anhanguera para Terrenos Amplos | SMS",
-    metaDescription: "Terraplanagem em Anhanguera para terrenos maiores, obras comerciais e áreas em expansão. Limpeza, movimentação de terra, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem em Anhanguera para terrenos maiores, obras comerciais e áreas em expansão é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    title: "Terraplanagem no Anhanguera para Terrenos Amplos | SMS",
+    metaDescription: "Terraplanagem no Anhanguera para terrenos maiores, obras comerciais e áreas em expansão. Limpeza, movimentação de terra, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem no Anhanguera para terrenos maiores, obras comerciais e áreas em expansão é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
     introSentence: "Anhanguera tem terrenos amplos, áreas em expansão e obras que costumam pedir corte, aterro e preparação completa do solo antes da construção.",
   },
   "santo-andre": {
