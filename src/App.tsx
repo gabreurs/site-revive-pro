@@ -45,6 +45,8 @@ const App = () => (
           <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
           <Route path="/terraplanagem-:slug" element={<Bairro />} />
           <Route path="/terraplanagem-*" element={<Bairro />} />
+          <Route path="/onde-atuamos" element={<OndeAtuamos />} />
+          <Route path="/onde-atuamos/:slug" element={<RegiaoHub />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>
