@@ -219,7 +219,7 @@ export function Header() {
       </header>
 
       {/* spacer — header is fixed (constant height to avoid CLS) */}
-      <div aria-hidden="true" style={{ height: 80 }} />
+      <div aria-hidden="true" className="h-16 lg:h-[72px]" />
     </>
   );
 }
