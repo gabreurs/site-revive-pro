@@ -19,6 +19,7 @@ import RegiaoHub from "./pages/RegiaoHub";
 import NotFound from "./pages/NotFound";
 import { IntroLoader } from "./components/IntroLoader";
 import { useGsapReveal } from "./hooks/useGsapReveal";
+import { useLenis } from "./hooks/useLenis";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +29,9 @@ function ScrollToTop() {
   return null;
 }
 
-function GlobalReveal() {
+function GlobalMotion() {
   useGsapReveal();
+  useLenis();
   return null;
 }
 
@@ -41,7 +43,7 @@ const App = () => (
       <BrowserRouter>
         <IntroLoader />
         <ScrollToTop />
-        <GlobalReveal />
+        <GlobalMotion />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/servicos" element={<Servicos />} />

@@ -87,10 +87,25 @@ export function Header() {
       <header
         className={`w-full fixed top-0 z-50 transition-[background-color,box-shadow] duration-200 ${headerBg} backdrop-blur-md`}
       >
-        <div className="container-custom flex items-center justify-between" style={{ height: scrolled ? 64 : 80 }}>
+        <div className="container-custom flex items-center justify-between h-16 lg:h-[72px]">
           {/* Logo */}
-          <Link to="/" aria-label="SMS Terraplenagem — Início" className="block shrink-0">
-            <img src={logoLight} alt="SMS Terraplenagem" className="h-7 sm:h-8 lg:h-9 w-auto" />
+          <Link
+            to="/"
+            aria-label="SMS Terraplenagem — Início"
+            className="block shrink-0"
+            onClick={(e) => {
+              if (location.pathname === "/") {
+                e.preventDefault();
+                const lenis = (window as any).__lenis;
+                if (lenis && typeof lenis.scrollTo === "function") {
+                  lenis.scrollTo(0, { duration: 1.1 });
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }
+            }}
+          >
+            <img src={logoLight} alt="SMS Terraplenagem" className="h-8 lg:h-9 w-auto" />
           </Link>
 
           {/* Desktop nav */}
@@ -204,7 +219,7 @@ export function Header() {
       </header>
 
       {/* spacer — header is fixed (constant height to avoid CLS) */}
-      <div aria-hidden="true" style={{ height: 80 }} />
+      <div aria-hidden="true" className="h-16 lg:h-[72px]" />
     </>
   );
 }

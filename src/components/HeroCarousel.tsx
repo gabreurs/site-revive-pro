@@ -70,7 +70,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className="relative isolate overflow-hidden -mt-20 section-dark"
+      className="relative isolate overflow-hidden -mt-16 lg:-mt-[72px] section-dark"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
