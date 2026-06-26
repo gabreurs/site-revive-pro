@@ -17,9 +17,25 @@ import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride }
 import { getRegionHub } from "@/data/regionHubs";
 import { ExpandableText } from "@/components/ui/ExpandableText";
 
-import { HERO_OBRA, SERVICE_IMAGE_BY_KEY } from "@/lib/serviceImages";
+import { HERO_OBRA, SERVICE_IMAGE_BY_KEY, SUPPORT_OBRAS } from "@/lib/serviceImages";
 
-const heroImg = HERO_OBRA.src;
+// Pool de imagens reais para rotação por bairro — evita hero repetida em massa
+const BAIRRO_HERO_POOL: { src: string; alt: (p: string) => string }[] = [
+  { src: HERO_OBRA.src, alt: (p) => `Escavadeira Volvo da SMS em obra de terraplanagem ${p}` },
+  { src: SERVICE_IMAGE_BY_KEY["movimentacao-terra"].src, alt: (p) => `Movimentação de terra executada pela SMS ${p}` },
+  { src: SERVICE_IMAGE_BY_KEY["demolicao"].src, alt: (p) => `Demolição controlada pela SMS ${p}` },
+  { src: SERVICE_IMAGE_BY_KEY["limpeza-terreno"].src, alt: (p) => `Limpeza de terreno feita pela SMS ${p}` },
+  { src: SERVICE_IMAGE_BY_KEY["escavacao"].src, alt: (p) => `Escavação com mini escavadeira da SMS ${p}` },
+  { src: SUPPORT_OBRAS.transporte.src, alt: (p) => `Caminhão prancha SMS entregando equipamento ${p}` },
+  { src: SUPPORT_OBRAS.prancha.src, alt: (p) => `Escavadeira sendo levada à obra da SMS ${p}` },
+  { src: SUPPORT_OBRAS.frota.src, alt: (p) => `Frota própria da SMS pronta para obra ${p}` },
+];
+function pickBairroHero(slug: string) {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return BAIRRO_HERO_POOL[h % BAIRRO_HERO_POOL.length];
+}
+
 
 type ServiceKey = "terraplanagem" | "limpeza" | "demolicao" | "nivelamento" | "movimentacao" | "preparo";
 
