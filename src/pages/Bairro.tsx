@@ -222,15 +222,19 @@ const Bairro = () => {
               Terraplanagem {phrase}: contexto local e tipos de obra atendidos
             </h2>
             <div className="mt-4 space-y-4 text-base text-muted-foreground leading-relaxed">
-              <p>
-                {name} é uma {profile.introProfile}. Por isso, a terraplanagem {phrase} costuma envolver {profile.workContext}, com cuidado especial no {profile.accessConcern}.
-              </p>
+              <p>{introSentence}</p>
               <p>
                 {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes — o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
               </p>
-              <p>
-                Cada projeto começa com uma avaliação do terreno e do escopo da obra. Só depois apresentamos o orçamento, com clareza sobre serviços, prazos e logística específicos para {name}.
-              </p>
+              <details className="group rounded-xl border border-border bg-card/40 p-4">
+                <summary className="cursor-pointer text-sm font-medium text-primary list-none flex items-center justify-between">
+                  <span>Continuar lendo sobre o atendimento {phrase}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-open:rotate-90" />
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed">
+                  Cada projeto começa com uma avaliação do terreno e do escopo da obra. Só depois apresentamos o orçamento, com clareza sobre serviços, prazos e logística específicos para {name}. Em obras que pedem mais de uma frente — por exemplo, demolição seguida de limpeza e movimentação de terra —, a equipe organiza a sequência para não deixar o canteiro parado entre etapas.
+                </p>
+              </details>
             </div>
 
             <ul className="mt-6 grid gap-2 sm:grid-cols-2">
