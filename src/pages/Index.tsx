@@ -6,6 +6,7 @@ import { ServiceCard } from "@/components/ui/ServiceCard";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { LocalBusinessJsonLd } from "@/components/seo/JsonLd";
 import {
