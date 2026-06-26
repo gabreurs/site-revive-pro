@@ -181,7 +181,7 @@ const Bairro = () => {
                   {h1}
                 </h1>
                 <p className="mt-4 text-base md:text-lg text-gray-300">
-                  {profile.heroLead(phrase)}
+                  {firstSentence}
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3">
                   <WhatsAppCTA
