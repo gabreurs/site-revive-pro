@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/layout/PageHero";
-import { HERO_OBRA } from "@/lib/serviceImages";
+import { SUPPORT_OBRAS } from "@/lib/serviceImages";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/constants";
 
 const POSTS_PER_PAGE = 6;
@@ -42,7 +42,7 @@ const Blog = () => {
         eyebrow="Conteúdo SMS"
         title="Blog"
         subtitle="Artigos, dicas e informações sobre terraplanagem, escavação e construção civil em São Paulo."
-        image={HERO_OBRA.src}
+        image={SUPPORT_OBRAS.prancha.src}
         imageAlt="Obra de terraplanagem da SMS na Grande São Paulo"
         breadcrumbs={[{ label: "Início", to: "/" }, { label: "Blog" }]}
       />

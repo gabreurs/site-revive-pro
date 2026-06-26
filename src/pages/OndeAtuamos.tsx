@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/layout/PageHero";
-import { HERO_OBRA } from "@/lib/serviceImages";
+import { SUPPORT_OBRAS } from "@/lib/serviceImages";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -50,7 +50,7 @@ export default function OndeAtuamos() {
         eyebrow="Cobertura SMS"
         title="Onde a SMS Terraplenagem atende em São Paulo e região"
         subtitle="Capital, Grande São Paulo, ABC paulista e cidades do interior — terraplanagem, limpeza, demolição e nivelamento com frota própria."
-        image={HERO_OBRA.src}
+        image={SUPPORT_OBRAS.transporte.src}
         imageAlt="Obra da SMS Terraplenagem em canteiro na Grande São Paulo"
         breadcrumbs={[{ label: "Início", to: "/" }, { label: "Onde atuamos" }]}
         actions={

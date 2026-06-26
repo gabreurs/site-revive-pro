@@ -2,7 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/layout/PageHero";
-import { HERO_OBRA } from "@/lib/serviceImages";
+import { SUPPORT_OBRAS } from "@/lib/serviceImages";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -41,7 +41,7 @@ export default function RegiaoHub() {
         eyebrow={`Região · ${hub.shortLabel}`}
         title={hub.h1}
         subtitle={hub.intro}
-        image={HERO_OBRA.src}
+        image={SUPPORT_OBRAS.frota.src}
         imageAlt={`Terraplanagem da SMS em ${hub.shortLabel}`}
         breadcrumbs={[
           { label: "Início", to: "/" },
