@@ -12,6 +12,7 @@ import { REGION_HUB_LIST } from "@/data/regionHubs";
 import { REGIONS, slugifyBairro } from "@/lib/bairros";
 import { getLocationPhrase } from "@/lib/preposition";
 import { SERVICES } from "@/lib/constants";
+import { HERO_PRIMARY_CTA } from "@/lib/ctaClasses";
 
 const CANONICAL = "https://smsterraplenagem.com.br/onde-atuamos";
 

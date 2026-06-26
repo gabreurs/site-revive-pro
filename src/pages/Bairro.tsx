@@ -11,6 +11,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
+import { HERO_PRIMARY_CTA, HERO_SECONDARY_CTA, SECTION_CTA_LIGHT } from "@/lib/ctaClasses";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
 import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride } from "@/data/locationProfiles";
