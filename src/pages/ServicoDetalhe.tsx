@@ -9,26 +9,19 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Layout } from "@/components/layout/Layout";
 import { SERVICES, BLOG_POSTS } from "@/lib/constants";
 
-import limpezaImg from "@/assets/limpeza-terreno.jpg";
-import demolicaoImg from "@/assets/demolicao.jpg";
-import escavacaoImg from "@/assets/escavacao.jpg";
-import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
-import perfuracaoImg from "@/assets/perfuracao.jpg";
-import transporteImg from "@/assets/transporte-locacao.jpg";
+import { SERVICE_IMAGE_BY_KEY, getServiceImage } from "@/lib/serviceImages";
+import piscinaVid1 from "@/assets/servicos/abertura-piscina-1.mp4.asset.json";
+import piscinaVid1Poster from "@/assets/servicos/abertura-piscina-1-poster.jpg.asset.json";
+import piscinaVid2 from "@/assets/servicos/abertura-piscina-2.mp4.asset.json";
+import piscinaVid2Poster from "@/assets/servicos/abertura-piscina-2-poster.jpg.asset.json";
+import piscinaVid3 from "@/assets/servicos/abertura-piscina-3.mp4.asset.json";
+import piscinaVid3Poster from "@/assets/servicos/abertura-piscina-3-poster.jpg.asset.json";
 
-const serviceImages: Record<string, string> = {
-  "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
-  "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
-};
-
-const serviceAltTexts: Record<string, string> = {
-  "limpeza-terreno": "Máquina realizando limpeza de terreno com remoção de vegetação em canteiro de obras",
-  "demolicao": "Escavadeira com rompedor executando demolição controlada de estrutura",
-  "escavacao": "Escavadeira hidráulica abrindo vala para fundação em terreno na Grande São Paulo",
-  "movimentacao-terra": "Trator de esteira realizando corte e aterro para nivelamento de terreno",
-  "perfuracao": "Perfuratriz em operação para sondagem geotécnica do solo",
-  "transporte-locacao": "Caminhão basculante e escavadeira disponíveis para locação em obra",
-};
+const PISCINA_VIDEOS = [
+  { src: piscinaVid1.url, poster: piscinaVid1Poster.url, label: "Abertura de cava para piscina — etapa 1" },
+  { src: piscinaVid2.url, poster: piscinaVid2Poster.url, label: "Abertura de cava para piscina — etapa 2" },
+  { src: piscinaVid3.url, poster: piscinaVid3Poster.url, label: "Abertura de cava para piscina — etapa 3" },
+];
 
 const ServicoDetalhe = () => {
   const { slug } = useParams<{ slug: string }>();
