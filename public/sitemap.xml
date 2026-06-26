@@ -253,4 +253,14 @@
   <url><loc>https://smsterraplenagem.com.br/terraplanagem-vargem-grande-paulista</loc></url>
   <url><loc>https://smsterraplenagem.com.br/terraplanagem-vila-caicara</loc></url>
   <url><loc>https://smsterraplenagem.com.br/terraplanagem-vinhedo</loc></url>
+
+  <!-- Onde atuamos (hubs) -->
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos/centro-de-sao-paulo</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos/zona-norte</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos/zona-sul</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos/zona-leste</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos/zona-oeste</loc></url>
+  <url><loc>https://smsterraplenagem.com.br/onde-atuamos/grande-sao-paulo</loc></url>
+
 </urlset>
