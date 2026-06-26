@@ -9,6 +9,8 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
+import { SUPPORT_OBRAS } from "@/lib/serviceImages";
 import { COMPANY_INFO, SERVICES, getExternalLinkTarget, getWhatsAppUrl, trackWhatsAppConversion } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 
@@ -48,12 +50,15 @@ const Contato = () => {
         canonical="https://smsterraplenagem.com.br/contato"
       />
 
-      <section className="section-dark py-12 md:py-24 topo-pattern">
-        <div className="container-custom"><AnimatedSection><div className="mx-auto max-w-3xl text-center">
-          <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">Entre em <span className="text-primary">contato</span></h1>
-          <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-300">Estamos prontos para atender sua demanda de terraplanagem na Grande São Paulo.</p>
-        </div></AnimatedSection></div>
-      </section>
+      <PageHero
+        eyebrow="Fale com a SMS"
+        title={<>Entre em <span className="text-primary">contato</span></>}
+        subtitle="Atendemos São Paulo e toda a Grande SP. Resposta rápida pelo WhatsApp ou pelo formulário."
+        image={SUPPORT_OBRAS.transporte.src}
+        imageAlt="Caminhão prancha da SMS transportando equipamento na Grande São Paulo"
+        breadcrumbs={[{ label: "Início", to: "/" }, { label: "Contato" }]}
+      />
+
 
       <section className="section-padding">
         <div className="container-custom"><div className="grid gap-8 md:gap-12 lg:grid-cols-2">

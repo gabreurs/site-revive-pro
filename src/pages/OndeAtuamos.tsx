@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
+import { HERO_OBRA } from "@/lib/serviceImages";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -43,32 +45,26 @@ export default function OndeAtuamos() {
       <JsonLd data={breadcrumbLd} />
 
       {/* HERO */}
-      <section className="section-dark py-12 md:py-20 topo-pattern">
-        <div className="container-custom">
-          <AnimatedSection>
-            <nav aria-label="breadcrumb" className="mb-4 text-xs text-gray-400">
-              <Link to="/" className="hover:text-primary">Início</Link>
-              <span className="mx-2">/</span>
-              <span className="text-white">Onde atuamos</span>
-            </nav>
-            <h1 className="font-heading text-3xl md:text-5xl font-medium text-white leading-tight">
-              Onde a SMS Terraplenagem atende em São Paulo e região
-            </h1>
-            <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-300">
-              Atendemos a capital de São Paulo, Grande São Paulo, ABC paulista e cidades do interior com frota própria e equipe dedicada — terraplanagem, limpeza de terreno, demolição, nivelamento e movimentação de terra para obras comerciais, industriais e residenciais.
-            </p>
-            <div className="mt-6">
-              <WhatsAppCTA
-                label="Solicitar orçamento"
-                locationTag="onde-atuamos-hero"
-                size="lg"
-                className="bg-whatsapp hover:bg-whatsapp/90 text-white rounded-full"
-                icon="message"
-              />
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+
+      <PageHero
+        eyebrow="Cobertura SMS"
+        title="Onde a SMS Terraplenagem atende em São Paulo e região"
+        subtitle="Capital, Grande São Paulo, ABC paulista e cidades do interior — terraplanagem, limpeza, demolição e nivelamento com frota própria."
+        image={HERO_OBRA.src}
+        imageAlt="Obra da SMS Terraplenagem em canteiro na Grande São Paulo"
+        breadcrumbs={[{ label: "Início", to: "/" }, { label: "Onde atuamos" }]}
+        actions={
+          <WhatsAppCTA
+            label="Solicitar orçamento"
+            locationTag="onde-atuamos-hero"
+            size="lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            icon="message"
+          />
+        }
+      />
+
+
 
       {/* MACRO REGIÕES */}
       <section className="section-padding">

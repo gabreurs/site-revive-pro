@@ -6,6 +6,8 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
+import { HERO_OBRA } from "@/lib/serviceImages";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/constants";
 
 const POSTS_PER_PAGE = 6;
@@ -36,18 +38,16 @@ const Blog = () => {
         canonical="https://smsterraplenagem.com.br/blog"
       />
 
-      <section className="section-dark py-12 md:py-24 topo-pattern">
-        <div className="container-custom">
-          <AnimatedSection>
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">Blog</h1>
-              <p className="mt-2 md:mt-3 text-base md:text-lg text-gray-300">
-                Artigos, dicas e informações sobre terraplanagem e construção civil em São Paulo
-              </p>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Conteúdo SMS"
+        title="Blog"
+        subtitle="Artigos, dicas e informações sobre terraplanagem, escavação e construção civil em São Paulo."
+        image={HERO_OBRA.src}
+        imageAlt="Obra de terraplanagem da SMS na Grande São Paulo"
+        breadcrumbs={[{ label: "Início", to: "/" }, { label: "Blog" }]}
+      />
+
+
 
       <section className="section-padding">
         <div className="container-custom">

@@ -7,6 +7,7 @@ import { SEOHead } from "@/components/seo/SEOHead";
 import { ServiceJsonLd } from "@/components/seo/JsonLd";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
 import { SERVICES, BLOG_POSTS } from "@/lib/constants";
 
 import { SERVICE_IMAGE_BY_KEY, getServiceImage } from "@/lib/serviceImages";
@@ -51,32 +52,28 @@ const ServicoDetalhe = () => {
       />
       <ServiceJsonLd name={service.title} description={service.fullDescription} />
 
-      {/* Hero */}
-      <section className="relative section-dark">
-        <div className="aspect-[16/8] sm:aspect-[16/6] max-h-[420px] w-full overflow-hidden">
-          <img
-            src={getServiceImage(service.image).src}
-            alt={getServiceImage(service.image).alt}
-            className="h-full w-full object-cover"
-            loading="eager"
-            width={1200}
-            height={450}
+      <PageHero
+        eyebrow="Serviço SMS"
+        title={service.title}
+        subtitle={service.shortDescription}
+        image={getServiceImage(service.image).src}
+        imageAlt={getServiceImage(service.image).alt}
+        breadcrumbs={[
+          { label: "Início", to: "/" },
+          { label: "Serviços", to: "/servicos" },
+          { label: service.title },
+        ]}
+        actions={
+          <WhatsAppCTA
+            label={`Cotar ${service.title.toLowerCase()}`}
+            locationTag={`servico-${service.slug}-hero`}
+            size="lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            icon="message"
           />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,30%,8%)] via-[hsl(222,30%,8%)]/40 to-transparent" aria-hidden="true" />
-        <div className="container-custom absolute inset-0 flex flex-col justify-end pb-6 md:pb-8">
-          <AnimatedSection>
-            <nav className="mb-2 md:mb-3 flex items-center gap-2 text-xs text-gray-300" aria-label="Breadcrumb">
-              <Link to="/" className="hover:text-white transition-colors">Início</Link>
-              <span>/</span>
-              <Link to="/servicos" className="hover:text-white transition-colors">Serviços</Link>
-              <span>/</span>
-              <span className="text-white truncate max-w-[150px] sm:max-w-none">{service.title}</span>
-            </nav>
-            <h1 className="font-heading text-2xl font-medium text-white md:text-4xl lg:text-5xl">{service.title}</h1>
-          </AnimatedSection>
-        </div>
-      </section>
+        }
+      />
+
 
       {/* Content */}
       <section className="section-padding">

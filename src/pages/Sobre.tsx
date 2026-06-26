@@ -5,10 +5,11 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
 import { CountUp } from "@/components/CountUp";
 import { COVERAGE_AREAS } from "@/lib/constants";
 import { MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-terraplanagem.jpg";
+import { SUPPORT_OBRAS } from "@/lib/serviceImages";
 
 const STATS = [
   { end: 500, suffix: "+", label: "Projetos Realizados" },
@@ -25,12 +26,15 @@ const Sobre = () => (
       canonical="https://smsterraplenagem.com.br/sobre"
     />
 
-    <section className="section-dark py-12 md:py-24 topo-pattern">
-      <div className="container-custom"><AnimatedSection><div className="mx-auto max-w-3xl text-center">
-        <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">Sobre a <span className="text-primary">SMS Terraplenagem</span></h1>
-        <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-300">Conheça nossa história, valores e o compromisso com a excelência em terraplanagem na Grande São Paulo.</p>
-      </div></AnimatedSection></div>
-    </section>
+    <PageHero
+      eyebrow="A empresa"
+      title={<>Sobre a <span className="text-primary">SMS Terraplenagem</span></>}
+      subtitle="Nossa história, valores e o compromisso com a excelência em terraplanagem na Grande São Paulo."
+      image={SUPPORT_OBRAS.frota.src}
+      imageAlt="Frota própria da SMS Terraplenagem no pátio"
+      breadcrumbs={[{ label: "Início", to: "/" }, { label: "Sobre" }]}
+    />
+
 
     <section className="section-padding">
       <div className="container-custom"><div className="grid gap-8 md:gap-12 lg:grid-cols-2 lg:items-center">

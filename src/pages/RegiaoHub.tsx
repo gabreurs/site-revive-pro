@@ -1,6 +1,8 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
+import { HERO_OBRA } from "@/lib/serviceImages";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -35,33 +37,29 @@ export default function RegiaoHub() {
       <SEOHead title={hub.title} description={hub.metaDescription} canonical={canonical} />
       <JsonLd data={breadcrumbLd} />
 
-      {/* HERO */}
-      <section className="section-dark py-12 md:py-20 topo-pattern">
-        <div className="container-custom">
-          <AnimatedSection>
-            <nav aria-label="breadcrumb" className="mb-4 text-xs text-gray-400">
-              <Link to="/" className="hover:text-primary">Início</Link>
-              <span className="mx-2">/</span>
-              <Link to="/onde-atuamos" className="hover:text-primary">Onde atuamos</Link>
-              <span className="mx-2">/</span>
-              <span className="text-white">{hub.shortLabel}</span>
-            </nav>
-            <h1 className="font-heading text-3xl md:text-5xl font-medium text-white leading-tight">
-              {hub.h1}
-            </h1>
-            <p className="mt-4 max-w-3xl text-base md:text-lg text-gray-300">{hub.intro}</p>
-            <div className="mt-6">
-              <WhatsAppCTA
-                label="Solicitar orçamento"
-                locationTag={`hub-${hub.slug}-hero`}
-                size="lg"
-                className="bg-whatsapp hover:bg-whatsapp/90 text-white rounded-full"
-                icon="message"
-              />
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={`Região · ${hub.shortLabel}`}
+        title={hub.h1}
+        subtitle={hub.intro}
+        image={HERO_OBRA.src}
+        imageAlt={`Terraplanagem da SMS em ${hub.shortLabel}`}
+        breadcrumbs={[
+          { label: "Início", to: "/" },
+          { label: "Onde atuamos", to: "/onde-atuamos" },
+          { label: hub.shortLabel },
+        ]}
+        actions={
+          <WhatsAppCTA
+            label="Solicitar orçamento"
+            locationTag={`hub-${hub.slug}-hero`}
+            size="lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            icon="message"
+          />
+        }
+      />
+
+
 
       {/* LOCALIDADES */}
       <section className="section-padding">

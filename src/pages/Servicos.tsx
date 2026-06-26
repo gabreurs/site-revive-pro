@@ -6,9 +6,10 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/layout/PageHero";
 import { SERVICES, COVERAGE_AREAS, BLOG_POSTS } from "@/lib/constants";
 
-import { SERVICE_IMAGE_BY_KEY } from "@/lib/serviceImages";
+import { SERVICE_IMAGE_BY_KEY, HERO_OBRA } from "@/lib/serviceImages";
 
 const serviceImages: Record<string, string> = Object.fromEntries(
   Object.entries(SERVICE_IMAGE_BY_KEY).map(([k, v]) => [k, v.src]),
@@ -24,21 +25,24 @@ const Servicos = () => (
       canonical="https://smsterraplenagem.com.br/servicos"
     />
 
-    {/* Hero curta */}
-    <section className="section-dark py-12 md:py-22 topo-pattern">
-      <div className="container-custom">
-        <AnimatedSection>
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="font-heading text-[1.75rem] font-medium text-white md:text-5xl">
-              Serviços de terraplanagem em São Paulo
-            </h1>
-            <p className="mt-3 md:mt-4 text-base md:text-lg text-gray-300">
-              Soluções completas para preparar, nivelar e executar sua obra com segurança e equipamento próprio. Dessa forma, garantimos agilidade em cada etapa.
-            </p>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
+    <PageHero
+      eyebrow="Soluções em terraplanagem"
+      title="Serviços de terraplanagem em São Paulo"
+      subtitle="Soluções completas para preparar, nivelar e executar sua obra com segurança, frota própria e operadores experientes."
+      image={HERO_OBRA.src}
+      imageAlt="Escavadeira da SMS em obra de terraplanagem na Grande São Paulo"
+      breadcrumbs={[{ label: "Início", to: "/" }, { label: "Serviços" }]}
+      actions={
+        <WhatsAppCTA
+          label="Solicitar cotação"
+          locationTag="servicos-hero"
+          size="lg"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+          icon="message"
+        />
+      }
+    />
+
 
     {/* Grid de serviços */}
     <section className="section-padding">
