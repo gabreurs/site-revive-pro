@@ -17,6 +17,8 @@ import Bairro from "./pages/Bairro";
 import OndeAtuamos from "./pages/OndeAtuamos";
 import RegiaoHub from "./pages/RegiaoHub";
 import NotFound from "./pages/NotFound";
+import { IntroLoader } from "./components/IntroLoader";
+import { useGsapReveal } from "./hooks/useGsapReveal";
 
 const queryClient = new QueryClient();
 
@@ -26,13 +28,20 @@ function ScrollToTop() {
   return null;
 }
 
+function GlobalReveal() {
+  useGsapReveal();
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <IntroLoader />
         <ScrollToTop />
+        <GlobalReveal />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/servicos" element={<Servicos />} />

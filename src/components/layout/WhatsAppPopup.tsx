@@ -15,8 +15,9 @@ export function WhatsAppPopup() {
 
     const timer = setTimeout(() => {
       setShowPopup(true);
-      if (typeof window !== "undefined" && (window as any).dataLayer) {
-        (window as any).dataLayer.push({ event: "whatsapp_popup_view" });
+      if (typeof window !== "undefined") {
+        const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+        dl.push({ event: "popup_open", location: "whatsapp_floating" });
       }
     }, 3000);
 
@@ -26,15 +27,27 @@ export function WhatsAppPopup() {
   const dismiss = () => {
     setShowPopup(false);
     localStorage.setItem(POPUP_DISMISS_KEY, Date.now().toString());
+    if (typeof window !== "undefined") {
+      const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+      dl.push({ event: "popup_close", location: "whatsapp_floating" });
+    }
   };
 
   const togglePopup = useCallback(() => {
-    setShowPopup((prev) => !prev);
+    setShowPopup((prev) => {
+      const next = !prev;
+      if (typeof window !== "undefined") {
+        const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+        dl.push({ event: next ? "popup_open" : "popup_close", location: "whatsapp_floating_button" });
+      }
+      return next;
+    });
   }, []);
 
   const handleCTAClick = () => {
-    if (typeof window !== "undefined" && (window as any).dataLayer) {
-      (window as any).dataLayer.push({ event: "whatsapp_popup_click" });
+    if (typeof window !== "undefined") {
+      const dl = ((window as any).dataLayer = (window as any).dataLayer || []);
+      dl.push({ event: "popup_whatsapp_click", location: "whatsapp_floating" });
     }
     trackWhatsAppConversion();
   };
