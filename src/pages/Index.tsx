@@ -296,6 +296,70 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ═══════════ FROTA & OBRAS (registros reais do cliente) ═══════════ */}
+      <section className="section-padding" aria-labelledby="frota-obras-titulo">
+        <div className="container-custom">
+          <AnimatedSection>
+            <SectionHeading
+              title="Frota e obras em andamento"
+              subtitle="Registros enviados pela equipe da SMS direto dos canteiros — escavadeiras próprias, transporte com prancha e demolições recentes em São Paulo."
+              centered
+            />
+          </AnimatedSection>
+
+          <div className="grid gap-4 md:gap-6 lg:grid-cols-12 mt-2">
+            {/* Vídeo curto — destaque sem dominar */}
+            <AnimatedSection direction="left" className="lg:col-span-5">
+              <figure className="relative overflow-hidden rounded-xl border border-border bg-muted/40 shadow-sm">
+                <div className="aspect-video w-full">
+                  <video
+                    className="h-full w-full object-cover"
+                    src={videoObra1.url}
+                    poster={videoObra1Poster.url}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="Vídeo curto de obra da SMS Terraplenagem"
+                  />
+                </div>
+                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                  <span className="text-xs font-medium uppercase tracking-wide text-white/90">
+                    Obra registrada · frota SMS
+                  </span>
+                </figcaption>
+              </figure>
+            </AnimatedSection>
+
+            {/* Grade compacta de fotos — cards pequenos, sem esticar */}
+            <AnimatedSection direction="right" className="lg:col-span-7">
+              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
+                {OBRA_GALLERY.map((photo, i) => (
+                  <li
+                    key={photo.src}
+                    className="group relative overflow-hidden rounded-lg border border-border bg-muted/30"
+                  >
+                    <div className="aspect-[4/3] w-full">
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        loading={i < 2 ? "eager" : "lazy"}
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Fotos reais enviadas pela equipe operacional. Sem montagem nem banco de imagens.
+              </p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════ DIFERENCIAIS ═══════════ */}
       <section className="section-padding section-dark">
         <div className="container-custom">
