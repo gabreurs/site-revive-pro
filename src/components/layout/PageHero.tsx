@@ -35,7 +35,7 @@ export function PageHero({
   const minH = size === "tall" ? "min-h-[62vh] lg:min-h-[68vh]" : "min-h-[48vh] lg:min-h-[54vh]";
 
   return (
-    <section className={`relative isolate overflow-hidden -mt-20 section-dark ${minH} flex items-end`}>
+    <section className={`relative isolate overflow-hidden -mt-16 lg:-mt-[72px] section-dark ${minH} flex items-end`}>
       {/* Imagem de fundo */}
       <div className="absolute inset-0 -z-10">
         <img
