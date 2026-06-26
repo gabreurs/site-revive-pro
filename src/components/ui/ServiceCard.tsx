@@ -16,7 +16,7 @@ export function ServiceCard({ slug, title, description, image, variant = "defaul
   return (
     <Link
       to={`/servicos/${slug}`}
-      className={`group relative block overflow-hidden rounded-xl card-interactive tap-feedback ${
+      className={`group relative block overflow-hidden rounded-md card-interactive tap-feedback ${
         isLarge ? "aspect-[16/10]" : "aspect-[4/3]"
       }`}
     >

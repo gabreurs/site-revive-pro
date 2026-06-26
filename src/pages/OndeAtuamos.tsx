@@ -83,7 +83,7 @@ export default function OndeAtuamos() {
               return (
                 <article
                   key={hub.key}
-                  className="group relative flex flex-col rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-md"
+                  className="group relative flex flex-col rounded-md border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-md"
                 >
                   <span aria-hidden="true" className="absolute left-6 top-0 h-1 w-10 -translate-y-1/2 rounded-full bg-primary" />
                   <h2 className="font-heading text-lg font-semibold text-foreground">
@@ -135,7 +135,7 @@ export default function OndeAtuamos() {
               <Link
                 key={s.id}
                 to={`/servicos/${s.slug}`}
-                className="flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                className="flex items-center justify-between rounded-md border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
               >
                 <span className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-primary" />
