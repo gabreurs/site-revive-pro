@@ -221,6 +221,9 @@ const Bairro = () => {
             </h2>
             <div className="mt-4 space-y-4 text-base text-muted-foreground leading-relaxed">
               <p>{introSentence}</p>
+              {override.localContext && (
+                <p>{override.localContext}</p>
+              )}
               <p>
                 {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes — o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
               </p>
