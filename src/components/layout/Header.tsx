@@ -28,6 +28,7 @@ export function Header() {
     setDeskDrop(null);
     setMobServices(false);
     setMobBlog(false);
+    setMobAreas(false);
   }, [location.pathname]);
 
   // Lock body scroll when drawer is open
