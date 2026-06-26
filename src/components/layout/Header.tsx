@@ -278,7 +278,7 @@ function MegaAreas({ onClose }: { onClose: () => void }) {
     <div>
       <h3 className="text-[10px] tracking-[0.22em] uppercase text-primary mb-5">Onde atuamos</h3>
       <div className="grid grid-cols-[280px_1fr] gap-7">
-        <Link to="/onde-atuamos" onClick={onClose} className="group relative block overflow-hidden border border-white/10 aspect-[4/5]">
+        <Link to="/onde-atuamos" onClick={onClose} className="group relative block overflow-hidden border border-white/10 rounded-md aspect-[4/3]">
           <img src={HERO_OBRA.src} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">
