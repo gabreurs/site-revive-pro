@@ -12,7 +12,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
-import { getProfileByName, googleMapsLink } from "@/data/locationProfiles";
+import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride } from "@/data/locationProfiles";
 
 import heroImg from "@/assets/hero-terraplanagem.jpg";
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
