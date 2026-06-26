@@ -24,6 +24,26 @@ import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
 import perfuracaoImg from "@/assets/perfuracao.jpg";
 import transporteImg from "@/assets/transporte-locacao.jpg";
 
+// Registros reais de obra enviados pela equipe SMS (uso em cards compactos)
+import obraEscavadeiraPrancha from "@/assets/obras/sms-escavadeira-prancha.jpg.asset.json";
+import obraDemolicaoTerreno from "@/assets/obras/sms-demolicao-terreno.jpg.asset.json";
+import obraFrotaEscavadeiras from "@/assets/obras/sms-frota-escavadeiras.jpg.asset.json";
+import obraCaminhaoTransporte from "@/assets/obras/sms-caminhao-transporte.jpg.asset.json";
+import obraVolvoCanteiro from "@/assets/obras/sms-volvo-canteiro.jpg.asset.json";
+import obraMiniEscavadeira from "@/assets/obras/sms-mini-escavadeira-sy35.jpg.asset.json";
+import obraDoosanPatio from "@/assets/obras/sms-doosan-patio.jpg.asset.json";
+import videoObra1 from "@/assets/obras/obra-14-43-07.mp4.asset.json";
+import videoObra1Poster from "@/assets/obras/obra-14-43-07-poster.jpg.asset.json";
+
+const OBRA_GALLERY = [
+  { src: obraDemolicaoTerreno.url, alt: "Demolição de sobrado em São Paulo com escavadeira SMS removendo alvenaria" },
+  { src: obraFrotaEscavadeiras.url, alt: "Frota SMS com mini escavadeira SY35U, SY75C e Doosan estacionadas em pátio próprio" },
+  { src: obraEscavadeiraPrancha.url, alt: "Escavadeira SMS sendo transportada em prancha rebaixada para obra na capital" },
+  { src: obraVolvoCanteiro.url, alt: "Escavadeira Volvo EC140B da SMS em canteiro de terraplanagem na Grande São Paulo" },
+  { src: obraCaminhaoTransporte.url, alt: "Caminhão prancha SMS 18-310 carregando escavadeira Sany para obra" },
+  { src: obraMiniEscavadeira.url, alt: "Mini escavadeira Sany SY35U da SMS em serviço de escavação em área urbana restrita" },
+];
+
 const serviceImages: Record<string, string> = {
   "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
   "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
