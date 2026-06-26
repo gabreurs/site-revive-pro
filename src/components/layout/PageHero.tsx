@@ -77,8 +77,8 @@ export function PageHero({
           className="max-w-[640px]"
         >
           {eyebrow && (
-            <span className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-primary border border-primary/50 px-3 py-1.5 rounded-sm bg-[hsl(222_30%_5%)]/40 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 bg-primary" /> {eyebrow}
+            <span className="inline-flex items-center gap-2 text-[13px] font-medium text-primary bg-primary/10 border border-primary/30 px-3 py-1.5 rounded-full">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {eyebrow}
             </span>
           )}
           <h1
