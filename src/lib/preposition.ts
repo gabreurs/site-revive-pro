@@ -45,7 +45,7 @@ const OVERRIDES: Record<string, Preposition> = {
 
   // Centro
   "Aclimação": "na",
-  "Anhanguera": "no",
+  "Anhanguera": "em", // nome ambíguo (rodovia/faculdade) — locativa segura
   "Bela Vista": "na",
   "Bom Retiro": "no",
   "Cambuci": "no",

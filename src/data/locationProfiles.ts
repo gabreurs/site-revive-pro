@@ -454,128 +454,211 @@ export interface LocationOverride {
   metaDescription?: string;
   firstSentence?: string;
   introSentence?: string;
+  /** Frase locativa explícita: usar para nomes ambíguos (ex: "em Anhanguera" em vez de "no Anhanguera"). */
+  phrase?: string;
+  /** Parágrafo extra com contexto local específico (avenidas, perfil de obra, vizinhança). */
+  localContext?: string;
 }
 
 export const LOCATION_OVERRIDES: Record<string, LocationOverride> = {
+  // ─────────── ZONA LESTE ───────────
   "tatuape": {
-    title: "Terraplanagem no Tatuapé para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem no Tatuapé para obras comerciais e terrenos urbanos. Limpeza de terreno, demolição, movimentação de terra e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem no Tatuapé para obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "O Tatuapé concentra obras comerciais, prédios residenciais e estacionamentos em ruas de fluxo intenso, o que exige planejamento de acesso de máquinas e janelas de operação bem combinadas.",
+    title: "Terraplanagem no Tatuapé | Obras Comerciais e Prediais — SMS",
+    metaDescription: "Terraplanagem no Tatuapé para obras comerciais, prédios residenciais e estacionamentos. Demolição, limpeza de terreno, nivelamento e movimentação de terra com frota própria.",
+    firstSentence: "Terraplanagem no Tatuapé para obras comerciais, prédios residenciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "O Tatuapé é um dos polos comerciais e residenciais mais adensados da Zona Leste de São Paulo, com obras frequentes em lotes urbanos cercados por prédios, comércio e fluxo intenso.",
+    localContext: "Obras na região tendem a ficar próximas de eixos movimentados como a Avenida Celso Garcia, Radial Leste e Rua Tuiuti, o que pede janelas combinadas para entrada de caminhões basculantes e remoção de entulho. Em demolições parciais e preparações de lote no Tatuapé, o cuidado costuma estar mais em organizar acesso, isolamento e descarte do que no volume de terra propriamente dito.",
   },
   "mooca": {
-    title: "Terraplanagem na Mooca para Obras e Reformas | SMS",
-    metaDescription: "Terraplanagem na Mooca para obras comerciais, reformas e terrenos urbanos. Limpeza, demolição, nivelamento e movimentação de terra com frota própria.",
-    firstSentence: "Terraplanagem na Mooca para obras comerciais, reformas e preparação de terrenos urbanos é com a SMS Terraplenagem, que atende a região com frota própria para limpeza de terreno, demolição, nivelamento e movimentação de terra.",
-    introSentence: "A Mooca mistura galpões antigos, prédios residenciais novos e comércio consolidado, e muita obra começa por demolição, retirada de entulho e regularização do lote.",
+    title: "Terraplanagem na Mooca | Reformas, Galpões e Obras Comerciais — SMS",
+    metaDescription: "Terraplanagem na Mooca para obras comerciais, retrofit de galpões e prédios residenciais. Demolição controlada, limpeza, nivelamento e movimentação de terra.",
+    firstSentence: "Terraplanagem na Mooca para obras comerciais, retrofit de galpões e preparação de terrenos urbanos é com a SMS Terraplenagem, que atende a região com frota própria em demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    introSentence: "A Mooca mistura galpões antigos, novos empreendimentos residenciais e comércio tradicional, e muita obra começa pela retirada de estruturas, demolição parcial e regularização do lote.",
+    localContext: "Por estar próxima da Rua da Mooca, Avenida Paes de Barros e Avenida Alcântara Machado, a operação considera horários de circulação, vizinhança residencial e logística para caçambas. Em retrofits de galpão, limpeza de terreno e nivelamento costumam vir junto da demolição, e a frota própria evita ter de coordenar terceiros entre as frentes de trabalho.",
   },
+  "penha": {
+    title: "Terraplanagem na Penha | Obras e Reformas — SMS Terraplenagem",
+    metaDescription: "Terraplanagem na Penha para obras comerciais, reformas e adequação de terrenos urbanos. Limpeza, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem na Penha para obras comerciais, reformas e preparação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "A Penha é uma região consolidada da Zona Leste, com comércio forte, lotes urbanos compactos e obras que normalmente envolvem reforma, demolição parcial e adequação de áreas já edificadas.",
+    localContext: "Próximo à Avenida Penha de França e ao eixo da Radial Leste, o trabalho considera vias com tráfego pesado e ruas estreitas no entorno residencial. Na maioria das obras, o volume de terra é menor, mas a operação exige planejamento para retirada de entulho e janelas para entrada de máquina.",
+  },
+
+  // ─────────── CENTRO ───────────
   "aclimacao": {
-    title: "Terraplanagem na Aclimação | SMS Terraplenagem",
-    metaDescription: "Terraplanagem na Aclimação para reformas, obras comerciais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem na Aclimação para obras comerciais, reformas e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "A Aclimação é uma região central com prédios antigos, lotes compactos e obras que costumam envolver retrofit, demolição pontual e retirada controlada de entulho.",
-  },
-  "alphaville": {
-    title: "Terraplanagem em Alphaville para Galpões e Empresas | SMS",
-    metaDescription: "Terraplanagem em Alphaville para obras comerciais, condomínios empresariais, galpões e áreas corporativas. Limpeza, demolição, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem em Alphaville para obras comerciais, condomínios empresariais, galpões e áreas corporativas é com a SMS Terraplenagem, que atua com frota própria em limpeza de terreno, movimentação de terra, nivelamento, demolição e preparo de solo.",
-    introSentence: "Alphaville reúne empreendimentos corporativos, condomínios empresariais e terrenos maiores, com obras que pedem cronograma operacional firme e logística de caminhões bem planejada.",
-  },
-  "perus": {
-    title: "Terraplanagem em Perus com Frota Própria | SMS Terraplenagem",
-    metaDescription: "Terraplanagem em Perus para terrenos, obras comerciais e áreas em expansão urbana. Movimentação de terra, limpeza, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem em Perus para terrenos, obras comerciais e áreas em expansão urbana é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Perus tem terrenos maiores e áreas em expansão, com obras que normalmente começam por limpeza do lote, corte, aterro e preparação do solo antes da construção.",
-  },
-  "cajamar": {
-    title: "Terraplanagem em Cajamar para Galpões e Indústria | SMS",
-    metaDescription: "Terraplanagem em Cajamar para galpões, áreas industriais e obras corporativas. Limpeza, movimentação de terra, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem em Cajamar para galpões, áreas industriais e obras corporativas é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Cajamar concentra galpões logísticos, condomínios industriais e terrenos amplos, com obras que demandam frota de porte e cronograma de caminhões bem dimensionado.",
-  },
-  "osasco": {
-    title: "Terraplanagem em Osasco para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem em Osasco para obras comerciais, industriais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem em Osasco para obras comerciais, industriais e terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Osasco une eixos comerciais movimentados, áreas industriais e bairros residenciais consolidados, com obras que pedem planejamento de acesso e logística de caminhões.",
+    title: "Terraplanagem na Aclimação | Reformas e Retrofits — SMS",
+    metaDescription: "Terraplanagem na Aclimação para reformas, retrofits e obras comerciais em terrenos urbanos. Demolição controlada, limpeza de terreno, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem na Aclimação para reformas, retrofits e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em demolição controlada, limpeza de terreno, nivelamento e preparo de solo.",
+    introSentence: "A Aclimação é uma região central de São Paulo formada por ruas tranquilas, prédios antigos e lotes compactos, com muitas obras de retrofit e adequação predial em vez de novas construções de grande porte.",
+    localContext: "Por ficar próxima do Parque da Aclimação, Avenida Lacerda Franco e da região da Liberdade, as obras costumam pedir demolição controlada, isolamento bom e horários combinados com a vizinhança. Equipamentos de porte compatível com lote urbano e remoção organizada de entulho são, na prática, o que destrava obras na Aclimação.",
   },
   "bras": {
-    title: "Terraplanagem no Brás para Obras e Demolição | SMS",
-    metaDescription: "Terraplanagem no Brás para obras comerciais, reformas e demolição. Limpeza de terreno, movimentação de terra e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem no Brás para obras comerciais, reformas e demolição controlada é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento e preparo de solo.",
-    introSentence: "O Brás concentra galpões antigos, lojas e prédios em retrofit, com obras que costumam começar por demolição parcial e retirada de entulho.",
+    title: "Terraplanagem no Brás | Demolição e Reformas Comerciais — SMS",
+    metaDescription: "Terraplanagem no Brás para obras comerciais, demolição controlada e retrofit de galpões. Limpeza de terreno, movimentação de terra e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem no Brás para obras comerciais, demolição controlada e retrofit de galpões é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento e preparo de solo.",
+    introSentence: "O Brás é uma região central de comércio intenso, com galpões antigos, lojas e prédios que muitas vezes passam por demolição parcial antes de receber uma nova ocupação.",
+    localContext: "Próximo à Avenida do Estado, Rua Oriente e ao eixo da Marginal Tietê, o trabalho exige planejamento de janelas para caminhão, isolamento bom e descarte regular de entulho. A combinação demolição + limpeza + nivelamento costuma resolver a maior parte das obras no Brás.",
+  },
+  "bela-vista": {
+    title: "Terraplanagem na Bela Vista | Reformas e Retrofit — SMS",
+    metaDescription: "Terraplanagem na Bela Vista para reformas, retrofit predial e obras comerciais em terrenos urbanos. Demolição controlada, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem na Bela Vista para reformas, retrofit predial e obras comerciais em terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em demolição controlada, limpeza de terreno, nivelamento e preparo de solo.",
+    introSentence: "A Bela Vista é uma região central consolidada, com prédios antigos, comércio tradicional e lotes apertados, onde as obras costumam ser retrofits e adequações em vez de novas construções.",
+    localContext: "Próxima da Avenida Paulista, da Avenida 9 de Julho e do eixo Brigadeiro, a região tem ruas estreitas e horários restritos para caminhão. Em obras na Bela Vista, demolição controlada, retirada de entulho em caçambas e bom isolamento da frente costumam ser mais críticos que o volume de terra movimentado.",
+  },
+  "liberdade": {
+    title: "Terraplanagem na Liberdade | Obras Comerciais e Reformas — SMS",
+    metaDescription: "Terraplanagem na Liberdade para reformas, obras comerciais e adequação de terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem na Liberdade para reformas, obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "A Liberdade reúne comércio intenso, prédios antigos e lotes compactos no Centro de São Paulo, com obras que pedem acesso planejado de máquinas e retirada controlada de entulho.",
+    localContext: "Próxima da Avenida Liberdade, Praça da Sé e do eixo central, a região tem trânsito denso e horários restritos para caminhões pesados. Demolição controlada, limpeza e ajuste de nível costumam ser as etapas mais frequentes em obras da Liberdade.",
+  },
+
+  // ─────────── ZONA SUL / OESTE — PRIORIDADE ───────────
+  "vila-mariana": {
+    title: "Terraplanagem na Vila Mariana | Obras Comerciais e Prediais — SMS",
+    metaDescription: "Terraplanagem na Vila Mariana para obras comerciais, prédios residenciais e adequação de terrenos urbanos. Demolição, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem na Vila Mariana para obras comerciais, prédios residenciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    introSentence: "A Vila Mariana é uma região residencial e comercial consolidada da Zona Sul de São Paulo, com prédios novos, escolas, comércio e lotes urbanos onde muita obra começa por adequação ou demolição parcial.",
+    localContext: "Próxima da Avenida 23 de Maio, Rua Vergueiro e do eixo do metrô, a operação considera ruas residenciais, horários combinados e logística para caçambas. Em obras na Vila Mariana, a frota própria ajuda principalmente em encadear demolição, limpeza e nivelamento sem deixar a frente parada entre etapas.",
+  },
+  "moema": {
+    title: "Terraplanagem em Moema | Obras Residenciais e Comerciais — SMS",
+    metaDescription: "Terraplanagem em Moema para obras residenciais de alto padrão, comerciais e adequação de terrenos. Demolição, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Moema para obras residenciais de alto padrão, comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    introSentence: "Moema é uma região nobre da Zona Sul de São Paulo, com prédios residenciais, comércio sofisticado e ruas arborizadas, onde a maior parte das obras envolve adequação, demolição parcial e preparação de lote.",
+    localContext: "Próximo da Avenida Ibirapuera, Avenida dos Bandeirantes e do Parque do Ibirapuera, o trabalho exige cuidado com vizinhança, vias residenciais e horários restritos. Em Moema, demolição controlada com pouco impacto, limpeza organizada e nivelamento preciso costumam ser os pontos críticos da operação.",
+  },
+  "itaim-bibi": {
+    title: "Terraplanagem no Itaim Bibi | Obras Corporativas e Reformas — SMS",
+    metaDescription: "Terraplanagem no Itaim Bibi para obras corporativas, edifícios comerciais e retrofits. Demolição controlada, limpeza, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem no Itaim Bibi para obras corporativas, edifícios comerciais e retrofits é com a SMS Terraplenagem, que atua com frota própria em demolição controlada, limpeza de terreno, nivelamento e preparo de solo.",
+    introSentence: "O Itaim Bibi é um dos principais polos corporativos de São Paulo, com edifícios comerciais, restaurantes e obras de retrofit em prédios que precisam ser preparados para novas ocupações.",
+    localContext: "Próximo da Avenida Brigadeiro Faria Lima, Avenida Juscelino Kubitschek e do eixo da Vila Olímpia, a operação considera trânsito corporativo, horários restritos para caminhões e exigências de isolamento. Em obras no Itaim Bibi, demolição controlada e logística rigorosa de entulho costumam ser mais críticas que o volume de terra.",
+  },
+  "brooklin": {
+    title: "Terraplanagem no Brooklin | Obras Comerciais e Corporativas — SMS",
+    metaDescription: "Terraplanagem no Brooklin para obras comerciais, edifícios corporativos e adequação de terrenos. Demolição, limpeza, nivelamento e movimentação de terra.",
+    firstSentence: "Terraplanagem no Brooklin para obras comerciais, edifícios corporativos e adequação de terrenos é com a SMS Terraplenagem, que atua com frota própria em demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    introSentence: "O Brooklin é um polo corporativo e residencial da Zona Sul de São Paulo, com prédios comerciais, novos empreendimentos residenciais e obras frequentes de adequação predial.",
+    localContext: "Próximo da Avenida das Nações Unidas, Avenida Engenheiro Luís Carlos Berrini e da Marginal Pinheiros, a região concentra escritórios e tem trânsito corporativo intenso. Em obras no Brooklin, a frota própria ajuda principalmente em demolição organizada, retirada controlada de entulho e nivelamento preciso para fundação.",
+  },
+  "pinheiros": {
+    title: "Terraplanagem em Pinheiros | Reformas e Obras Comerciais — SMS",
+    metaDescription: "Terraplanagem em Pinheiros para reformas, retrofits e obras comerciais em terrenos urbanos. Demolição controlada, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Pinheiros para reformas, retrofits e obras comerciais em terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em demolição controlada, limpeza de terreno, nivelamento e preparo de solo.",
+    introSentence: "Pinheiros é uma região consolidada da Zona Oeste de São Paulo, com casarões antigos, prédios novos, comércio forte e muitas obras de retrofit, demolição parcial e adequação de imóveis.",
+    localContext: "Próxima da Avenida Brigadeiro Faria Lima, Rua dos Pinheiros, Rua Teodoro Sampaio e da Marginal Pinheiros, a região tem ruas estreitas, lotes apertados e trânsito intenso. Em obras em Pinheiros, demolição controlada e logística organizada de caminhões geralmente importam mais que o volume bruto de terra.",
+  },
+  "morumbi": {
+    title: "Terraplanagem no Morumbi | Obras Residenciais e Comerciais — SMS",
+    metaDescription: "Terraplanagem no Morumbi para obras residenciais de alto padrão, comerciais e adequação de terrenos com relevo. Corte, aterro, demolição, limpeza e nivelamento.",
+    firstSentence: "Terraplanagem no Morumbi para obras residenciais de alto padrão, comerciais e adequação de terrenos com relevo é com a SMS Terraplenagem, que atua com frota própria em corte, aterro, demolição, limpeza e nivelamento.",
+    introSentence: "O Morumbi é uma região da Zona Sul com terrenos de relevo acentuado, residências de alto padrão e empreendimentos comerciais, onde corte e aterro costumam ser parte importante da obra.",
+    localContext: "Próximo da Avenida Giovanni Gronchi, Avenida Morumbi e do eixo da Marginal Pinheiros, muitas obras envolvem terrenos em desnível, contenções e preparação cuidadosa do lote. A frota própria de escavadeira, motoniveladora e basculantes ajuda a sequenciar corte, aterro e nivelamento sem depender de terceiros entre etapas.",
+  },
+  "butanta": {
+    title: "Terraplanagem no Butantã | Obras Comerciais e Prediais — SMS",
+    metaDescription: "Terraplanagem no Butantã para obras comerciais, prédios residenciais e adequação de terrenos urbanos. Limpeza, demolição, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem no Butantã para obras comerciais, prédios residenciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "O Butantã mistura áreas residenciais consolidadas, eixos comerciais e novos empreendimentos na Zona Oeste de São Paulo, com obras que pedem planejamento de acesso de máquinas.",
+    localContext: "Próximo da Avenida Vital Brasil, Avenida Corifeu de Azevedo Marques e da Marginal Pinheiros, o trabalho considera vias movimentadas e ruas residenciais estreitas. Em obras no Butantã, a operação encadeia limpeza, demolição parcial e nivelamento conforme o porte do lote.",
+  },
+  "ipiranga": {
+    title: "Terraplanagem no Ipiranga | Reformas e Retrofit de Galpões — SMS",
+    metaDescription: "Terraplanagem no Ipiranga para obras comerciais, retrofit de galpões e prédios residenciais. Demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    firstSentence: "Terraplanagem no Ipiranga para obras comerciais, retrofit de galpões e prédios residenciais é com a SMS Terraplenagem, que atua com frota própria em demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    introSentence: "O Ipiranga mistura áreas comerciais, galpões antigos em retrofit e prédios residenciais novos na Zona Sul de São Paulo, com obras frequentes de demolição parcial e preparação de lote.",
+    localContext: "Próximo da Avenida do Estado, Rua Silva Bueno e do eixo do Museu do Ipiranga, a operação considera vias movimentadas, vizinhança residencial e logística para caçambas. Em retrofits de galpão, demolição controlada e limpeza costumam vir juntas antes do nivelamento.",
+  },
+
+  // ─────────── ZONA NORTE / OESTE / EXPANSÃO ───────────
+  "santana": {
+    title: "Terraplanagem em Santana | Obras Comerciais na Zona Norte — SMS",
+    metaDescription: "Terraplanagem em Santana para obras comerciais, prédios residenciais e adequação de terrenos na Zona Norte de São Paulo. Demolição, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Santana para obras comerciais, prédios residenciais e adequação de terrenos urbanos na Zona Norte é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Santana é um polo comercial e residencial consolidado da Zona Norte de São Paulo, com prédios novos, comércio tradicional e obras urbanas em ruas de grande circulação.",
+    localContext: "Próximo da Avenida Cruzeiro do Sul, Avenida Braz Leme e do eixo do metrô, a operação considera trânsito intenso e vizinhança residencial densa. Em Santana, demolição parcial, limpeza e nivelamento costumam encadear a maioria das obras urbanas.",
+  },
+  "perus": {
+    title: "Terraplanagem em Perus | Terrenos e Áreas em Expansão — SMS",
+    metaDescription: "Terraplanagem em Perus para terrenos, obras comerciais e áreas em expansão urbana na Zona Norte. Movimentação de terra, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Perus para terrenos, obras comerciais e áreas em expansão urbana é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Perus, no extremo noroeste da capital, tem terrenos maiores e áreas em expansão, com obras que normalmente começam por limpeza do lote, corte, aterro e preparação do solo.",
+    localContext: "Próximo da Rodovia Anhanguera e da Avenida Raimundo Pereira de Magalhães, a região recebe obras com volume maior de terra e logística de caminhão facilitada por eixos rodoviários. Em Perus, corte, aterro e nivelamento costumam ser as etapas mais importantes.",
   },
   "anhanguera": {
-    title: "Terraplanagem no Anhanguera para Terrenos Amplos | SMS",
-    metaDescription: "Terraplanagem no Anhanguera para terrenos maiores, obras comerciais e áreas em expansão. Limpeza, movimentação de terra, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem no Anhanguera para terrenos maiores, obras comerciais e áreas em expansão é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Anhanguera tem terrenos amplos, áreas em expansão e obras que costumam pedir corte, aterro e preparação completa do solo antes da construção.",
+    title: "Terraplanagem em Anhanguera | Terrenos Amplos e Obras em Expansão — SMS",
+    metaDescription: "Terraplanagem em Anhanguera (bairro/distrito da Zona Noroeste de São Paulo) para terrenos amplos, obras comerciais e áreas em expansão. Limpeza, movimentação de terra, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Anhanguera para terrenos amplos, obras comerciais e áreas em expansão urbana é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Anhanguera, distrito da Zona Noroeste de São Paulo, tem terrenos maiores, áreas em expansão e obras que pedem corte, aterro e preparação completa do solo antes da construção.",
+    localContext: "Esta página trata do distrito/região Anhanguera, na capital — não da Rodovia Anhanguera nem de instituições de mesmo nome. Próximo da Rodovia Anhanguera e da divisa com Perus e Caieiras, a operação se beneficia de eixos rodoviários para logística de caminhões e de lotes mais amplos para escavação e movimentação de terra.",
+    phrase: "em Anhanguera", // override desambigua: nunca "no Anhanguera"
   },
-  "santo-andre": {
-    title: "Terraplanagem em Santo André para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem em Santo André para obras comerciais e industriais no ABC. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem em Santo André para obras comerciais e industriais no ABC é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Santo André tem polos industriais, eixos comerciais e bairros residenciais consolidados, com obras que pedem deslocamento de frota e cronograma firme.",
+  "casa-verde": {
+    title: "Terraplanagem na Casa Verde | Obras Comerciais e Prediais — SMS",
+    metaDescription: "Terraplanagem na Casa Verde para obras comerciais, prédios residenciais e adequação de terrenos urbanos na Zona Norte. Demolição, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem na Casa Verde para obras comerciais, prédios residenciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em demolição, limpeza de terreno, nivelamento e movimentação de terra.",
+    introSentence: "A Casa Verde é uma região consolidada da Zona Norte de São Paulo, com comércio forte, áreas residenciais e obras urbanas que costumam pedir adequação predial.",
+    localContext: "Próxima da Avenida Braz Leme, Avenida Casa Verde e do eixo da Marginal Tietê, a operação considera vias movimentadas e ruas residenciais. Em obras na Casa Verde, limpeza, demolição parcial e nivelamento encadeiam a maioria das frentes.",
   },
-  "sao-bernardo-do-campo": {
-    title: "Terraplanagem em São Bernardo do Campo | SMS",
-    metaDescription: "Terraplanagem em São Bernardo do Campo para obras comerciais e industriais. Limpeza, demolição, movimentação de terra, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem em São Bernardo do Campo para obras comerciais e industriais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "São Bernardo concentra indústria, galpões logísticos e empreendimentos comerciais, com obras que pedem planejamento de caminhões e equipe deslocada.",
+
+  // ─────────── REGIÃO METROPOLITANA / CORPORATIVO ───────────
+  "alphaville": {
+    title: "Terraplanagem em Alphaville | Galpões, Empresas e Condomínios — SMS",
+    metaDescription: "Terraplanagem em Alphaville para condomínios empresariais, galpões, áreas corporativas e residenciais. Limpeza, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Alphaville para condomínios empresariais, galpões, áreas corporativas e empreendimentos residenciais é com a SMS Terraplenagem, que atua com frota própria em limpeza de terreno, movimentação de terra, nivelamento, demolição e preparo de solo.",
+    introSentence: "Alphaville reúne condomínios empresariais, parques corporativos, condomínios residenciais de alto padrão e terrenos amplos na divisa de Barueri e Santana de Parnaíba.",
+    localContext: "Próximo da Rodovia Castello Branco, Alameda Rio Negro e do eixo da Rodovia Tenente Marques, a região concentra terrenos maiores, exigências de cronograma operacional firme e obras que combinam corporativo, comercial e residencial. Em Alphaville, a frota própria ajuda a sequenciar limpeza, corte, aterro e nivelamento conforme o porte do projeto, sem depender de terceiros.",
   },
-  "diadema": {
-    title: "Terraplanagem em Diadema para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem em Diadema para obras comerciais e industriais. Limpeza, demolição, movimentação de terra, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem em Diadema para obras comerciais e industriais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Diadema mistura indústria, comércio e bairros densos, com obras que pedem planejamento de acesso e cronograma firme de caminhões.",
+  "osasco": {
+    title: "Terraplanagem em Osasco | Obras Comerciais e Industriais — SMS",
+    metaDescription: "Terraplanagem em Osasco para obras comerciais, industriais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Osasco para obras comerciais, industriais e terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Osasco une eixos comerciais movimentados, áreas industriais e bairros residenciais consolidados na Região Metropolitana de São Paulo, com obras que pedem planejamento de acesso e logística de caminhões.",
+    localContext: "Próximo da Rodovia Castello Branco, Rodovia Anhanguera e da Marginal Tietê, a região tem boa logística rodoviária e obras variadas, de retrofit comercial a preparação de galpão. A frota própria ajuda a manter cronograma firme entre demolição, limpeza e nivelamento.",
   },
   "barueri": {
-    title: "Terraplanagem em Barueri para Empresas e Galpões | SMS",
-    metaDescription: "Terraplanagem em Barueri para galpões, áreas corporativas e obras comerciais. Limpeza, movimentação de terra, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem em Barueri para galpões, áreas corporativas e obras comerciais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Barueri concentra parques empresariais, condomínios corporativos e áreas industriais, com obras que pedem cronograma operacional firme.",
+    title: "Terraplanagem em Barueri | Empresas, Galpões e Corporativo — SMS",
+    metaDescription: "Terraplanagem em Barueri para parques empresariais, galpões e áreas corporativas. Limpeza, movimentação de terra, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Barueri para parques empresariais, galpões, áreas corporativas e empreendimentos comerciais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Barueri concentra parques empresariais, condomínios corporativos e áreas industriais na Região Metropolitana de São Paulo, com obras que pedem cronograma operacional firme.",
+    localContext: "Próximo da Rodovia Castello Branco e do eixo de Alphaville, a região recebe obras de porte com terrenos maiores e logística rodoviária favorável. Em Barueri, corte, aterro e nivelamento costumam ser as frentes mais relevantes em galpões e edifícios corporativos.",
+  },
+  "cajamar": {
+    title: "Terraplanagem em Cajamar | Galpões Logísticos e Indústria — SMS",
+    metaDescription: "Terraplanagem em Cajamar para galpões logísticos, condomínios industriais e terrenos amplos. Movimentação de terra, limpeza, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Cajamar para galpões logísticos, condomínios industriais e terrenos amplos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Cajamar concentra galpões logísticos, condomínios industriais e terrenos amplos próximos à Rodovia Anhanguera, com obras que demandam frota de porte e cronograma de caminhões bem dimensionado.",
+    localContext: "Por estar conectada à Rodovia Anhanguera e à Rodovia dos Bandeirantes, Cajamar é um eixo logístico forte da Região Metropolitana. Em obras na região, corte, aterro e nivelamento de áreas grandes para galpão e pátio são, normalmente, o coração da operação.",
   },
   "guarulhos": {
-    title: "Terraplanagem em Guarulhos para Indústria e Comércio | SMS",
+    title: "Terraplanagem em Guarulhos | Indústria, Comércio e Galpões — SMS",
     metaDescription: "Terraplanagem em Guarulhos para obras industriais, galpões e terrenos comerciais. Limpeza, demolição, nivelamento e preparo de solo com frota própria.",
     firstSentence: "Terraplanagem em Guarulhos para obras industriais, galpões e terrenos comerciais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
     introSentence: "Guarulhos tem forte presença industrial, áreas logísticas e bairros consolidados, com obras que pedem frota de porte e cronograma alinhado.",
+    localContext: "Próximo da Rodovia Presidente Dutra, Rodovia Fernão Dias e do eixo do Aeroporto de Guarulhos, a região tem logística rodoviária privilegiada para obras industriais e galpões. Em Guarulhos, a operação costuma combinar limpeza, corte, aterro e nivelamento em terrenos amplos.",
   },
-  "bela-vista": {
-    title: "Terraplanagem na Bela Vista para Reformas | SMS",
-    metaDescription: "Terraplanagem na Bela Vista para reformas, retrofits e obras comerciais. Limpeza, demolição controlada, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem na Bela Vista para reformas, retrofits e obras comerciais em terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "A Bela Vista é uma região central, com prédios antigos, lotes compactos e obras que tipicamente envolvem retrofit e demolição parcial.",
+  "santo-andre": {
+    title: "Terraplanagem em Santo André | Obras Comerciais e Industriais no ABC — SMS",
+    metaDescription: "Terraplanagem em Santo André para obras comerciais e industriais no ABC paulista. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Santo André para obras comerciais e industriais no ABC paulista é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Santo André tem polos industriais, eixos comerciais e bairros residenciais consolidados, com obras que pedem deslocamento de frota e cronograma firme.",
+    localContext: "Próximo da Avenida dos Estados, Rodovia Anchieta e do eixo do ABC, a região recebe obras industriais, comerciais e prediais. A frota própria reduz dependência de terceiros entre demolição, limpeza e nivelamento.",
   },
-  "liberdade": {
-    title: "Terraplanagem na Liberdade para Obras Urbanas | SMS",
-    metaDescription: "Terraplanagem na Liberdade para reformas, obras comerciais e adequação de terrenos urbanos. Limpeza, demolição, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem na Liberdade para reformas, obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "A Liberdade reúne comércio intenso, prédios antigos e lotes compactos, com obras que pedem acesso planejado de máquinas e retirada controlada de entulho.",
+  "sao-bernardo-do-campo": {
+    title: "Terraplanagem em São Bernardo do Campo | Indústria e Galpões — SMS",
+    metaDescription: "Terraplanagem em São Bernardo do Campo para obras comerciais e industriais no ABC. Limpeza, demolição, movimentação de terra, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em São Bernardo do Campo para obras comerciais e industriais no ABC paulista é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "São Bernardo do Campo concentra indústria automotiva, galpões logísticos e empreendimentos comerciais no ABC, com obras que pedem planejamento de caminhões e equipe deslocada.",
+    localContext: "Próximo da Rodovia Anchieta, Rodovia Imigrantes e do eixo da Avenida dos Estados, a região tem logística rodoviária forte e obras de porte. Em São Bernardo, corte, aterro e nivelamento de áreas industriais costumam guiar a operação.",
   },
-  "morumbi": {
-    title: "Terraplanagem no Morumbi para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem no Morumbi para obras comerciais, residenciais de alto padrão e adequação de terrenos. Limpeza, demolição, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem no Morumbi para obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "O Morumbi tem terrenos com relevo, obras de alto padrão e empreendimentos comerciais, com necessidade frequente de corte, aterro e contenção.",
-  },
-  "butanta": {
-    title: "Terraplanagem no Butantã para Obras Urbanas | SMS",
-    metaDescription: "Terraplanagem no Butantã para obras comerciais, prediais e terrenos urbanos. Limpeza, demolição, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem no Butantã para obras comerciais, prediais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "O Butantã mistura áreas residenciais consolidadas, eixos comerciais e novos empreendimentos, com obras que pedem planejamento de acesso de máquinas.",
-  },
-  "santana": {
-    title: "Terraplanagem em Santana para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem em Santana para obras comerciais, prediais e terrenos urbanos na Zona Norte. Limpeza, demolição, nivelamento e preparo de solo.",
-    firstSentence: "Terraplanagem em Santana para obras comerciais, prediais e adequação de terrenos urbanos na Zona Norte é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "Santana é polo comercial e residencial da Zona Norte, com obras que pedem cronograma firme e logística de caminhões em vias movimentadas.",
-  },
-  "ipiranga": {
-    title: "Terraplanagem no Ipiranga para Obras Comerciais | SMS",
-    metaDescription: "Terraplanagem no Ipiranga para obras comerciais, prediais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
-    firstSentence: "Terraplanagem no Ipiranga para obras comerciais, prediais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
-    introSentence: "O Ipiranga mistura áreas comerciais, galpões antigos em retrofit e prédios residenciais novos, com obras frequentes de demolição parcial e preparação de lote.",
+  "diadema": {
+    title: "Terraplanagem em Diadema | Obras Comerciais e Industriais — SMS",
+    metaDescription: "Terraplanagem em Diadema para obras comerciais e industriais no ABC paulista. Limpeza, demolição, movimentação de terra, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Diadema para obras comerciais e industriais no ABC paulista é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Diadema mistura indústria, comércio e bairros densos no ABC, com obras que pedem planejamento de acesso e cronograma firme de caminhões.",
+    localContext: "Próximo da Avenida Piraporinha e do eixo da Rodovia dos Imigrantes, a região recebe obras industriais e comerciais com terrenos variados. Em Diadema, encadear limpeza, demolição e nivelamento com frota própria evita gargalos entre etapas.",
   },
 };
 

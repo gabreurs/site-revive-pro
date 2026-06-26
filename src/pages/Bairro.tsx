@@ -88,11 +88,11 @@ const Bairro = () => {
 
   const { name, region, path, slug: bairroSlug } = bairro;
   const isCidade = region.key === "outras";
+  const override = getLocationOverride(bairroSlug);
   const prep = getPreposition(name);
-  const phrase = `${prep} ${name}`; // ex: "no Tatuapé"
+  const phrase = override.phrase || `${prep} ${name}`; // override resolve ambiguidade (ex: Anhanguera → "em Anhanguera")
   const cityLabel = isCidade ? name : "São Paulo";
   const profile = getProfileByName(name, region.key);
-  const override = getLocationOverride(bairroSlug);
 
   const h1 = `Terraplanagem ${phrase} ${profile.h1Suffix}`;
   const seoTitle = override.title || `Terraplanagem ${phrase} | SMS Terraplenagem`;
@@ -221,6 +221,9 @@ const Bairro = () => {
             </h2>
             <div className="mt-4 space-y-4 text-base text-muted-foreground leading-relaxed">
               <p>{introSentence}</p>
+              {override.localContext && (
+                <p>{override.localContext}</p>
+              )}
               <p>
                 {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes — o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
               </p>
