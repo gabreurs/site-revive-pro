@@ -213,35 +213,59 @@ export function Header() {
 function MegaServices({ onClose }: { onClose: () => void }) {
   const featured = SERVICES[0];
   const featuredImg = SERVICE_IMAGE_BY_KEY[featured.image]?.src ?? HERO_OBRA.src;
+  // Atalhos — apenas os principais. "Ver todos" leva para a página completa.
+  const shortcuts = SERVICES.slice(0, 4);
   return (
     <div>
-      <h3 className="text-[10px] tracking-[0.22em] uppercase text-primary mb-5">Serviços de terraplanagem</h3>
-      <div className="grid grid-cols-[280px_1fr] gap-7">
-        <Link to={`/servicos/${featured.slug}`} onClick={onClose} className="group relative block overflow-hidden border border-white/10 aspect-[4/5]">
-          <img src={featuredImg} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+      <h3 className="text-[10px] tracking-[0.22em] uppercase text-primary mb-5">Serviços em destaque</h3>
+      <div className="grid grid-cols-[320px_1fr] gap-8">
+        <Link
+          to={`/servicos/${featured.slug}`}
+          onClick={onClose}
+          className="group relative block overflow-hidden border border-white/10 rounded-md aspect-[4/3]"
+        >
+          <img
+            src={featuredImg}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">
             <span className="text-[10px] tracking-[0.18em] uppercase text-primary">Em destaque</span>
             <h4 className="mt-1 text-white text-lg font-medium leading-tight">{featured.title}</h4>
-            <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-white/80 group-hover:text-primary transition-colors">
+            <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-white/85 group-hover:text-primary transition-colors">
               Ver serviço <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </Link>
-        <div className="space-y-0.5">
-          <Link to="/servicos" onClick={onClose} className="group flex items-center justify-between py-2.5 px-4 hover:bg-white/[0.04] transition-colors">
-            <span className="text-sm font-medium text-white group-hover:text-primary transition-colors">Ver todos os serviços</span>
-            <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-primary transition-colors" />
+        <div className="flex flex-col">
+          <Link
+            to="/servicos"
+            onClick={onClose}
+            className="group flex items-center justify-between py-3 px-4 mb-2 bg-primary/10 border border-primary/30 rounded-md hover:bg-primary/15 transition-colors"
+          >
+            <div>
+              <span className="text-sm font-medium text-white block">Ver todos os serviços</span>
+              <span className="text-xs text-white/55">Catálogo completo, equipamentos e detalhes</span>
+            </div>
+            <ArrowRight className="w-4 h-4 text-primary flex-shrink-0" />
           </Link>
-          {SERVICES.map((s) => (
-            <Link key={s.id} to={`/servicos/${s.slug}`} onClick={onClose} className="group flex items-start justify-between gap-4 py-2.5 px-4 hover:bg-white/[0.04] transition-colors">
-              <div>
-                <span className="text-sm font-medium text-white/85 group-hover:text-primary transition-colors block">{s.title}</span>
-                <span className="text-xs text-white/45 line-clamp-1">{s.shortDescription}</span>
-              </div>
-              <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-primary transition-colors flex-shrink-0 mt-1" />
-            </Link>
-          ))}
+          <div className="space-y-0.5">
+            {shortcuts.map((s) => (
+              <Link
+                key={s.id}
+                to={`/servicos/${s.slug}`}
+                onClick={onClose}
+                className="group flex items-start justify-between gap-4 py-2.5 px-4 rounded-md hover:bg-white/[0.04] transition-colors"
+              >
+                <div>
+                  <span className="text-sm font-medium text-white/90 group-hover:text-primary transition-colors block">{s.title}</span>
+                  <span className="text-xs text-white/45 line-clamp-1">{s.shortDescription}</span>
+                </div>
+                <ArrowRight className="w-4 h-4 text-white/25 group-hover:text-primary transition-colors flex-shrink-0 mt-1" />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -254,7 +278,7 @@ function MegaAreas({ onClose }: { onClose: () => void }) {
     <div>
       <h3 className="text-[10px] tracking-[0.22em] uppercase text-primary mb-5">Onde atuamos</h3>
       <div className="grid grid-cols-[280px_1fr] gap-7">
-        <Link to="/onde-atuamos" onClick={onClose} className="group relative block overflow-hidden border border-white/10 aspect-[4/5]">
+        <Link to="/onde-atuamos" onClick={onClose} className="group relative block overflow-hidden border border-white/10 rounded-md aspect-[4/3]">
           <img src={HERO_OBRA.src} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">

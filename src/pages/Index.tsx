@@ -314,9 +314,6 @@ const Index = () => {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-xs text-muted-foreground">
-                Fotos reais enviadas pela equipe operacional. Sem montagem nem banco de imagens.
-              </p>
             </AnimatedSection>
           </div>
         </div>
