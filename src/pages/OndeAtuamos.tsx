@@ -12,6 +12,7 @@ import { REGION_HUB_LIST } from "@/data/regionHubs";
 import { REGIONS, slugifyBairro } from "@/lib/bairros";
 import { getLocationPhrase } from "@/lib/preposition";
 import { SERVICES } from "@/lib/constants";
+import { HERO_PRIMARY_CTA } from "@/lib/ctaClasses";
 
 const CANONICAL = "https://smsterraplenagem.com.br/onde-atuamos";
 
@@ -58,7 +59,7 @@ export default function OndeAtuamos() {
             label="Solicitar orçamento"
             locationTag="onde-atuamos-hero"
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            className={HERO_PRIMARY_CTA}
             icon="message"
           />
         }

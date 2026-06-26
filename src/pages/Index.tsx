@@ -16,6 +16,7 @@ import { Layout } from "@/components/layout/Layout";
 import {
   SERVICES, COVERAGE_AREAS, TESTIMONIALS, FAQ_ITEMS, DIFFERENTIALS, BLOG_POSTS,
 } from "@/lib/constants";
+import { SECTION_CTA_LIGHT } from "@/lib/ctaClasses";
 
 // Registros reais de obra enviados pela equipe SMS (sem IA)
 import obraEscavadeiraPrancha from "@/assets/obras/sms-escavadeira-prancha.jpg.asset.json";
@@ -421,7 +422,7 @@ const Index = () => {
             <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">Entre em contato pelo WhatsApp e receba um orçamento personalizado sem compromisso.</p>
             <div className="mt-6 md:mt-8">
               <WhatsAppCTA label="Falar com um especialista" locationTag="cta-final"
-                className="bg-white text-primary hover:bg-white/90 rounded-full px-8 w-full sm:w-auto tap-feedback" size="lg" />
+                className={SECTION_CTA_LIGHT} size="lg" />
             </div>
           </AnimatedSection>
         </div>

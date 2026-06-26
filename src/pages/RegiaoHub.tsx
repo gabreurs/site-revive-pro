@@ -11,6 +11,7 @@ import { getRegionHubBySlug } from "@/data/regionHubs";
 import { REGIONS, slugifyBairro } from "@/lib/bairros";
 import { getLocationPhrase } from "@/lib/preposition";
 import { SERVICES } from "@/lib/constants";
+import { HERO_PRIMARY_CTA } from "@/lib/ctaClasses";
 
 export default function RegiaoHub() {
   const { slug } = useParams<{ slug: string }>();
@@ -53,7 +54,7 @@ export default function RegiaoHub() {
             label="Solicitar orçamento"
             locationTag={`hub-${hub.slug}-hero`}
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            className={HERO_PRIMARY_CTA}
             icon="message"
           />
         }

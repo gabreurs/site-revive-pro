@@ -8,6 +8,7 @@ import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/layout/PageHero";
 import { CountUp } from "@/components/CountUp";
 import { COVERAGE_AREAS } from "@/lib/constants";
+import { SECTION_CTA_LIGHT } from "@/lib/ctaClasses";
 import { MapPin } from "lucide-react";
 import { SUPPORT_OBRAS } from "@/lib/serviceImages";
 
@@ -110,7 +111,7 @@ const Sobre = () => (
         <h2 className="font-heading text-2xl font-medium text-white md:text-4xl">Vamos trabalhar juntos?</h2>
         <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">Entre em contato e descubra como podemos ajudar no seu próximo projeto de terraplanagem.</p>
         <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <WhatsAppCTA label="Fale conosco" locationTag="sobre-cta" className="bg-white text-primary hover:bg-white/90 rounded-full px-8 w-full sm:w-auto tap-feedback" size="lg" />
+          <WhatsAppCTA label="Fale conosco" locationTag="sobre-cta" className={SECTION_CTA_LIGHT} size="lg" />
           <Link to="/contato" className="text-sm text-white/80 hover:text-white underline underline-offset-4 transition-colors">Ou use nosso formulário de contato</Link>
         </div>
       </AnimatedSection></div>

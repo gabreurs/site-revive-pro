@@ -129,7 +129,7 @@ export function Header() {
               data-cta="whatsapp"
               data-location="header"
               onClick={trackWhatsAppConversion}
-              className="ml-3 inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-xs uppercase tracking-wider hover:bg-primary/90 transition-colors"
+              className="ml-3 inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-[13px] font-medium rounded-md hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_hsl(var(--primary)/0.6)] transition-all"
             >
               <MessageCircle className="w-3.5 h-3.5" /> Solicitar orçamento
             </a>
@@ -193,7 +193,7 @@ export function Header() {
                   data-cta="whatsapp"
                   data-location="drawer"
                   onClick={trackWhatsAppConversion}
-                  className="mt-5 flex w-full items-center justify-center gap-2 bg-primary text-primary-foreground py-3 text-sm uppercase tracking-wider"
+                  className="mt-5 flex w-full items-center justify-center gap-2 bg-primary text-primary-foreground py-3 text-[14px] font-medium rounded-md"
                 >
                   <MessageCircle className="w-4 h-4" /> Solicitar orçamento
                 </a>

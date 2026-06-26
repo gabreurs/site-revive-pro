@@ -11,6 +11,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
+import { HERO_PRIMARY_CTA, HERO_SECONDARY_CTA, SECTION_CTA_LIGHT } from "@/lib/ctaClasses";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
 import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride } from "@/data/locationProfiles";
@@ -196,12 +197,12 @@ const Bairro = () => {
               message={whatsappMsg}
               locationTag={`bairro-hero-${bairro.slug}`}
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+              className={HERO_PRIMARY_CTA}
               icon="message"
             />
             <a
               href="#servicos-locais"
-              className="inline-flex items-center justify-center border border-white/25 px-7 py-3 text-sm uppercase tracking-wider text-white hover:bg-white/10 transition-colors"
+              className={HERO_SECONDARY_CTA}
             >
               Ver serviços {phrase}
             </a>
@@ -545,7 +546,7 @@ const Bairro = () => {
                 message={whatsappMsg}
                 locationTag={`bairro-cta-${bairro.slug}`}
                 size="lg"
-                className="bg-white text-primary hover:bg-white/90 rounded-full px-8 w-full sm:w-auto"
+                className={SECTION_CTA_LIGHT}
               />
               <Link to="/contato" className="text-sm text-white/80 hover:text-white underline underline-offset-4">
                 Formulário de contato
