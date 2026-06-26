@@ -24,6 +24,26 @@ import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
 import perfuracaoImg from "@/assets/perfuracao.jpg";
 import transporteImg from "@/assets/transporte-locacao.jpg";
 
+// Registros reais de obra enviados pela equipe SMS (uso em cards compactos)
+import obraEscavadeiraPrancha from "@/assets/obras/sms-escavadeira-prancha.jpg.asset.json";
+import obraDemolicaoTerreno from "@/assets/obras/sms-demolicao-terreno.jpg.asset.json";
+import obraFrotaEscavadeiras from "@/assets/obras/sms-frota-escavadeiras.jpg.asset.json";
+import obraCaminhaoTransporte from "@/assets/obras/sms-caminhao-transporte.jpg.asset.json";
+import obraVolvoCanteiro from "@/assets/obras/sms-volvo-canteiro.jpg.asset.json";
+import obraMiniEscavadeira from "@/assets/obras/sms-mini-escavadeira-sy35.jpg.asset.json";
+import obraDoosanPatio from "@/assets/obras/sms-doosan-patio.jpg.asset.json";
+import videoObra1 from "@/assets/obras/obra-14-43-07.mp4.asset.json";
+import videoObra1Poster from "@/assets/obras/obra-14-43-07-poster.jpg.asset.json";
+
+const OBRA_GALLERY = [
+  { src: obraDemolicaoTerreno.url, alt: "Demolição de sobrado em São Paulo com escavadeira SMS removendo alvenaria" },
+  { src: obraFrotaEscavadeiras.url, alt: "Frota SMS com mini escavadeira SY35U, SY75C e Doosan estacionadas em pátio próprio" },
+  { src: obraEscavadeiraPrancha.url, alt: "Escavadeira SMS sendo transportada em prancha rebaixada para obra na capital" },
+  { src: obraVolvoCanteiro.url, alt: "Escavadeira Volvo EC140B da SMS em canteiro de terraplanagem na Grande São Paulo" },
+  { src: obraCaminhaoTransporte.url, alt: "Caminhão prancha SMS 18-310 carregando escavadeira Sany para obra" },
+  { src: obraMiniEscavadeira.url, alt: "Mini escavadeira Sany SY35U da SMS em serviço de escavação em área urbana restrita" },
+];
+
 const serviceImages: Record<string, string> = {
   "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
   "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
@@ -271,6 +291,70 @@ const Index = () => {
                   </div>
                 ))}
               </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ FROTA & OBRAS (registros reais do cliente) ═══════════ */}
+      <section className="section-padding" aria-labelledby="frota-obras-titulo">
+        <div className="container-custom">
+          <AnimatedSection>
+            <SectionHeading
+              title="Frota e obras em andamento"
+              subtitle="Registros enviados pela equipe da SMS direto dos canteiros — escavadeiras próprias, transporte com prancha e demolições recentes em São Paulo."
+              centered
+            />
+          </AnimatedSection>
+
+          <div className="grid gap-4 md:gap-6 lg:grid-cols-12 mt-2">
+            {/* Vídeo curto — destaque sem dominar */}
+            <AnimatedSection direction="left" className="lg:col-span-5">
+              <figure className="relative overflow-hidden rounded-xl border border-border bg-muted/40 shadow-sm">
+                <div className="aspect-video w-full">
+                  <video
+                    className="h-full w-full object-cover"
+                    src={videoObra1.url}
+                    poster={videoObra1Poster.url}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="Vídeo curto de obra da SMS Terraplenagem"
+                  />
+                </div>
+                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                  <span className="text-xs font-medium uppercase tracking-wide text-white/90">
+                    Obra registrada · frota SMS
+                  </span>
+                </figcaption>
+              </figure>
+            </AnimatedSection>
+
+            {/* Grade compacta de fotos — cards pequenos, sem esticar */}
+            <AnimatedSection direction="right" className="lg:col-span-7">
+              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
+                {OBRA_GALLERY.map((photo, i) => (
+                  <li
+                    key={photo.src}
+                    className="group relative overflow-hidden rounded-lg border border-border bg-muted/30"
+                  >
+                    <div className="aspect-[4/3] w-full">
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        loading={i < 2 ? "eager" : "lazy"}
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Fotos reais enviadas pela equipe operacional. Sem montagem nem banco de imagens.
+              </p>
             </AnimatedSection>
           </div>
         </div>
