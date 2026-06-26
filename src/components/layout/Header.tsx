@@ -255,6 +255,38 @@ export function Header() {
                 <Link to="/sobre" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground">
                   Sobre nós
                 </Link>
+
+                {/* Onde atuamos accordion */}
+                <div>
+                  <button
+                    onClick={() => setMobAreas(!mobAreas)}
+                    aria-expanded={mobAreas}
+                    className="flex w-full items-center justify-between rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground"
+                  >
+                    Onde atuamos
+                    <ChevronDown className={`h-4 w-4 transition-transform ${mobAreas ? "rotate-180" : ""}`} />
+                  </button>
+                  <AnimatePresence>
+                    {mobAreas && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden pl-4"
+                      >
+                        <Link to="/onde-atuamos" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted">
+                          Ver todas as regiões
+                        </Link>
+                        {REGION_HUB_LIST.map((h) => (
+                          <Link key={h.slug} to={`/onde-atuamos/${h.slug}`} onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted">
+                            {h.shortLabel}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <Link to="/contato" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground">
                   Contato
                 </Link>
