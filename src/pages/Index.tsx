@@ -16,24 +16,20 @@ import {
   SERVICES, COVERAGE_AREAS, TESTIMONIALS, FAQ_ITEMS, DIFFERENTIALS, BLOG_POSTS,
 } from "@/lib/constants";
 
-import heroImage from "@/assets/hero-terraplanagem.jpg";
-import limpezaImg from "@/assets/limpeza-terreno.jpg";
-import demolicaoImg from "@/assets/demolicao.jpg";
-import escavacaoImg from "@/assets/escavacao.jpg";
-import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
-import perfuracaoImg from "@/assets/perfuracao.jpg";
-import transporteImg from "@/assets/transporte-locacao.jpg";
-
-// Registros reais de obra enviados pela equipe SMS (uso em cards compactos)
+// Registros reais de obra enviados pela equipe SMS (sem IA)
 import obraEscavadeiraPrancha from "@/assets/obras/sms-escavadeira-prancha.jpg.asset.json";
 import obraDemolicaoTerreno from "@/assets/obras/sms-demolicao-terreno.jpg.asset.json";
 import obraFrotaEscavadeiras from "@/assets/obras/sms-frota-escavadeiras.jpg.asset.json";
 import obraCaminhaoTransporte from "@/assets/obras/sms-caminhao-transporte.jpg.asset.json";
 import obraVolvoCanteiro from "@/assets/obras/sms-volvo-canteiro.jpg.asset.json";
 import obraMiniEscavadeira from "@/assets/obras/sms-mini-escavadeira-sy35.jpg.asset.json";
-import obraDoosanPatio from "@/assets/obras/sms-doosan-patio.jpg.asset.json";
-import videoObra1 from "@/assets/obras/obra-14-43-07.mp4.asset.json";
-import videoObra1Poster from "@/assets/obras/obra-14-43-07-poster.jpg.asset.json";
+import videoObra1 from "@/assets/obras/obra-39-54.mp4.asset.json";
+import videoObra1Poster from "@/assets/obras/obra-39-54-poster.jpg.asset.json";
+import videoObra2 from "@/assets/obras/obra-41-32.mp4.asset.json";
+import videoObra2Poster from "@/assets/obras/obra-41-32-poster.jpg.asset.json";
+import { SERVICE_IMAGE_BY_KEY, HERO_OBRA } from "@/lib/serviceImages";
+
+const heroImage = HERO_OBRA.src;
 
 const OBRA_GALLERY = [
   { src: obraDemolicaoTerreno.url, alt: "Demolição de sobrado em São Paulo com escavadeira SMS removendo alvenaria" },
@@ -44,10 +40,9 @@ const OBRA_GALLERY = [
   { src: obraMiniEscavadeira.url, alt: "Mini escavadeira Sany SY35U da SMS em serviço de escavação em área urbana restrita" },
 ];
 
-const serviceImages: Record<string, string> = {
-  "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
-  "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
-};
+const serviceImages: Record<string, string> = Object.fromEntries(
+  Object.entries(SERVICE_IMAGE_BY_KEY).map(([k, v]) => [k, v.src]),
+);
 
 const Index = () => {
   return (
