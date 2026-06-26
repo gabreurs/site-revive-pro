@@ -108,6 +108,31 @@ export function Header() {
               </div>
 
               <Link to="/sobre" className={linkCls("/sobre")}>Sobre nós</Link>
+
+              {/* Onde atuamos dropdown */}
+              <div className="relative" onMouseEnter={() => setDeskDrop("areas")} onMouseLeave={() => setDeskDrop(null)}>
+                <Link to="/onde-atuamos" className={linkCls("/onde-atuamos")}>
+                  Onde atuamos <ChevronDown className={`h-3.5 w-3.5 transition-transform ${deskDrop === "areas" ? "rotate-180" : ""}`} />
+                </Link>
+                <AnimatePresence>
+                  {deskDrop === "areas" && (
+                    <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }} transition={{ duration: 0.15 }} className="absolute left-0 top-full pt-2 w-72">
+                      <div className="rounded-lg border border-border bg-card p-2 shadow-xl">
+                        <Link to="/onde-atuamos" className="block rounded-md px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted">
+                          Ver todas as regiões
+                        </Link>
+                        <div className="my-1 h-px bg-border" />
+                        {REGION_HUB_LIST.map((h) => (
+                          <Link key={h.slug} to={`/onde-atuamos/${h.slug}`} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+                            {h.shortLabel}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <Link to="/contato" className={linkCls("/contato")}>Contato</Link>
               
 
