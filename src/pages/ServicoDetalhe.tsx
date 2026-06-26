@@ -9,26 +9,19 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Layout } from "@/components/layout/Layout";
 import { SERVICES, BLOG_POSTS } from "@/lib/constants";
 
-import limpezaImg from "@/assets/limpeza-terreno.jpg";
-import demolicaoImg from "@/assets/demolicao.jpg";
-import escavacaoImg from "@/assets/escavacao.jpg";
-import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
-import perfuracaoImg from "@/assets/perfuracao.jpg";
-import transporteImg from "@/assets/transporte-locacao.jpg";
+import { SERVICE_IMAGE_BY_KEY, getServiceImage } from "@/lib/serviceImages";
+import piscinaVid1 from "@/assets/servicos/abertura-piscina-1.mp4.asset.json";
+import piscinaVid1Poster from "@/assets/servicos/abertura-piscina-1-poster.jpg.asset.json";
+import piscinaVid2 from "@/assets/servicos/abertura-piscina-2.mp4.asset.json";
+import piscinaVid2Poster from "@/assets/servicos/abertura-piscina-2-poster.jpg.asset.json";
+import piscinaVid3 from "@/assets/servicos/abertura-piscina-3.mp4.asset.json";
+import piscinaVid3Poster from "@/assets/servicos/abertura-piscina-3-poster.jpg.asset.json";
 
-const serviceImages: Record<string, string> = {
-  "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
-  "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
-};
-
-const serviceAltTexts: Record<string, string> = {
-  "limpeza-terreno": "Máquina realizando limpeza de terreno com remoção de vegetação em canteiro de obras",
-  "demolicao": "Escavadeira com rompedor executando demolição controlada de estrutura",
-  "escavacao": "Escavadeira hidráulica abrindo vala para fundação em terreno na Grande São Paulo",
-  "movimentacao-terra": "Trator de esteira realizando corte e aterro para nivelamento de terreno",
-  "perfuracao": "Perfuratriz em operação para sondagem geotécnica do solo",
-  "transporte-locacao": "Caminhão basculante e escavadeira disponíveis para locação em obra",
-};
+const PISCINA_VIDEOS = [
+  { src: piscinaVid1.url, poster: piscinaVid1Poster.url, label: "Abertura de cava para piscina — etapa 1" },
+  { src: piscinaVid2.url, poster: piscinaVid2Poster.url, label: "Abertura de cava para piscina — etapa 2" },
+  { src: piscinaVid3.url, poster: piscinaVid3Poster.url, label: "Abertura de cava para piscina — etapa 3" },
+];
 
 const ServicoDetalhe = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -62,8 +55,8 @@ const ServicoDetalhe = () => {
       <section className="relative section-dark">
         <div className="aspect-[16/8] sm:aspect-[16/6] max-h-[420px] w-full overflow-hidden">
           <img
-            src={serviceImages[service.image]}
-            alt={serviceAltTexts[service.image] || `Serviço de ${service.title} em São Paulo`}
+            src={getServiceImage(service.image).src}
+            alt={getServiceImage(service.image).alt}
             className="h-full w-full object-cover"
             loading="eager"
             width={1200}
@@ -94,6 +87,29 @@ const ServicoDetalhe = () => {
                 <h2 className="font-heading text-xl md:text-2xl font-bold text-foreground">Sobre o serviço</h2>
                 <p className="mt-3 md:mt-4 text-sm md:text-base text-muted-foreground leading-relaxed">{service.fullDescription}</p>
               </AnimatedSection>
+
+              {service.slug === "abertura-de-piscina" && (
+                <AnimatedSection>
+                  <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Veja em obra</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">Registros reais de abertura de cava executada pela equipe SMS com mini escavadeira em terreno residencial.</p>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {PISCINA_VIDEOS.map((v) => (
+                      <div key={v.src} className="overflow-hidden rounded-md border border-border bg-card aspect-video">
+                        <video
+                          src={v.src}
+                          poster={v.poster}
+                          aria-label={v.label}
+                          controls
+                          playsInline
+                          muted
+                          preload="none"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              )}
 
               <AnimatedSection>
                 <h3 className="font-heading text-lg md:text-xl font-bold text-foreground">Para quem é?</h3>
@@ -176,7 +192,7 @@ const ServicoDetalhe = () => {
                     {otherServices.map((s) => (
                       <li key={s.id}>
                         <Link to={`/servicos/${s.slug}`} className="flex items-center gap-3 rounded-md p-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
-                          <img src={serviceImages[s.image]} alt={`Miniatura do serviço ${s.title}`} className="h-10 w-10 rounded object-cover" loading="lazy" width={40} height={40} />
+                          <img src={getServiceImage(s.image).src} alt={`Miniatura do serviço ${s.title}`} className="h-10 w-10 rounded object-cover" loading="lazy" width={40} height={40} />
                           {s.title}
                         </Link>
                       </li>

@@ -8,17 +8,11 @@ import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
 import { SERVICES, COVERAGE_AREAS, BLOG_POSTS } from "@/lib/constants";
 
-import limpezaImg from "@/assets/limpeza-terreno.jpg";
-import demolicaoImg from "@/assets/demolicao.jpg";
-import escavacaoImg from "@/assets/escavacao.jpg";
-import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
-import perfuracaoImg from "@/assets/perfuracao.jpg";
-import transporteImg from "@/assets/transporte-locacao.jpg";
+import { SERVICE_IMAGE_BY_KEY } from "@/lib/serviceImages";
 
-const serviceImages: Record<string, string> = {
-  "limpeza-terreno": limpezaImg, demolicao: demolicaoImg, escavacao: escavacaoImg,
-  "movimentacao-terra": movimentacaoImg, perfuracao: perfuracaoImg, "transporte-locacao": transporteImg,
-};
+const serviceImages: Record<string, string> = Object.fromEntries(
+  Object.entries(SERVICE_IMAGE_BY_KEY).map(([k, v]) => [k, v.src]),
+);
 
 const relatedPosts = BLOG_POSTS.slice(0, 2);
 

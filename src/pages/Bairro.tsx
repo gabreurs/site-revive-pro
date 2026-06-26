@@ -16,51 +16,48 @@ import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride }
 import { getRegionHub } from "@/data/regionHubs";
 import { ExpandableText } from "@/components/ui/ExpandableText";
 
-import heroImg from "@/assets/hero-terraplanagem.jpg";
-import limpezaImg from "@/assets/limpeza-terreno.jpg";
-import demolicaoImg from "@/assets/demolicao.jpg";
-import escavacaoImg from "@/assets/escavacao.jpg";
-import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
-import transporteImg from "@/assets/transporte-locacao.jpg";
+import { HERO_OBRA, SERVICE_IMAGE_BY_KEY } from "@/lib/serviceImages";
+
+const heroImg = HERO_OBRA.src;
 
 type ServiceKey = "terraplanagem" | "limpeza" | "demolicao" | "nivelamento" | "movimentacao" | "preparo";
 
 const SERVICE_META: Record<ServiceKey, { title: string; image: string; linkTo: string; alt: (p: string) => string }> = {
   terraplanagem: {
     title: "Terraplanagem",
-    image: heroImg,
+    image: HERO_OBRA.src,
     linkTo: "/servicos",
-    alt: (p) => `Escavadeira em serviço de terraplanagem ${p}`,
+    alt: () => "Escavadeira em serviço de terraplanagem da SMS Terraplenagem",
   },
   limpeza: {
     title: "Limpeza de terreno",
-    image: limpezaImg,
+    image: SERVICE_IMAGE_BY_KEY["limpeza-terreno"].src,
     linkTo: "/servicos/limpeza-de-terreno",
-    alt: (p) => `Limpeza de terreno ${p} com remoção de vegetação e entulho`,
+    alt: () => SERVICE_IMAGE_BY_KEY["limpeza-terreno"].alt,
   },
   demolicao: {
     title: "Demolição",
-    image: demolicaoImg,
+    image: SERVICE_IMAGE_BY_KEY["demolicao"].src,
     linkTo: "/servicos/demolicao",
-    alt: (p) => `Demolição controlada ${p} com escavadeira hidráulica`,
+    alt: () => SERVICE_IMAGE_BY_KEY["demolicao"].alt,
   },
   nivelamento: {
     title: "Nivelamento de terreno",
-    image: movimentacaoImg,
+    image: SERVICE_IMAGE_BY_KEY["movimentacao-terra"].src,
     linkTo: "/servicos/movimentacao-de-terra-corte-e-aterro",
-    alt: (p) => `Nivelamento de terreno ${p} com motoniveladora e rolo compactador`,
+    alt: () => "Nivelamento de terreno executado por equipamento da SMS",
   },
   movimentacao: {
     title: "Movimentação de terra",
-    image: escavacaoImg,
+    image: SERVICE_IMAGE_BY_KEY["escavacao"].src,
     linkTo: "/servicos/movimentacao-de-terra-corte-e-aterro",
-    alt: (p) => `Movimentação de terra ${p} com escavadeira e caminhões basculantes`,
+    alt: () => "Mini escavadeira da SMS em movimentação de terra urbana",
   },
   preparo: {
     title: "Preparo de terreno para obra",
-    image: transporteImg,
+    image: SERVICE_IMAGE_BY_KEY["transporte-locacao"].src,
     linkTo: "/servicos",
-    alt: (p) => `Preparo de terreno para obra ${p} pela frota da SMS Terraplenagem`,
+    alt: () => "Caminhão e equipamento da SMS para preparo de terreno",
   },
 };
 
@@ -291,7 +288,7 @@ const Bairro = () => {
             <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
               <div className="relative h-48">
                 <img
-                  src={escavacaoImg}
+                  src={SERVICE_IMAGE_BY_KEY["movimentacao-terra"].src}
                   alt={`Terraplanagem e preparo de terreno para obras ${phrase} e região`}
                   className="h-full w-full object-cover"
                   loading="lazy"

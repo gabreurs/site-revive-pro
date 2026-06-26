@@ -166,6 +166,25 @@ export const SERVICES = [
     seoKeyword: "locação de máquinas em sp",
     image: "transporte-locacao",
   },
+  {
+    id: "abertura-de-piscina",
+    slug: "abertura-de-piscina",
+    title: "Abertura de Piscina",
+    shortDescription: "Escavação e abertura de cava para piscina em terrenos residenciais com mini escavadeira de pequeno porte.",
+    fullDescription: "Realizamos a abertura de cava para piscina em terrenos residenciais e áreas de acesso restrito com mini escavadeira de pequeno porte. O equipamento entra em quintais e laterais estreitas sem comprometer estrutura, calçamento ou jardim, e executa a escavação no formato e profundidade do projeto. O serviço inclui a retirada do material escavado em caçamba e a entrega da cava pronta para a equipe de piscineiro iniciar a instalação.",
+    whoIsItFor: "Proprietários residenciais, construtoras e empresas de piscina que precisam abrir a cava em terreno urbano com pouco acesso, sem retrabalho manual.",
+    howWeExecute: ["Visita ou avaliação por fotos do acesso", "Posicionamento da mini escavadeira no lote", "Escavação no formato e profundidade do projeto", "Carregamento e retirada do material em caçamba", "Entrega da cava pronta para a instalação"],
+    equipment: ["Mini escavadeira Sany SY35U", "Caçamba estacionária", "Caminhão prancha para transporte do equipamento"],
+    benefits: ["Equipamento de pequeno porte para acesso restrito", "Sem quebra de calçada ou estrutura", "Retirada de entulho inclusa", "Cava pronta para o piscineiro", "Equipe e maquinário próprios"],
+    faq: [
+      { q: "A mini escavadeira passa em portão estreito?", a: "A SY35U tem cerca de 1,70 m de largura e passa na maioria dos portões residenciais. Avaliamos o acesso por foto ou visita antes de fechar o serviço." },
+      { q: "Vocês retiram a terra escavada?", a: "Sim. A retirada em caçamba está inclusa no orçamento, com descarte em local autorizado." },
+    ],
+    seoTitle: "Abertura de Piscina em SP | Escavação com Mini Escavadeira | SMS",
+    seoDescription: "Abertura de cava para piscina em São Paulo com mini escavadeira de pequeno porte. Acesso restrito, sem quebra. Orçamento pelo WhatsApp.",
+    seoKeyword: "abertura de piscina em sp",
+    image: "abertura-piscina",
+  },
 ];
 
 export const COVERAGE_AREAS = [
