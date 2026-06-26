@@ -13,6 +13,8 @@ import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
 import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride } from "@/data/locationProfiles";
+import { getRegionHub } from "@/data/regionHubs";
+import { ExpandableText } from "@/components/ui/ExpandableText";
 
 import heroImg from "@/assets/hero-terraplanagem.jpg";
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
