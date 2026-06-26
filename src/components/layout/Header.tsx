@@ -9,9 +9,10 @@ import logoDark from "@/assets/logo-sms-dark.svg";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [deskDrop, setDeskDrop] = useState<"services" | "blog" | null>(null);
+  const [deskDrop, setDeskDrop] = useState<"services" | "blog" | "areas" | null>(null);
   const [mobServices, setMobServices] = useState(false);
   const [mobBlog, setMobBlog] = useState(false);
+  const [mobAreas, setMobAreas] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const drawerRef = useRef<HTMLDivElement>(null);
