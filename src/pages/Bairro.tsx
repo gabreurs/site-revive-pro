@@ -86,17 +86,23 @@ const Bairro = () => {
     );
   }
 
-  const { name, region, path } = bairro;
+  const { name, region, path, slug: bairroSlug } = bairro;
   const isCidade = region.key === "outras";
   const prep = getPreposition(name);
   const phrase = `${prep} ${name}`; // ex: "no Tatuapé"
   const cityLabel = isCidade ? name : "São Paulo";
   const profile = getProfileByName(name, region.key);
+  const override = getLocationOverride(bairroSlug);
 
   const h1 = `Terraplanagem ${phrase} ${profile.h1Suffix}`;
-  const seoTitle = `Terraplanagem ${phrase} | SMS Terraplenagem`;
+  const seoTitle = override.title || `Terraplanagem ${phrase} | SMS Terraplenagem`;
   const seoDesc =
+    override.metaDescription ||
     `Terraplanagem ${phrase} para ${profile.descSuffix}. Limpeza de terreno, demolição, nivelamento, movimentação de terra e preparo de solo com frota própria.`;
+  const firstSentence = override.firstSentence || profile.heroLead(phrase);
+  const introSentence =
+    override.introSentence ||
+    `${name} é uma ${profile.introProfile}. Por isso, a terraplanagem ${phrase} costuma envolver ${profile.workContext}, com cuidado especial no ${profile.accessConcern}.`;
   const canonical = `https://smsterraplenagem.com.br${path}`;
   const whatsappMsg = `Olá! Gostaria de um orçamento de terraplanagem ${phrase}.`;
   const mapsHref = googleMapsLink(name, cityLabel);
