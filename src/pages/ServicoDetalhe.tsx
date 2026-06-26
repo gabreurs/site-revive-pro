@@ -55,8 +55,8 @@ const ServicoDetalhe = () => {
       <section className="relative section-dark">
         <div className="aspect-[16/8] sm:aspect-[16/6] max-h-[420px] w-full overflow-hidden">
           <img
-            src={serviceImages[service.image]}
-            alt={serviceAltTexts[service.image] || `Serviço de ${service.title} em São Paulo`}
+            src={getServiceImage(service.image).src}
+            alt={getServiceImage(service.image).alt}
             className="h-full w-full object-cover"
             loading="eager"
             width={1200}
