@@ -106,7 +106,7 @@ export function Header() {
 
               <Link to="/sobre" className={linkCls("/sobre")}>Sobre nós</Link>
               <Link to="/contato" className={linkCls("/contato")}>Contato</Link>
-              <a href="#areas-atendimento" className="text-xs font-medium text-muted-foreground/70 transition-colors hover:text-primary">Onde atuamos</a>
+              
 
               {/* Blog dropdown */}
               <div className="relative" onMouseEnter={() => setDeskDrop("blog")} onMouseLeave={() => setDeskDrop(null)}>
@@ -230,9 +230,6 @@ export function Header() {
                 <Link to="/contato" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium hover:bg-muted text-foreground">
                   Contato
                 </Link>
-                <a href="#areas-atendimento" onClick={() => setMenuOpen(false)} className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-muted">
-                  Onde atuamos
-                </a>
 
                 {/* Blog accordion */}
                 <div>
