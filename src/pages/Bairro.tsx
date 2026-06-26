@@ -115,7 +115,7 @@ const Bairro = () => {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Início", item: "https://smsterraplenagem.com.br/" },
-      { "@type": "ListItem", position: 2, name: region.label, item: "https://smsterraplenagem.com.br/#areas-atendimento" },
+      { "@type": "ListItem", position: 2, name: region.label },
       { "@type": "ListItem", position: 3, name: `Terraplanagem ${phrase}`, item: canonical },
     ],
   };
