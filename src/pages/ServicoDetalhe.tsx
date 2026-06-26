@@ -169,7 +169,7 @@ const ServicoDetalhe = () => {
                     {otherServices.map((s) => (
                       <li key={s.id}>
                         <Link to={`/servicos/${s.slug}`} className="flex items-center gap-3 rounded-md p-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
-                          <img src={serviceImages[s.image]} alt={`Miniatura do serviço ${s.title}`} className="h-10 w-10 rounded object-cover" loading="lazy" width={40} height={40} />
+                          <img src={getServiceImage(s.image).src} alt={`Miniatura do serviço ${s.title}`} className="h-10 w-10 rounded object-cover" loading="lazy" width={40} height={40} />
                           {s.title}
                         </Link>
                       </li>
