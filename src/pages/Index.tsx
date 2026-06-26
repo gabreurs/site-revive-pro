@@ -56,46 +56,9 @@ const Index = () => {
       />
       <LocalBusinessJsonLd />
 
-      {/* ═══════════ HERO ═══════════ */}
-      <section className="relative overflow-hidden section-dark">
-        <div className="grid lg:grid-cols-2 min-h-[50vh] lg:min-h-[70vh]">
-          {/* Left - Blue panel with text */}
-          <div className="hero-blue-panel relative topo-pattern">
-            <div className="container-custom flex items-center h-full py-12 md:py-20 lg:py-28 lg:pr-16">
-              <AnimatedSection>
-                <h1 className="font-heading text-[1.75rem] font-medium leading-[1.1] text-white md:text-5xl lg:text-[3.25rem]">
-                  Terraplanagem em São Paulo com equipamento próprio
-                </h1>
-                <p className="mt-4 md:mt-6 max-w-xl text-[0.94rem] text-white/80 md:text-lg leading-relaxed">
-                  Movimentação de terra, nivelamento e preparo de terreno para obras comerciais e
-                  industriais em toda a Grande São Paulo. Além disso, contamos com frota própria para garantir agilidade e cumprimento de prazo.
-                </p>
-                <div className="mt-6 md:mt-8 flex flex-col gap-3 sm:flex-row">
-                  <WhatsAppCTA label="Solicitar cotação rápida" locationTag="hero" size="lg"
-                    className="bg-white text-primary hover:bg-white/90 rounded-full px-6 w-full sm:w-auto tap-feedback" icon="message" />
-                  <Button asChild variant="outline" size="lg"
-                    className="gap-2 border-white/30 text-white hover:bg-white/10 hover:text-white rounded-full px-6 w-full sm:w-auto tap-feedback">
-                    <Link to="/servicos">Ver serviços <ArrowRight className="h-4 w-4" /></Link>
-                  </Button>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
+      {/* ═══════════ HERO CAROUSEL ═══════════ */}
+      <HeroCarousel />
 
-          {/* Right - Full image (desktop) */}
-          <div className="relative hidden lg:block">
-            <img src={heroImage} alt="Escavadeira realizando movimentação de terra em obra na Grande São Paulo"
-              className="absolute inset-0 h-full w-full object-cover" loading="eager" width={960} height={720} />
-            <div className="absolute inset-0 bg-gradient-to-r from-[hsl(217,91%,50%)]/20 to-transparent" aria-hidden="true" />
-          </div>
-        </div>
-
-        {/* Mobile image */}
-        <div className="relative h-48 sm:h-56 lg:hidden">
-          <img src={heroImage} alt="Máquinas de terraplanagem em obra na região de São Paulo" className="h-full w-full object-cover" loading="eager" width={800} height={400} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,30%,8%)] to-transparent" aria-hidden="true" />
-        </div>
-      </section>
 
       {/* ═══════════ SERVIÇOS ═══════════ */}
       <section className="section-padding">
