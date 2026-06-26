@@ -123,51 +123,132 @@ const Index = () => {
       </section>
 
       {/* ═══════════ ÁREAS ATENDIDAS ═══════════ */}
-      <section className="section-padding section-neutral">
+      <section id="areas-atendimento" className="section-padding section-neutral">
         <div className="container-custom">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-stretch">
+          <AnimatedSection>
+            <SectionHeading
+              title="Terraplanagem na Grande São Paulo para obras comerciais e industriais"
+              subtitle="A SMS Terraplenagem atende a capital, bairros de São Paulo e municípios da região metropolitana com movimentação de terra, limpeza de terreno, demolição, nivelamento e preparo de solo."
+            />
+          </AnimatedSection>
+
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
             <AnimatedSection direction="left" className="hidden lg:block lg:col-span-5">
-              <div className="h-full min-h-[420px] overflow-hidden rounded-2xl shadow-sm">
-                <img src={heroImage} alt="Região metropolitana de São Paulo onde a SMS Terraplenagem atende" className="h-full w-full object-cover" loading="lazy" width={600} height={800} />
+              <div className="h-full min-h-[520px] overflow-hidden rounded-2xl shadow-sm">
+                <img
+                  src={heroImage}
+                  alt="Frota de terraplanagem da SMS em obra na Grande São Paulo"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  width={600}
+                  height={800}
+                />
               </div>
             </AnimatedSection>
 
             <AnimatedSection direction="right" className="lg:col-span-7">
-              <SectionHeading title="Atendemos toda a Grande São Paulo"
-                subtitle="Capital e região metropolitana. Se tiver dúvida sobre sua cidade, chame no WhatsApp." />
-
-              {/* Desktop: list cards */}
-              <div className="hidden md:block space-y-3">
-                {COVERAGE_AREAS.map((area) => (
-                  <div key={area.region} className="flex items-start gap-4 rounded-lg bg-card border border-border p-4 transition-colors hover:border-primary/20 card-interactive">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                      <MapPin className="h-5 w-5 text-primary" />
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  {
+                    region: "Capital de São Paulo",
+                    text: "Atendimento em bairros das zonas Norte, Sul, Leste, Oeste e Centro para obras urbanas, reformas, demolições, limpeza de terreno e preparação de áreas comerciais.",
+                    links: [
+                      { label: "Terraplanagem no Tatuapé", to: "/terraplanagem-tatuape" },
+                      { label: "Terraplanagem na Mooca", to: "/terraplanagem-mooca" },
+                      { label: "Terraplanagem no Morumbi", to: "/terraplanagem-morumbi" },
+                    ],
+                  },
+                  {
+                    region: "Centro de São Paulo",
+                    text: "Serviços para regiões urbanas consolidadas, com foco em acesso de máquinas, retirada de entulho, adequação de terrenos e obras comerciais.",
+                    links: [
+                      { label: "Terraplanagem na Aclimação", to: "/terraplanagem-aclimacao" },
+                      { label: "Terraplanagem na Bela Vista", to: "/terraplanagem-bela-vista" },
+                      { label: "Terraplanagem no Brás", to: "/terraplanagem-bras" },
+                    ],
+                  },
+                  {
+                    region: "Zona Norte",
+                    text: "Atendimento em bairros e regiões com terrenos urbanos, áreas em expansão, obras comerciais, demolições e movimentação de terra.",
+                    links: [
+                      { label: "Terraplanagem em Santana", to: "/terraplanagem-santana" },
+                      { label: "Terraplanagem em Perus", to: "/terraplanagem-perus" },
+                      { label: "Terraplanagem na Casa Verde", to: "/terraplanagem-casa-verde" },
+                    ],
+                  },
+                  {
+                    region: "Zona Leste",
+                    text: "Terraplanagem, limpeza de terreno e preparo de solo em bairros com grande circulação urbana, obras comerciais e adequação de áreas.",
+                    links: [
+                      { label: "Terraplanagem no Tatuapé", to: "/terraplanagem-tatuape" },
+                      { label: "Terraplanagem na Mooca", to: "/terraplanagem-mooca" },
+                      { label: "Terraplanagem na Penha", to: "/terraplanagem-penha" },
+                    ],
+                  },
+                  {
+                    region: "Região Oeste e Alphaville",
+                    text: "Atendimento para obras corporativas, galpões, estacionamentos, terrenos maiores e áreas empresariais em cidades e regiões da Grande São Paulo.",
+                    links: [
+                      { label: "Terraplanagem em Alphaville", to: "/terraplanagem-alphaville" },
+                      { label: "Terraplanagem em Osasco", to: "/terraplanagem-osasco" },
+                      { label: "Terraplanagem em Barueri", to: "/terraplanagem-barueri" },
+                    ],
+                  },
+                  {
+                    region: "Grande ABC",
+                    text: "Serviços de terraplanagem, demolição, nivelamento e limpeza para obras comerciais e industriais em Santo André, São Bernardo, São Caetano e Diadema.",
+                    links: [
+                      { label: "Terraplanagem em Santo André", to: "/terraplanagem-santo-andre" },
+                      { label: "Terraplanagem em São Bernardo do Campo", to: "/terraplanagem-sao-bernardo-do-campo" },
+                      { label: "Terraplanagem em Diadema", to: "/terraplanagem-diadema" },
+                    ],
+                  },
+                  {
+                    region: "Região Sul",
+                    text: "Atendimento para terrenos, áreas externas, obras comerciais e preparação de solo em bairros e municípios da zona sul e entorno.",
+                    links: [
+                      { label: "Terraplanagem no Ipiranga", to: "/terraplanagem-ipiranga" },
+                      { label: "Terraplanagem em Santo Amaro", to: "/terraplanagem-santo-amaro" },
+                      { label: "Terraplanagem na Vila Mariana", to: "/terraplanagem-vila-mariana" },
+                    ],
+                  },
+                  {
+                    region: "Cidades fora da capital",
+                    text: "Atendimento programado para Guarulhos, Cajamar, Jundiaí, Campinas e demais cidades, com deslocamento de equipe e frota.",
+                    links: [
+                      { label: "Terraplanagem em Guarulhos", to: "/terraplanagem-guarulhos" },
+                      { label: "Terraplanagem em Cajamar", to: "/terraplanagem-cajamar" },
+                      { label: "Terraplanagem em Campinas", to: "/terraplanagem-campinas" },
+                    ],
+                  },
+                ].map((card) => (
+                  <div
+                    key={card.region}
+                    className="flex flex-col rounded-2xl bg-card border border-border p-5 transition-colors hover:border-primary/30 card-interactive"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                        <MapPin className="h-4 w-4 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold text-foreground">{card.region}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">{card.text}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-heading font-semibold text-foreground">{area.region}</h3>
-                      <p className="text-sm text-muted-foreground">{area.areas}</p>
-                    </div>
+                    <ul className="mt-3 flex flex-wrap gap-2">
+                      {card.links.map((l) => (
+                        <li key={l.to}>
+                          <Link
+                            to={l.to}
+                            className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground hover:border-primary/40 hover:text-primary transition-colors"
+                          >
+                            {l.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
-              </div>
-
-              {/* Mobile: accordion */}
-              <div className="md:hidden">
-                <Accordion type="single" collapsible className="w-full">
-                  {COVERAGE_AREAS.map((area, i) => (
-                    <AccordionItem key={i} value={`area-${i}`} className="border-border">
-                      <AccordionTrigger className="text-left text-sm font-semibold hover:text-primary font-heading gap-2">
-                        <span className="flex items-center gap-2">
-                          <MapPin className="h-4 w-4 text-primary shrink-0" />
-                          {area.region}
-                        </span>
-                      </AccordionTrigger>
-                      <AccordionContent className="text-sm text-muted-foreground pl-6">
-                        {area.areas}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
               </div>
 
               <div className="mt-6 md:mt-7">
