@@ -181,8 +181,8 @@ const Bairro = () => {
         eyebrow={`${region.label} · ${cityLabel}`}
         title={h1}
         subtitle={firstSentence}
-        image={heroImg}
-        imageAlt={`Escavadeira em serviço de terraplanagem ${phrase} pela SMS Terraplenagem`}
+        image={pickBairroHero(slug ?? name).src}
+        imageAlt={pickBairroHero(slug ?? name).alt(phrase)}
         breadcrumbs={[
           { label: "Início", to: "/" },
           { label: "Onde atuamos", to: "/onde-atuamos" },
