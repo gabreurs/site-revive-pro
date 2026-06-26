@@ -58,7 +58,7 @@ export default function OndeAtuamos() {
             label="Solicitar orçamento"
             locationTag="onde-atuamos-hero"
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            className={HERO_PRIMARY_CTA}
             icon="message"
           />
         }

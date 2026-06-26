@@ -8,6 +8,7 @@ import { SEOHead } from "@/components/seo/SEOHead";
 import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/layout/PageHero";
 import { SERVICES, COVERAGE_AREAS, BLOG_POSTS } from "@/lib/constants";
+import { HERO_PRIMARY_CTA, SECTION_CTA_LIGHT } from "@/lib/ctaClasses";
 
 import { SERVICE_IMAGE_BY_KEY, HERO_OBRA } from "@/lib/serviceImages";
 
@@ -37,7 +38,7 @@ const Servicos = () => (
           label="Solicitar cotação"
           locationTag="servicos-hero"
           size="lg"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+          className={HERO_PRIMARY_CTA}
           icon="message"
         />
       }
@@ -138,7 +139,7 @@ const Servicos = () => (
           <h2 className="font-heading text-2xl font-medium text-white md:text-4xl">Precisa de um orçamento?</h2>
           <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-base md:text-lg text-white/80">Fale com nossa equipe e receba uma proposta personalizada para sua obra.</p>
           <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <WhatsAppCTA label="Solicitar orçamento" locationTag="servicos-cta" className="bg-white text-primary hover:bg-white/90 rounded-full px-8 w-full sm:w-auto tap-feedback" size="lg" />
+            <WhatsAppCTA label="Solicitar orçamento" locationTag="servicos-cta" className={SECTION_CTA_LIGHT} size="lg" />
             <Link to="/contato" className="text-sm text-white/80 hover:text-white underline underline-offset-4 transition-colors">Formulário de contato</Link>
           </div>
         </AnimatedSection>

@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/layout/PageHero";
 import { SERVICES, BLOG_POSTS } from "@/lib/constants";
+import { HERO_PRIMARY_CTA } from "@/lib/ctaClasses";
 
 import { SERVICE_IMAGE_BY_KEY, getServiceImage } from "@/lib/serviceImages";
 import piscinaVid1 from "@/assets/servicos/abertura-piscina-1.mp4.asset.json";
@@ -68,7 +69,7 @@ const ServicoDetalhe = () => {
             label={`Cotar ${service.title.toLowerCase()}`}
             locationTag={`servico-${service.slug}-hero`}
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-7 py-6 text-sm uppercase tracking-wider tap-feedback"
+            className={HERO_PRIMARY_CTA}
             icon="message"
           />
         }
