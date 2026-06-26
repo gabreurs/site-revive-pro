@@ -14,6 +14,8 @@ import BlogPost from "./pages/BlogPost";
 import BlogCategoria from "./pages/BlogCategoria";
 import PoliticaPrivacidade from "./pages/PoliticaPrivacidade";
 import Bairro from "./pages/Bairro";
+import OndeAtuamos from "./pages/OndeAtuamos";
+import RegiaoHub from "./pages/RegiaoHub";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
