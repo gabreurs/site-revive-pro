@@ -88,11 +88,11 @@ const Bairro = () => {
 
   const { name, region, path, slug: bairroSlug } = bairro;
   const isCidade = region.key === "outras";
+  const override = getLocationOverride(bairroSlug);
   const prep = getPreposition(name);
-  const phrase = `${prep} ${name}`; // ex: "no Tatuapé"
+  const phrase = override.phrase || `${prep} ${name}`; // override resolve ambiguidade (ex: Anhanguera → "em Anhanguera")
   const cityLabel = isCidade ? name : "São Paulo";
   const profile = getProfileByName(name, region.key);
-  const override = getLocationOverride(bairroSlug);
 
   const h1 = `Terraplanagem ${phrase} ${profile.h1Suffix}`;
   const seoTitle = override.title || `Terraplanagem ${phrase} | SMS Terraplenagem`;
