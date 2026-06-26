@@ -1,5 +1,7 @@
 import { useParams, useLocation, Link } from "react-router-dom";
-import { ArrowRight, MapPin, CheckCircle2, Truck, Building2, ShieldCheck, ClipboardList } from "lucide-react";
+import {
+  ArrowRight, MapPin, CheckCircle2, Truck, Building2, ShieldCheck, ClipboardList, ExternalLink,
+} from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,7 +12,57 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
-import { LOCAL_SERVICES, REGION_CONTEXT, buildLocalFaq } from "@/lib/localServices";
+import { getProfileByName, googleMapsLink } from "@/data/locationProfiles";
+
+import heroImg from "@/assets/hero-terraplanagem.jpg";
+import limpezaImg from "@/assets/limpeza-terreno.jpg";
+import demolicaoImg from "@/assets/demolicao.jpg";
+import escavacaoImg from "@/assets/escavacao.jpg";
+import movimentacaoImg from "@/assets/movimentacao-terra.jpg";
+import transporteImg from "@/assets/transporte-locacao.jpg";
+
+type ServiceKey = "terraplanagem" | "limpeza" | "demolicao" | "nivelamento" | "movimentacao" | "preparo";
+
+const SERVICE_META: Record<ServiceKey, { title: string; image: string; linkTo: string; alt: (p: string) => string }> = {
+  terraplanagem: {
+    title: "Terraplanagem",
+    image: heroImg,
+    linkTo: "/servicos",
+    alt: (p) => `Escavadeira em serviço de terraplanagem ${p}`,
+  },
+  limpeza: {
+    title: "Limpeza de terreno",
+    image: limpezaImg,
+    linkTo: "/servicos/limpeza-de-terreno",
+    alt: (p) => `Limpeza de terreno ${p} com remoção de vegetação e entulho`,
+  },
+  demolicao: {
+    title: "Demolição",
+    image: demolicaoImg,
+    linkTo: "/servicos/demolicao",
+    alt: (p) => `Demolição controlada ${p} com escavadeira hidráulica`,
+  },
+  nivelamento: {
+    title: "Nivelamento de terreno",
+    image: movimentacaoImg,
+    linkTo: "/servicos/movimentacao-de-terra-corte-e-aterro",
+    alt: (p) => `Nivelamento de terreno ${p} com motoniveladora e rolo compactador`,
+  },
+  movimentacao: {
+    title: "Movimentação de terra",
+    image: escavacaoImg,
+    linkTo: "/servicos/movimentacao-de-terra-corte-e-aterro",
+    alt: (p) => `Movimentação de terra ${p} com escavadeira e caminhões basculantes`,
+  },
+  preparo: {
+    title: "Preparo de terreno para obra",
+    image: transporteImg,
+    linkTo: "/servicos",
+    alt: (p) => `Preparo de terreno para obra ${p} pela frota da SMS Terraplenagem`,
+  },
+};
+
+const SERVICE_ORDER: ServiceKey[] = ["terraplanagem", "limpeza", "demolicao", "nivelamento", "movimentacao", "preparo"];
 
 const Bairro = () => {
   const { slug: paramSlug } = useParams<{ slug: string }>();
@@ -38,16 +90,17 @@ const Bairro = () => {
   const isCidade = region.key === "outras";
   const prep = getPreposition(name);
   const phrase = `${prep} ${name}`; // ex: "no Tatuapé"
-  const ctx = REGION_CONTEXT[region.key] || "obras em geral";
   const cityLabel = isCidade ? name : "São Paulo";
+  const profile = getProfileByName(name, region.key);
 
-  const h1 = `Terraplanagem ${phrase} com frota própria para obras comerciais e industriais`;
+  const h1 = `Terraplanagem ${phrase} ${profile.h1Suffix}`;
   const seoTitle = `Terraplanagem ${phrase} | SMS Terraplenagem`;
-  const seoDesc = `Terraplanagem ${phrase} para obras comerciais e industriais. Limpeza de terreno, demolição, nivelamento, movimentação de terra e preparo de solo com frota própria.`;
+  const seoDesc =
+    `Terraplanagem ${phrase} para ${profile.descSuffix}. Limpeza de terreno, demolição, nivelamento, movimentação de terra e preparo de solo com frota própria.`;
   const canonical = `https://smsterraplenagem.com.br${path}`;
   const whatsappMsg = `Olá! Gostaria de um orçamento de terraplanagem ${phrase}.`;
-
-  const faq = buildLocalFaq(name, phrase);
+  const mapsHref = googleMapsLink(name, cityLabel);
+  const faq = profile.faq(name, phrase);
   const nearbyBairros = region.bairros.filter((n) => n !== name).slice(0, 12);
 
   // ---------- JSON-LD ----------
@@ -122,7 +175,7 @@ const Bairro = () => {
                   {h1}
                 </h1>
                 <p className="mt-4 text-base md:text-lg text-gray-300">
-                  Terraplanagem {phrase} para obras comerciais e industriais é com a SMS Terraplenagem, empresa com frota própria para movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.
+                  {profile.heroLead(phrase)}
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3">
                   <WhatsAppCTA
@@ -144,8 +197,8 @@ const Bairro = () => {
 
               <div className="hidden lg:block">
                 <img
-                  src={LOCAL_SERVICES[0].image}
-                  alt={`Serviço de terraplanagem ${phrase} realizado pela SMS Terraplenagem`}
+                  src={heroImg}
+                  alt={`Escavadeira em serviço de terraplanagem ${phrase} pela SMS Terraplenagem`}
                   className="w-full h-[360px] object-cover rounded-2xl shadow-2xl"
                   loading="eager"
                 />
@@ -155,22 +208,22 @@ const Bairro = () => {
         </div>
       </section>
 
-      {/* INTRO ESPECÍFICA */}
+      {/* INTRO ESPECÍFICA POR PERFIL */}
       <section className="section-padding">
         <div className="container-custom max-w-3xl">
           <AnimatedSection>
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
-              Terraplanagem {phrase} para obras urbanas, comerciais e industriais
+              Terraplanagem {phrase}: contexto local e tipos de obra atendidos
             </h2>
             <div className="mt-4 space-y-4 text-base text-muted-foreground leading-relaxed">
               <p>
-                Em {ctx.startsWith("obras") ? "regiões" : "áreas"} como {name}, obras de terraplanagem exigem planejamento de acesso, retirada de material, movimentação de máquinas e organização do terreno antes do avanço da construção. A SMS Terraplenagem atua com frota própria para dar mais controle ao cronograma e reduzir atrasos.
+                {name} é uma {profile.introProfile}. Por isso, a terraplanagem {phrase} costuma envolver {profile.workContext}, com cuidado especial no {profile.accessConcern}.
               </p>
               <p>
-                {region.intro} Por isso, cada projeto começa com visita técnica para entender condições do terreno, volume de terra a movimentar e logística de entrada e saída de caminhões — só depois apresentamos o orçamento.
+                {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes — o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
               </p>
               <p>
-                Atendemos {ctx}, com equipe especializada em limpeza de terreno, nivelamento, demolição, escavação e movimentação de terra. Em {name}, isso significa obra entregue no prazo, sem surpresas com remoção de entulho ou compactação mal executada.
+                Cada projeto começa com uma avaliação do terreno e do escopo da obra. Só depois apresentamos o orçamento, com clareza sobre serviços, prazos e logística específicos para {name}.
               </p>
             </div>
 
@@ -179,7 +232,7 @@ const Bairro = () => {
                 "Frota e equipe próprias",
                 "Orçamento rápido pelo WhatsApp",
                 "Descarte de entulho conforme normas",
-                "Atendimento em obras de todos os portes",
+                "Atendimento a obras comerciais e industriais",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-foreground">
                   <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
@@ -191,15 +244,15 @@ const Bairro = () => {
         </div>
       </section>
 
-      {/* ATENDIMENTO + MAPA REPRESENTATIVO */}
+      {/* LOCALIZAÇÃO E ATENDIMENTO (sem mapa fake) */}
       <section className="section-padding section-neutral">
         <div className="container-custom grid gap-8 lg:grid-cols-2 items-start">
           <AnimatedSection>
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
-              Atendimento {phrase} e bairros próximos
+              Atendimento de terraplanagem {phrase} e entorno
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Além de {name}, a SMS Terraplenagem atende regiões próximas {isCidade ? "no entorno" : `da ${region.label}`}, facilitando deslocamento de máquinas, avaliação do terreno e execução dos serviços com mais agilidade.
+              A SMS Terraplenagem atende {name} e bairros próximos {isCidade ? "no entorno" : `da ${region.label}`} em serviços de preparação de terreno, limpeza, demolição, movimentação de terra e nivelamento. Por se tratar de {profile.introProfile.split(",")[0]}, o planejamento da operação considera {profile.accessConcern}.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {nearbyBairros.map((n) => {
@@ -210,48 +263,67 @@ const Bairro = () => {
                     to={`/terraplanagem-${s}`}
                     className="rounded-full border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground hover:border-primary/40 hover:text-primary transition-colors"
                   >
-                    terraplanagem {getLocationPhrase(n)}
+                    Terraplanagem {getLocationPhrase(n)}
                   </Link>
                 );
               })}
             </div>
           </AnimatedSection>
 
-          {/* Mapa estilizado */}
+          {/* Card informativo de localização (sem mapa desenhado) */}
           <AnimatedSection delay={0.1}>
-            <div
-              className="rounded-2xl border border-border bg-card p-6 shadow-sm"
-              role="img"
-              aria-label={`Mapa representativo da área de atendimento da SMS Terraplenagem ${phrase} e bairros próximos`}
-            >
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-                Mapa de atendimento {phrase}
-              </h3>
-              <div className="mt-4 relative h-56 rounded-xl bg-gradient-to-br from-primary/10 via-muted to-primary/5 overflow-hidden">
-                <svg viewBox="0 0 400 220" className="absolute inset-0 w-full h-full opacity-30">
-                  <path d="M0,150 Q100,90 200,120 T400,100 L400,220 L0,220 Z" fill="currentColor" className="text-primary/40" />
-                  <path d="M0,180 Q120,140 240,160 T400,150 L400,220 L0,220 Z" fill="currentColor" className="text-primary/20" />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                  <MapPin className="h-8 w-8 text-primary" />
-                  <p className="mt-2 font-heading text-lg font-bold text-foreground">{name}</p>
-                  <p className="text-xs text-muted-foreground">{region.label} · {cityLabel}</p>
-                </div>
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+              <div className="relative h-48">
+                <img
+                  src={escavacaoImg}
+                  alt={`Terraplanagem e preparo de terreno para obras ${phrase} e região`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
               </div>
-              <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                <div>
-                  <dt className="text-xs text-muted-foreground">Cidade</dt>
-                  <dd className="font-medium text-foreground">{cityLabel}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-muted-foreground">Região</dt>
-                  <dd className="font-medium text-foreground">{region.label}</dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="text-xs text-muted-foreground">Atendimento</dt>
-                  <dd className="font-medium text-foreground">Obras comerciais, industriais e terrenos urbanos</dd>
-                </div>
-              </dl>
+              <div className="p-6">
+                <h3 className="font-heading text-lg font-semibold text-foreground">
+                  Localização e atendimento {phrase}
+                </h3>
+                <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Localidade</dt>
+                    <dd className="font-medium text-foreground">{name}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Cidade</dt>
+                    <dd className="font-medium text-foreground">{cityLabel}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Região</dt>
+                    <dd className="font-medium text-foreground">{region.label}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">Tipo</dt>
+                    <dd className="font-medium text-foreground">{isCidade ? "Cidade" : "Bairro"}</dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-xs text-muted-foreground">Atendimento</dt>
+                    <dd className="font-medium text-foreground">{profile.atendimento}</dd>
+                  </div>
+                  {nearbyBairros.length > 0 && (
+                    <div className="col-span-2">
+                      <dt className="text-xs text-muted-foreground">Bairros próximos</dt>
+                      <dd className="font-medium text-foreground">
+                        {nearbyBairros.slice(0, 6).join(", ")}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+                <a
+                  href={mapsHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-primary/30 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
+                >
+                  Ver {name} no mapa <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </div>
             </div>
           </AnimatedSection>
         </div>
@@ -269,37 +341,39 @@ const Bairro = () => {
           </AnimatedSection>
 
           <div className="mt-10 space-y-12 md:space-y-16">
-            {LOCAL_SERVICES.map((svc, i) => {
+            {SERVICE_ORDER.map((key, i) => {
+              const meta = SERVICE_META[key];
+              const text = profile.service[key](phrase);
               const reverse = i % 2 === 1;
               return (
-                <AnimatedSection key={svc.key} delay={i * 0.05}>
+                <AnimatedSection key={key} delay={i * 0.05}>
                   <article className={`grid gap-6 md:gap-10 md:grid-cols-2 items-center ${reverse ? "md:[&>div:first-child]:order-2" : ""}`}>
                     <div className="overflow-hidden rounded-2xl">
                       <img
-                        src={svc.image}
-                        alt={svc.alt(phrase)}
+                        src={meta.image}
+                        alt={meta.alt(phrase)}
                         className="w-full h-64 md:h-80 object-cover"
                         loading="lazy"
                       />
                     </div>
                     <div>
                       <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
-                        {svc.title} {phrase}
+                        {meta.title} {phrase}
                       </h2>
                       <p className="mt-4 text-muted-foreground leading-relaxed">
-                        {svc.paragraph(name, phrase, ctx)}
+                        {text}
                       </p>
                       <div className="mt-5 flex flex-wrap gap-3">
                         <Link
-                          to={svc.linkTo}
+                          to={meta.linkTo}
                           className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                         >
-                          Saiba mais sobre {svc.title.toLowerCase()} <ArrowRight className="h-4 w-4" />
+                          Saiba mais sobre {meta.title.toLowerCase()} <ArrowRight className="h-4 w-4" />
                         </Link>
                         <WhatsAppCTA
                           label="Orçamento pelo WhatsApp"
-                          message={`Olá! Quero um orçamento de ${svc.title.toLowerCase()} ${phrase}.`}
-                          locationTag={`bairro-${bairro.slug}-${svc.key}`}
+                          message={`Olá! Quero um orçamento de ${meta.title.toLowerCase()} ${phrase}.`}
+                          locationTag={`bairro-${bairro.slug}-${key}`}
                           size="sm"
                           variant="outline"
                           icon="message"
