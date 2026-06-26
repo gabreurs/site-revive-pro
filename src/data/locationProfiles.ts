@@ -7,9 +7,9 @@
 export type ProfileKey =
   | "central"
   | "residential"
-  | "industrial"
+  | "corporativo"
   | "metropolitan"
-  | "peripheral"
+  | "expansao"
   | "interior";
 
 export interface FaqItem { q: string; a: string }
@@ -117,8 +117,8 @@ export const PROFILES: Record<ProfileKey, LocationProfile> = {
   },
 
   // ────────────────────────────────────────────────────────────
-  industrial: {
-    key: "industrial",
+  corporativo: {
+    key: "corporativo",
     h1Suffix: "para obras comerciais, industriais e galpões",
     descSuffix: "obras comerciais, industriais, galpões e áreas corporativas",
     heroLead: (p) =>
@@ -195,8 +195,8 @@ export const PROFILES: Record<ProfileKey, LocationProfile> = {
   },
 
   // ────────────────────────────────────────────────────────────
-  peripheral: {
-    key: "peripheral",
+  expansao: {
+    key: "expansao",
     h1Suffix: "para terrenos em expansão, obras comerciais e residenciais",
     descSuffix: "terrenos em expansão, obras comerciais e residenciais",
     heroLead: (p) =>
@@ -276,7 +276,7 @@ export const PROFILES: Record<ProfileKey, LocationProfile> = {
 // Mapeamento NOME → perfil. Nomes não listados caem em "residential".
 const PROFILE_BY_NAME: Record<string, ProfileKey> = {
   // Central
-  "Aclimação": "central", "Anhanguera": "peripheral", "Bela Vista": "central", "Bom Retiro": "central",
+  "Aclimação": "central", "Anhanguera": "expansao", "Bela Vista": "central", "Bom Retiro": "central",
   "Brás": "central", "Cambuci": "central", "Campos Elíseos": "central", "Consolação": "central",
   "Higienópolis": "central", "Jardins": "central", "Liberdade": "central", "Pacaembu": "central",
   "Pari": "central", "República": "central", "Santa Cecília": "central", "Santa Efigênia": "central",
@@ -301,10 +301,10 @@ const PROFILE_BY_NAME: Record<string, ProfileKey> = {
   "Vila Maria": "residential", "Vila Guilherme": "residential", "Horto Florestal": "residential",
 
   // Industrial / logística
-  "Alphaville": "industrial", "Barueri": "industrial", "Cajamar": "industrial", "Osasco": "industrial",
-  "Cumbica": "industrial", "Aeroporto": "industrial", "Santana de Parnaíba": "industrial",
-  "Jaguaré": "industrial", "Presidente Altino": "industrial", "Vila Jaguara": "industrial",
-  "Vila dos Remédios": "industrial", "Carapicuíba": "industrial",
+  "Alphaville": "corporativo", "Barueri": "corporativo", "Cajamar": "corporativo", "Osasco": "corporativo",
+  "Cumbica": "corporativo", "Aeroporto": "corporativo", "Santana de Parnaíba": "corporativo",
+  "Jaguaré": "corporativo", "Presidente Altino": "corporativo", "Vila Jaguara": "corporativo",
+  "Vila dos Remédios": "corporativo", "Carapicuíba": "corporativo",
 
   // Metropolitana
   "Guarulhos": "metropolitan", "Santo André": "metropolitan", "São Bernardo do Campo": "metropolitan",
@@ -317,34 +317,34 @@ const PROFILE_BY_NAME: Record<string, ProfileKey> = {
   "Itapecerica da Serra": "metropolitan", "Abc Paulista": "metropolitan",
 
   // Peripheral / expansão
-  "Perus": "peripheral", "Pirituba": "peripheral", "Jaraguá": "peripheral", "Brasilândia": "peripheral",
-  "Freguesia do Ó": "peripheral", "Bairro do Limão": "peripheral", "Vila Nova Cachoeirinha": "peripheral",
-  "Lauzane Paulista": "peripheral", "Jardim Peri Peri": "peripheral", "Jaçanã": "peripheral",
-  "Vila Medeiros": "peripheral", "José Bonifácio": "peripheral", "Santa Terezinha": "peripheral",
-  "Cidade Tiradentes": "peripheral", "Itaim Paulista": "peripheral", "Guaianases": "peripheral",
-  "São Miguel Paulista": "peripheral", "São Mateus": "peripheral", "Itaquera": "peripheral",
-  "Cidade Líder": "peripheral", "Cidade Patriarca": "peripheral", "Ermelino Matarazzo": "peripheral",
-  "Arthur Alvim": "peripheral", "Iguatemi": "peripheral", "Americanópolis": "peripheral",
-  "Cangaíba": "peripheral", "Jardim Helena": "peripheral", "Parque do Carmo": "peripheral",
-  "Ponte Rasa": "peripheral", "São Lucas": "peripheral", "Sapopemba": "peripheral",
-  "Vila Curuçá": "peripheral", "Vila Jacuí": "peripheral", "Jardim Aricanduva": "peripheral",
-  "Vila Zelina": "peripheral", "Lajeado": "peripheral",
-  "Parelheiros": "peripheral", "Marsilac": "peripheral", "Grajaú": "peripheral", "M'Boi Mirim": "peripheral",
-  "Capão Redondo": "peripheral", "Campo Limpo": "peripheral", "Jardim Ângela": "peripheral",
-  "Jardim São Luís": "peripheral", "Cidade Ademar": "peripheral", "Cidade Dutra": "peripheral",
-  "Cidade Avelino": "peripheral", "Capela do Socorro": "peripheral", "Pedreira": "peripheral",
-  "Heliópolis": "peripheral", "Paraisópolis": "peripheral", "Jurubatuba": "peripheral",
-  "Interlagos": "peripheral", "Água Funda": "peripheral", "Cursino": "peripheral",
-  "Sacomã": "peripheral", "Vila Andrade": "peripheral", "Vila Mascote": "peripheral",
-  "Vila das Mêrces": "peripheral", "Vila Santa Catarina": "peripheral", "Panamby": "peripheral",
-  "Real Parque": "peripheral", "São Judas": "peripheral", "São Rafael": "peripheral",
-  "Alto da Boa Vista": "peripheral", "Chácara Flora": "peripheral", "Chácara Santo Antônio": "peripheral",
-  "Granja Julieta": "peripheral", "Horto do Ipê": "peripheral", "Jardim Ipanema": "peripheral",
-  "Jardim Marajoara": "peripheral", "Jardim Paulista": "peripheral", "Jardim Sul": "peripheral",
-  "Campo Grande": "peripheral", "Santo Amaro": "residential",
-  "Sumaré": "peripheral", "Rio Pequeno": "peripheral", "Caxingui": "peripheral",
-  "Raposo Tavares": "peripheral", "Quitaúna": "peripheral", "Parque dos Príncipes": "peripheral",
-  "Parque São Domingos": "peripheral", "Amador Bueno": "peripheral", "Vila São Francisco": "peripheral",
+  "Perus": "expansao", "Pirituba": "expansao", "Jaraguá": "expansao", "Brasilândia": "expansao",
+  "Freguesia do Ó": "expansao", "Bairro do Limão": "expansao", "Vila Nova Cachoeirinha": "expansao",
+  "Lauzane Paulista": "expansao", "Jardim Peri Peri": "expansao", "Jaçanã": "expansao",
+  "Vila Medeiros": "expansao", "José Bonifácio": "expansao", "Santa Terezinha": "expansao",
+  "Cidade Tiradentes": "expansao", "Itaim Paulista": "expansao", "Guaianases": "expansao",
+  "São Miguel Paulista": "expansao", "São Mateus": "expansao", "Itaquera": "expansao",
+  "Cidade Líder": "expansao", "Cidade Patriarca": "expansao", "Ermelino Matarazzo": "expansao",
+  "Arthur Alvim": "expansao", "Iguatemi": "expansao", "Americanópolis": "expansao",
+  "Cangaíba": "expansao", "Jardim Helena": "expansao", "Parque do Carmo": "expansao",
+  "Ponte Rasa": "expansao", "São Lucas": "expansao", "Sapopemba": "expansao",
+  "Vila Curuçá": "expansao", "Vila Jacuí": "expansao", "Jardim Aricanduva": "expansao",
+  "Vila Zelina": "expansao", "Lajeado": "expansao",
+  "Parelheiros": "expansao", "Marsilac": "expansao", "Grajaú": "expansao", "M'Boi Mirim": "expansao",
+  "Capão Redondo": "expansao", "Campo Limpo": "expansao", "Jardim Ângela": "expansao",
+  "Jardim São Luís": "expansao", "Cidade Ademar": "expansao", "Cidade Dutra": "expansao",
+  "Cidade Avelino": "expansao", "Capela do Socorro": "expansao", "Pedreira": "expansao",
+  "Heliópolis": "expansao", "Paraisópolis": "expansao", "Jurubatuba": "expansao",
+  "Interlagos": "expansao", "Água Funda": "expansao", "Cursino": "expansao",
+  "Sacomã": "expansao", "Vila Andrade": "expansao", "Vila Mascote": "expansao",
+  "Vila das Mêrces": "expansao", "Vila Santa Catarina": "expansao", "Panamby": "expansao",
+  "Real Parque": "expansao", "São Judas": "expansao", "São Rafael": "expansao",
+  "Alto da Boa Vista": "expansao", "Chácara Flora": "expansao", "Chácara Santo Antônio": "expansao",
+  "Granja Julieta": "expansao", "Horto do Ipê": "expansao", "Jardim Ipanema": "expansao",
+  "Jardim Marajoara": "expansao", "Jardim Paulista": "expansao", "Jardim Sul": "expansao",
+  "Campo Grande": "expansao", "Santo Amaro": "residential",
+  "Sumaré": "expansao", "Rio Pequeno": "expansao", "Caxingui": "expansao",
+  "Raposo Tavares": "expansao", "Quitaúna": "expansao", "Parque dos Príncipes": "expansao",
+  "Parque São Domingos": "expansao", "Amador Bueno": "expansao", "Vila São Francisco": "expansao",
 
   // Interior / litoral / fora da Grande SP
   "Campinas": "interior", "Jundiaí": "interior", "Sorocaba": "interior", "Indaiatuba": "interior",
@@ -357,7 +357,7 @@ const PROFILE_BY_NAME: Record<string, ProfileKey> = {
   // Litoral
   "Santos": "interior", "Praia Grande": "interior", "Guarujá": "interior", "São Vicente": "interior",
   "Itanhaém": "interior", "Mongaguá": "interior", "Peruíbe": "interior", "Vila Caiçara": "interior",
-  "Serra da Cantareira": "peripheral",
+  "Serra da Cantareira": "expansao",
 };
 
 export function getProfileByName(name: string, regionKey?: string): LocationProfile {
