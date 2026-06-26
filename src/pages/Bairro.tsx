@@ -353,7 +353,7 @@ const Bairro = () => {
           <div className="mt-10 space-y-12 md:space-y-16">
             {SERVICE_ORDER.map((key, i) => {
               const meta = SERVICE_META[key];
-              const text = profile.service[key](phrase);
+              const text = getServiceText(profile, key, bairro.slug, phrase);
               const reverse = i % 2 === 1;
               return (
                 <AnimatedSection key={key} delay={i * 0.05}>
@@ -373,15 +373,22 @@ const Bairro = () => {
                       <p className="mt-4 text-muted-foreground leading-relaxed">
                         {text}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-3">
+                      <p className="mt-3 text-sm text-muted-foreground">
+                        Veja mais sobre{" "}
+                        <Link to={meta.linkTo} className="text-primary underline-offset-4 hover:underline">
+                          {meta.title.toLowerCase()} {phrase}
+                        </Link>{" "}
+                        ou peça um orçamento direto pelo WhatsApp.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-3">
                         <Link
                           to={meta.linkTo}
-                          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                          className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
                         >
-                          Saiba mais sobre {meta.title.toLowerCase()} <ArrowRight className="h-4 w-4" />
+                          Ver serviço <ArrowRight className="h-4 w-4" />
                         </Link>
                         <WhatsAppCTA
-                          label="Orçamento pelo WhatsApp"
+                          label="Pedir orçamento"
                           message={`Olá! Quero um orçamento de ${meta.title.toLowerCase()} ${phrase}.`}
                           locationTag={`bairro-${bairro.slug}-${key}`}
                           size="sm"
