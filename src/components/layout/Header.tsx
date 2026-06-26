@@ -203,8 +203,8 @@ export function Header() {
         </AnimatePresence>
       </header>
 
-      {/* spacer — header is fixed */}
-      <div aria-hidden="true" style={{ height: scrolled ? 64 : 80 }} />
+      {/* spacer — header is fixed (constant height to avoid CLS) */}
+      <div aria-hidden="true" style={{ height: 80 }} />
     </>
   );
 }
