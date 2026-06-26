@@ -59,7 +59,7 @@ export function WhatsAppPopup() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-36 right-4 z-50 w-72 overflow-hidden rounded-xl bg-[#1a2332] shadow-2xl border border-white/10 md:bottom-24 md:right-6 md:w-80"
+            className="fixed bottom-36 right-4 z-50 w-72 overflow-hidden rounded-md bg-[#1a2332] shadow-2xl border border-white/10 md:bottom-24 md:right-6 md:w-80"
           >
             <div className="flex items-center justify-between bg-whatsapp px-4 py-3">
               <div className="flex items-center gap-2">

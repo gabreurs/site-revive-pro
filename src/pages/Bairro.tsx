@@ -207,7 +207,7 @@ const Bairro = () => {
                 <img
                   src={heroImg}
                   alt={`Escavadeira em serviço de terraplanagem ${phrase} pela SMS Terraplenagem`}
-                  className="w-full h-[360px] object-cover rounded-2xl shadow-2xl"
+                  className="w-full h-[360px] object-cover rounded-md shadow-2xl"
                   loading="eager"
                 />
               </div>
@@ -285,7 +285,7 @@ const Bairro = () => {
 
           {/* Card informativo de localização (sem mapa desenhado) */}
           <AnimatedSection delay={0.1}>
-            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+            <div className="overflow-hidden rounded-md border border-border bg-card shadow-sm">
               <div className="relative h-48">
                 <img
                   src={SERVICE_IMAGE_BY_KEY["movimentacao-terra"].src}
@@ -361,7 +361,7 @@ const Bairro = () => {
               return (
                 <AnimatedSection key={key} delay={i * 0.05}>
                   <article className={`grid gap-6 md:gap-10 md:grid-cols-2 items-center ${reverse ? "md:[&>div:first-child]:order-2" : ""}`}>
-                    <div className="overflow-hidden rounded-2xl">
+                    <div className="overflow-hidden rounded-md">
                       <img
                         src={meta.image}
                         alt={meta.alt(phrase)}
@@ -432,7 +432,7 @@ const Bairro = () => {
                 "Atendimento a obras comerciais e industriais",
                 "Caminhões basculantes próprios para retirada de material",
               ].map((p) => (
-                <li key={p} className="flex items-start gap-2 text-sm text-gray-200 bg-white/5 border border-white/10 rounded-xl p-3">
+                <li key={p} className="flex items-start gap-2 text-sm text-gray-200 bg-white/5 border border-white/10 rounded-md p-3">
                   <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" /> {p}
                 </li>
               ))}
@@ -460,7 +460,7 @@ const Bairro = () => {
               { t: "Terrenos urbanos", d: "Limpeza, demolição e regularização de lotes urbanos antes da construção." },
               { t: "Reformas com demolição", d: "Demolição controlada e retirada de entulho em reformas de prédios e instalações." },
             ].map((o) => (
-              <div key={o.t} className="rounded-2xl border border-border bg-card p-5">
+              <div key={o.t} className="rounded-md border border-border bg-card p-5">
                 <div className="flex items-center gap-2 text-primary">
                   <Building2 className="h-4 w-4" />
                   <h3 className="font-heading font-semibold text-foreground">{o.t}</h3>
@@ -491,7 +491,7 @@ const Bairro = () => {
               "Programação da equipe e da frota",
               "Execução da terraplanagem, limpeza, demolição ou nivelamento",
             ].map((step, i) => (
-              <li key={step} className="rounded-2xl border border-border bg-card p-5">
+              <li key={step} className="rounded-md border border-border bg-card p-5">
                 <div className="flex items-center gap-2 text-primary">
                   <ClipboardList className="h-4 w-4" />
                   <span className="text-xs font-semibold uppercase tracking-wide">Passo {i + 1}</span>

@@ -108,7 +108,7 @@ export default function RegiaoHub() {
                 <Link
                   key={s.id}
                   to={`/servicos/${s.slug}`}
-                  className="flex items-center justify-between rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                  className="flex items-center justify-between rounded-md border border-border bg-card px-4 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:text-primary"
                 >
                   {s.title}
                   <ArrowRight className="h-4 w-4 text-muted-foreground" />

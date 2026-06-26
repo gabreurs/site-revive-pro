@@ -151,7 +151,7 @@ const Index = () => {
             {/* Imagem real lateral — sticky para não deixar buraco vazio */}
             <AnimatedSection direction="left" className="hidden lg:block lg:col-span-5">
               <div className="lg:sticky lg:top-24">
-                <div className="overflow-hidden rounded-2xl shadow-sm">
+                <div className="overflow-hidden rounded-md shadow-sm">
                   <img
                     src={heroImage}
                     alt="Escavadeira da SMS Terraplenagem em operação de movimentação de terra em obra na Grande São Paulo"
@@ -161,7 +161,7 @@ const Index = () => {
                     height={900}
                   />
                 </div>
-                <div className="mt-5 rounded-2xl border border-border bg-card p-5">
+                <div className="mt-5 rounded-md border border-border bg-card p-5">
                   <p className="text-sm text-muted-foreground">
                     Frota própria, equipe treinada e atendimento programado em <strong className="text-foreground">capital, Grande São Paulo e interior</strong>. Solicite avaliação para a sua obra.
                   </p>
@@ -174,7 +174,7 @@ const Index = () => {
 
             {/* Imagem mobile — banner horizontal */}
             <div className="lg:hidden">
-              <div className="overflow-hidden rounded-2xl shadow-sm">
+              <div className="overflow-hidden rounded-md shadow-sm">
                 <img
                   src={heroImage}
                   alt="Escavadeira da SMS Terraplenagem em operação de movimentação de terra em obra na Grande São Paulo"
@@ -264,7 +264,7 @@ const Index = () => {
                 ].map((card) => (
                   <div
                     key={card.region}
-                    className="group relative flex flex-col rounded-2xl bg-card border border-border p-6 transition-all hover:border-primary/40 hover:shadow-md"
+                    className="group relative flex flex-col rounded-md bg-card border border-border p-6 transition-all hover:border-primary/40 hover:shadow-md"
                   >
                     <span aria-hidden="true" className="absolute left-6 top-0 h-1 w-10 -translate-y-1/2 rounded-full bg-primary" />
                     <h3 className="font-heading text-base font-semibold text-foreground">{card.region}</h3>
@@ -309,7 +309,7 @@ const Index = () => {
                 { src: videoObra1.url, poster: videoObra1Poster.url, label: "Obra registrada — frota SMS em canteiro" },
                 { src: videoObra2.url, poster: videoObra2Poster.url, label: "Obra registrada — equipamento SMS em ação" },
               ].map((v) => (
-                <figure key={v.src} className="relative overflow-hidden rounded-xl border border-border bg-muted/40 shadow-sm">
+                <figure key={v.src} className="relative overflow-hidden rounded-md border border-border bg-muted/40 shadow-sm">
                   <div className="aspect-video w-full">
                     <video
                       className="h-full w-full object-cover"
