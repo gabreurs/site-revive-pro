@@ -12,7 +12,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { COMPANY_INFO, WHATSAPP_NUMBER } from "@/lib/constants";
 import { findBairroBySlug, slugifyBairro } from "@/lib/bairros";
 import { getPreposition, getLocationPhrase } from "@/lib/preposition";
-import { getProfileByName, googleMapsLink } from "@/data/locationProfiles";
+import { getProfileByName, googleMapsLink, getServiceText, getLocationOverride } from "@/data/locationProfiles";
 
 import heroImg from "@/assets/hero-terraplanagem.jpg";
 import limpezaImg from "@/assets/limpeza-terreno.jpg";
@@ -86,17 +86,23 @@ const Bairro = () => {
     );
   }
 
-  const { name, region, path } = bairro;
+  const { name, region, path, slug: bairroSlug } = bairro;
   const isCidade = region.key === "outras";
   const prep = getPreposition(name);
   const phrase = `${prep} ${name}`; // ex: "no Tatuapé"
   const cityLabel = isCidade ? name : "São Paulo";
   const profile = getProfileByName(name, region.key);
+  const override = getLocationOverride(bairroSlug);
 
   const h1 = `Terraplanagem ${phrase} ${profile.h1Suffix}`;
-  const seoTitle = `Terraplanagem ${phrase} | SMS Terraplenagem`;
+  const seoTitle = override.title || `Terraplanagem ${phrase} | SMS Terraplenagem`;
   const seoDesc =
+    override.metaDescription ||
     `Terraplanagem ${phrase} para ${profile.descSuffix}. Limpeza de terreno, demolição, nivelamento, movimentação de terra e preparo de solo com frota própria.`;
+  const firstSentence = override.firstSentence || profile.heroLead(phrase);
+  const introSentence =
+    override.introSentence ||
+    `${name} é uma ${profile.introProfile}. Por isso, a terraplanagem ${phrase} costuma envolver ${profile.workContext}, com cuidado especial no ${profile.accessConcern}.`;
   const canonical = `https://smsterraplenagem.com.br${path}`;
   const whatsappMsg = `Olá! Gostaria de um orçamento de terraplanagem ${phrase}.`;
   const mapsHref = googleMapsLink(name, cityLabel);
@@ -175,7 +181,7 @@ const Bairro = () => {
                   {h1}
                 </h1>
                 <p className="mt-4 text-base md:text-lg text-gray-300">
-                  {profile.heroLead(phrase)}
+                  {firstSentence}
                 </p>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3">
                   <WhatsAppCTA
@@ -216,15 +222,19 @@ const Bairro = () => {
               Terraplanagem {phrase}: contexto local e tipos de obra atendidos
             </h2>
             <div className="mt-4 space-y-4 text-base text-muted-foreground leading-relaxed">
-              <p>
-                {name} é uma {profile.introProfile}. Por isso, a terraplanagem {phrase} costuma envolver {profile.workContext}, com cuidado especial no {profile.accessConcern}.
-              </p>
+              <p>{introSentence}</p>
               <p>
                 {region.intro} A SMS Terraplenagem atua nessa região com frota própria — escavadeira, retroescavadeira, motoniveladora, rolo compactador e caminhões basculantes — o que reduz dependência de terceiros e dá mais previsibilidade ao cronograma da obra {phrase}.
               </p>
-              <p>
-                Cada projeto começa com uma avaliação do terreno e do escopo da obra. Só depois apresentamos o orçamento, com clareza sobre serviços, prazos e logística específicos para {name}.
-              </p>
+              <details className="group rounded-xl border border-border bg-card/40 p-4">
+                <summary className="cursor-pointer text-sm font-medium text-primary list-none flex items-center justify-between">
+                  <span>Continuar lendo sobre o atendimento {phrase}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-open:rotate-90" />
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed">
+                  Cada projeto começa com uma avaliação do terreno e do escopo da obra. Só depois apresentamos o orçamento, com clareza sobre serviços, prazos e logística específicos para {name}. Em obras que pedem mais de uma frente — por exemplo, demolição seguida de limpeza e movimentação de terra —, a equipe organiza a sequência para não deixar o canteiro parado entre etapas.
+                </p>
+              </details>
             </div>
 
             <ul className="mt-6 grid gap-2 sm:grid-cols-2">
@@ -343,7 +353,7 @@ const Bairro = () => {
           <div className="mt-10 space-y-12 md:space-y-16">
             {SERVICE_ORDER.map((key, i) => {
               const meta = SERVICE_META[key];
-              const text = profile.service[key](phrase);
+              const text = getServiceText(profile, key, bairro.slug, phrase);
               const reverse = i % 2 === 1;
               return (
                 <AnimatedSection key={key} delay={i * 0.05}>
@@ -363,15 +373,22 @@ const Bairro = () => {
                       <p className="mt-4 text-muted-foreground leading-relaxed">
                         {text}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-3">
+                      <p className="mt-3 text-sm text-muted-foreground">
+                        Veja mais sobre{" "}
+                        <Link to={meta.linkTo} className="text-primary underline-offset-4 hover:underline">
+                          {meta.title.toLowerCase()} {phrase}
+                        </Link>{" "}
+                        ou peça um orçamento direto pelo WhatsApp.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-3">
                         <Link
                           to={meta.linkTo}
-                          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                          className="inline-flex items-center gap-1 rounded-full border border-primary/30 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
                         >
-                          Saiba mais sobre {meta.title.toLowerCase()} <ArrowRight className="h-4 w-4" />
+                          Ver serviço <ArrowRight className="h-4 w-4" />
                         </Link>
                         <WhatsAppCTA
-                          label="Orçamento pelo WhatsApp"
+                          label="Pedir orçamento"
                           message={`Olá! Quero um orçamento de ${meta.title.toLowerCase()} ${phrase}.`}
                           locationTag={`bairro-${bairro.slug}-${key}`}
                           size="sm"

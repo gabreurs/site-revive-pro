@@ -372,3 +372,213 @@ export function googleMapsLink(name: string, city: string): string {
   const q = encodeURIComponent(`${name} ${city}`);
   return `https://www.google.com/maps/search/?api=1&query=${q}`;
 }
+
+// ────────────────────────────────────────────────────────────
+// VARIANTES POR SERVIÇO — quebram a duplicação dentro de cada perfil.
+// Escolha determinística por slug (mesmo slug sempre vê o mesmo texto),
+// porém slugs diferentes do mesmo perfil tendem a ver textos diferentes.
+
+type ServiceKeyLocal = "terraplanagem" | "limpeza" | "demolicao" | "nivelamento" | "movimentacao" | "preparo";
+type ServiceFnLocal = (phrase: string) => string;
+
+const SERVICE_VARIANTS_B: Record<ProfileKey, Record<ServiceKeyLocal, ServiceFnLocal>> = {
+  central: {
+    terraplanagem: (p) => `Fazer terraplanagem ${p} costuma exigir mais planejamento do que máquina. A SMS combina escavadeira de porte adequado, retirada de entulho em caçambas e cronograma compatível com a rotina do entorno — comércio, residências e via pública dividindo o mesmo quarteirão. O serviço entrega o terreno regularizado, com cota e compactação prontas para fundação, piso ou nova estrutura.`,
+    limpeza: (p) => `Em lotes do Centro, a limpeza de terreno ${p} resolve um problema clássico: imóvel parado, vegetação crescida, resto de reforma e materiais largados que travam qualquer evolução da obra. A SMS chega com equipe, faz a triagem, retira o que precisa sair e devolve o terreno limpo, com descarte em local autorizado e sem confusão com a vizinhança.`,
+    demolicao: (p) => `A demolição ${p} normalmente é parcial — uma laje interna, um anexo, um muro, um trecho de prédio em retrofit. A SMS atua com escavadeira hidráulica e rompedor, isola a frente de trabalho, controla poeira com umidificação e remove o entulho em caçambas no mesmo dia, mantendo a operação dentro do horário permitido para a região.`,
+    nivelamento: (p) => `Para nivelamento de terreno ${p} em pequenos lotes urbanos, o ganho vem da máquina certa: motoniveladora compacta, rolo adequado ao espaço e equipe que entende o projeto. A SMS entrega a cota prevista, com compactação que segura piso, estacionamento ou base de fundação sem recalque depois.`,
+    movimentacao: (p) => `Movimentar terra ${p} significa girar caminhão em rua movimentada, respeitar janelas de carga e descarga e evitar interferir no fluxo. A SMS opera com frota própria de basculantes, programa as viagens e mantém o canteiro alimentado sem acumular caçamba na calçada.`,
+    preparo: (p) => `O preparo de terreno para obra ${p} junta tudo o que vem antes da fundação: limpar, demolir o que precisa sair, escavar, cortar, aterrar e nivelar. Em lotes centrais, a vantagem é coordenar essas frentes na mesma equipe — menos terceiros, menos repasse, mais previsibilidade.`,
+  },
+  residential: {
+    terraplanagem: (p) => `A terraplanagem ${p} costuma atender obra residencial ou comercial em rua movimentada, com vizinhos próximos e cronograma curto. A SMS dimensiona a máquina ao lote, coordena entrada e saída de caminhão e executa corte, aterro e regularização sem deixar a obra parada esperando equipamento.`,
+    limpeza: (p) => `Limpeza de terreno ${p} costuma vir antes da topografia ou da fundação. A SMS retira vegetação, entulho de reforma anterior e materiais soltos, organiza o canteiro e entrega o lote pronto para a próxima etapa, com descarte conforme as normas.`,
+    demolicao: (p) => `A demolição ${p} atende casa antiga, comércio fechado ou pequeno galpão que vai dar lugar a um empreendimento novo. O serviço é planejado para reduzir ruído, poeira e impacto na vizinhança, com escavadeira hidráulica equipada com rompedor e retirada de entulho organizada.`,
+    nivelamento: (p) => `Nivelamento de terreno ${p} aparece quando o lote vai receber fundação, piso de estacionamento, área externa comercial ou base para galpão. A SMS entrega a cota e a compactação previstas em projeto, evitando recalque e retrabalho na fundação.`,
+    movimentacao: (p) => `A movimentação de terra ${p} é executada com escavadeira e caminhão basculante próprios. Isso permite ajustar o ritmo das viagens ao cronograma da obra, mantendo o canteiro produtivo e evitando paradas por falta de equipamento.`,
+    preparo: (p) => `Preparar terreno para obra ${p} envolve limpeza, demolição quando necessária, escavação, corte, aterro e nivelamento. A SMS coordena essas frentes com frota própria, entregando a área pronta para fundação, piso ou estrutura do empreendimento.`,
+  },
+  corporativo: {
+    terraplanagem: (p) => `A terraplanagem ${p} costuma atender áreas maiores — galpão, condomínio empresarial, estacionamento corporativo, pátio de manobra. A SMS atua com frota de diferentes portes, abre frentes simultâneas e mantém ritmo de corte, aterro e regularização compatível com o cronograma do empreendimento.`,
+    limpeza: (p) => `Limpeza de terreno ${p} antes de uma implantação corporativa exige equipe e volume. A SMS dimensiona caçambas, máquinas e turnos conforme a área, retira vegetação e restos de estruturas antigas e devolve o lote pronto para topografia e marcação.`,
+    demolicao: (p) => `A demolição ${p} normalmente envolve galpão antigo, muro perimetral, laje externa ou estrutura que vai dar lugar a uma nova implantação. O trabalho é controlado, com escavadeira hidráulica e rompedor, isolamento da área e retirada de entulho dentro da janela combinada com o gestor.`,
+    nivelamento: (p) => `Nivelamento de terreno ${p} é etapa crítica em piso de galpão, pátio e base de estrutura metálica. A SMS entrega cota e compactação previstas em projeto, com motoniveladora, trator de esteira e rolo, evitando recalque no piso industrial.`,
+    movimentacao: (p) => `Movimentação de terra ${p} em obra corporativa exige cronograma firme: rota planejada, janela de descarga definida, ponto de descarte combinado. A frota própria da SMS dá previsibilidade ao corte, ao aterro e à retirada do material.`,
+    preparo: (p) => `O preparo de terreno para obra ${p} costuma envolver áreas amplas, condomínios e empreendimentos com maior exigência de planejamento. A SMS organiza limpeza, demolição, movimentação de terra e nivelamento como frentes coordenadas, entregando a área pronta para a próxima etapa.`,
+  },
+  metropolitan: {
+    terraplanagem: (p) => `A terraplanagem ${p} atende obra comercial e industrial em municípios da Grande SP. A SMS desloca equipe e frota com cronograma definido, opera em terreno médio e grande e executa corte, aterro, regularização e compactação conforme o projeto, mantendo previsibilidade para a construtora.`,
+    limpeza: (p) => `Limpeza de terreno ${p} costuma envolver lote parado, vegetação alta e material acumulado. A SMS dimensiona equipe e caçambas conforme o volume, retira o que precisa sair e descarta conforme as normas, deixando a área pronta para a próxima etapa.`,
+    demolicao: (p) => `A demolição ${p} atende imóvel antigo, galpão ou pequena estrutura comercial que vai dar lugar a um novo empreendimento. Trabalhamos com escavadeira hidráulica e rompedor, isolamento da frente, retirada de entulho e limpeza final do terreno.`,
+    nivelamento: (p) => `Nivelamento de terreno ${p} prepara fundação, piso de galpão, estacionamento ou base de estrutura. A SMS entrega cota e compactação previstas em projeto, dando segurança ao piso e à fundação do empreendimento.`,
+    movimentacao: (p) => `Movimentação de terra ${p} envolve corte, aterro e transporte em volume variável. A frota própria de basculantes sustenta o ritmo, com rota e ponto de descarte planejados — fator que pesa especialmente em obras fora da capital.`,
+    preparo: (p) => `O preparo de terreno para obra ${p} reúne limpeza, demolição, escavação, corte, aterro, compactação e nivelamento. A SMS coordena as frentes com equipe deslocada, entregando o lote pronto para fundação, piso ou estrutura.`,
+  },
+  expansao: {
+    terraplanagem: (p) => `Terraplanagem ${p} envolve, com frequência, terreno maior e relevo irregular. A SMS atua com escavadeira, retroescavadeira, motoniveladora, rolo e basculantes próprios, fazendo corte, aterro e regularização dentro do volume previsto em projeto, com acesso planejado por vias secundárias.`,
+    limpeza: (p) => `Limpeza de terreno ${p} costuma ser o primeiro passo para destravar a obra: vegetação alta, entulho, materiais largados. A SMS executa a retirada com equipe e descarte conforme as normas, entregando o lote pronto para topografia ou movimentação de terra.`,
+    demolicao: (p) => `A demolição ${p} atende pequena construção, muro, laje, galpão antigo ou estrutura que precisa sair antes da nova obra. O trabalho é controlado, com escavadeira hidráulica e rompedor, isolamento e retirada de entulho organizada.`,
+    nivelamento: (p) => `Nivelamento de terreno ${p} prepara a área para fundação, piso ou base de estrutura. Em lotes maiores e relevo irregular típico de áreas em expansão, a SMS entrega cota e compactação previstas em projeto com motoniveladora, trator e rolo.`,
+    movimentacao: (p) => `Movimentação de terra ${p} costuma envolver volume médio ou grande, com corte e aterro para nivelar lote amplo. A frota própria da SMS sustenta o ritmo, com rota e ponto de descarte planejados.`,
+    preparo: (p) => `O preparo de terreno para obra ${p} reúne limpeza, demolição quando necessária, escavação, corte, aterro, compactação e nivelamento. Em áreas em expansão, é etapa que destrava lote parado e dá início real à obra.`,
+  },
+  interior: {
+    terraplanagem: (p) => `Terraplanagem ${p} é atendida com deslocamento programado de equipe e frota. A SMS opera em terreno médio e grande, executa corte, aterro, regularização e compactação conforme o projeto e ajusta a sequência das frentes ao cronograma do empreendimento.`,
+    limpeza: (p) => `Limpeza de terreno ${p} envolve, em geral, lote maior e área parada há tempos. A SMS dimensiona equipe e caçambas conforme o volume, faz a retirada e o descarte conforme as normas, deixando o terreno pronto para a próxima etapa.`,
+    demolicao: (p) => `A demolição ${p} atende imóvel antigo, galpão ou pequena estrutura, com escavadeira hidráulica e rompedor, isolamento da área e retirada de entulho, em cronograma compatível com o deslocamento da equipe até a cidade.`,
+    nivelamento: (p) => `Nivelamento de terreno ${p} prepara fundação, piso de galpão, estacionamento ou base de estrutura, com cota e compactação previstas em projeto.`,
+    movimentacao: (p) => `Movimentação de terra ${p} envolve corte, aterro e transporte em volume variável, com rota e ponto de descarte planejados — operação que costuma pesar no cronograma de obra fora da capital.`,
+    preparo: (p) => `Preparo de terreno para obra ${p} reúne limpeza, demolição, escavação, corte, aterro, compactação e nivelamento, com a equipe deslocada para o local e cronograma combinado com a construtora.`,
+  },
+};
+
+function hashString(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+export function getServiceText(profile: LocationProfile, key: ServiceKeyLocal, slug: string, phrase: string): string {
+  const variantIndex = hashString(slug) % 2;
+  if (variantIndex === 0) return profile.service[key](phrase);
+  return SERVICE_VARIANTS_B[profile.key][key](phrase);
+}
+
+// ────────────────────────────────────────────────────────────
+// OVERRIDES POR LOCALIDADE — title, meta description e primeira frase
+// únicos para slugs prioritários (alvo de Ads/SEO). Slugs ausentes
+// recebem fallback gerado pelo perfil.
+
+export interface LocationOverride {
+  title?: string;
+  metaDescription?: string;
+  firstSentence?: string;
+  introSentence?: string;
+}
+
+export const LOCATION_OVERRIDES: Record<string, LocationOverride> = {
+  "tatuape": {
+    title: "Terraplanagem no Tatuapé para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem no Tatuapé para obras comerciais e terrenos urbanos. Limpeza de terreno, demolição, movimentação de terra e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem no Tatuapé para obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "O Tatuapé concentra obras comerciais, prédios residenciais e estacionamentos em ruas de fluxo intenso, o que exige planejamento de acesso de máquinas e janelas de operação bem combinadas.",
+  },
+  "mooca": {
+    title: "Terraplanagem na Mooca para Obras e Reformas | SMS",
+    metaDescription: "Terraplanagem na Mooca para obras comerciais, reformas e terrenos urbanos. Limpeza, demolição, nivelamento e movimentação de terra com frota própria.",
+    firstSentence: "Terraplanagem na Mooca para obras comerciais, reformas e preparação de terrenos urbanos é com a SMS Terraplenagem, que atende a região com frota própria para limpeza de terreno, demolição, nivelamento e movimentação de terra.",
+    introSentence: "A Mooca mistura galpões antigos, prédios residenciais novos e comércio consolidado, e muita obra começa por demolição, retirada de entulho e regularização do lote.",
+  },
+  "aclimacao": {
+    title: "Terraplanagem na Aclimação | SMS Terraplenagem",
+    metaDescription: "Terraplanagem na Aclimação para reformas, obras comerciais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem na Aclimação para obras comerciais, reformas e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "A Aclimação é uma região central com prédios antigos, lotes compactos e obras que costumam envolver retrofit, demolição pontual e retirada controlada de entulho.",
+  },
+  "alphaville": {
+    title: "Terraplanagem em Alphaville para Galpões e Empresas | SMS",
+    metaDescription: "Terraplanagem em Alphaville para obras comerciais, condomínios empresariais, galpões e áreas corporativas. Limpeza, demolição, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Alphaville para obras comerciais, condomínios empresariais, galpões e áreas corporativas é com a SMS Terraplenagem, que atua com frota própria em limpeza de terreno, movimentação de terra, nivelamento, demolição e preparo de solo.",
+    introSentence: "Alphaville reúne empreendimentos corporativos, condomínios empresariais e terrenos maiores, com obras que pedem cronograma operacional firme e logística de caminhões bem planejada.",
+  },
+  "perus": {
+    title: "Terraplanagem em Perus com Frota Própria | SMS Terraplenagem",
+    metaDescription: "Terraplanagem em Perus para terrenos, obras comerciais e áreas em expansão urbana. Movimentação de terra, limpeza, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Perus para terrenos, obras comerciais e áreas em expansão urbana é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Perus tem terrenos maiores e áreas em expansão, com obras que normalmente começam por limpeza do lote, corte, aterro e preparação do solo antes da construção.",
+  },
+  "cajamar": {
+    title: "Terraplanagem em Cajamar para Galpões e Indústria | SMS",
+    metaDescription: "Terraplanagem em Cajamar para galpões, áreas industriais e obras corporativas. Limpeza, movimentação de terra, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Cajamar para galpões, áreas industriais e obras corporativas é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Cajamar concentra galpões logísticos, condomínios industriais e terrenos amplos, com obras que demandam frota de porte e cronograma de caminhões bem dimensionado.",
+  },
+  "osasco": {
+    title: "Terraplanagem em Osasco para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem em Osasco para obras comerciais, industriais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Osasco para obras comerciais, industriais e terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Osasco une eixos comerciais movimentados, áreas industriais e bairros residenciais consolidados, com obras que pedem planejamento de acesso e logística de caminhões.",
+  },
+  "bras": {
+    title: "Terraplanagem no Brás para Obras e Demolição | SMS",
+    metaDescription: "Terraplanagem no Brás para obras comerciais, reformas e demolição. Limpeza de terreno, movimentação de terra e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem no Brás para obras comerciais, reformas e demolição controlada é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento e preparo de solo.",
+    introSentence: "O Brás concentra galpões antigos, lojas e prédios em retrofit, com obras que costumam começar por demolição parcial e retirada de entulho.",
+  },
+  "anhanguera": {
+    title: "Terraplanagem no Anhanguera para Terrenos Amplos | SMS",
+    metaDescription: "Terraplanagem no Anhanguera para terrenos maiores, obras comerciais e áreas em expansão. Limpeza, movimentação de terra, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem no Anhanguera para terrenos maiores, obras comerciais e áreas em expansão é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Anhanguera tem terrenos amplos, áreas em expansão e obras que costumam pedir corte, aterro e preparação completa do solo antes da construção.",
+  },
+  "santo-andre": {
+    title: "Terraplanagem em Santo André para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem em Santo André para obras comerciais e industriais no ABC. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Santo André para obras comerciais e industriais no ABC é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Santo André tem polos industriais, eixos comerciais e bairros residenciais consolidados, com obras que pedem deslocamento de frota e cronograma firme.",
+  },
+  "sao-bernardo-do-campo": {
+    title: "Terraplanagem em São Bernardo do Campo | SMS",
+    metaDescription: "Terraplanagem em São Bernardo do Campo para obras comerciais e industriais. Limpeza, demolição, movimentação de terra, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em São Bernardo do Campo para obras comerciais e industriais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "São Bernardo concentra indústria, galpões logísticos e empreendimentos comerciais, com obras que pedem planejamento de caminhões e equipe deslocada.",
+  },
+  "diadema": {
+    title: "Terraplanagem em Diadema para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem em Diadema para obras comerciais e industriais. Limpeza, demolição, movimentação de terra, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Diadema para obras comerciais e industriais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Diadema mistura indústria, comércio e bairros densos, com obras que pedem planejamento de acesso e cronograma firme de caminhões.",
+  },
+  "barueri": {
+    title: "Terraplanagem em Barueri para Empresas e Galpões | SMS",
+    metaDescription: "Terraplanagem em Barueri para galpões, áreas corporativas e obras comerciais. Limpeza, movimentação de terra, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Barueri para galpões, áreas corporativas e obras comerciais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Barueri concentra parques empresariais, condomínios corporativos e áreas industriais, com obras que pedem cronograma operacional firme.",
+  },
+  "guarulhos": {
+    title: "Terraplanagem em Guarulhos para Indústria e Comércio | SMS",
+    metaDescription: "Terraplanagem em Guarulhos para obras industriais, galpões e terrenos comerciais. Limpeza, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem em Guarulhos para obras industriais, galpões e terrenos comerciais é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Guarulhos tem forte presença industrial, áreas logísticas e bairros consolidados, com obras que pedem frota de porte e cronograma alinhado.",
+  },
+  "bela-vista": {
+    title: "Terraplanagem na Bela Vista para Reformas | SMS",
+    metaDescription: "Terraplanagem na Bela Vista para reformas, retrofits e obras comerciais. Limpeza, demolição controlada, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem na Bela Vista para reformas, retrofits e obras comerciais em terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "A Bela Vista é uma região central, com prédios antigos, lotes compactos e obras que tipicamente envolvem retrofit e demolição parcial.",
+  },
+  "liberdade": {
+    title: "Terraplanagem na Liberdade para Obras Urbanas | SMS",
+    metaDescription: "Terraplanagem na Liberdade para reformas, obras comerciais e adequação de terrenos urbanos. Limpeza, demolição, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem na Liberdade para reformas, obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "A Liberdade reúne comércio intenso, prédios antigos e lotes compactos, com obras que pedem acesso planejado de máquinas e retirada controlada de entulho.",
+  },
+  "morumbi": {
+    title: "Terraplanagem no Morumbi para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem no Morumbi para obras comerciais, residenciais de alto padrão e adequação de terrenos. Limpeza, demolição, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem no Morumbi para obras comerciais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "O Morumbi tem terrenos com relevo, obras de alto padrão e empreendimentos comerciais, com necessidade frequente de corte, aterro e contenção.",
+  },
+  "butanta": {
+    title: "Terraplanagem no Butantã para Obras Urbanas | SMS",
+    metaDescription: "Terraplanagem no Butantã para obras comerciais, prediais e terrenos urbanos. Limpeza, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem no Butantã para obras comerciais, prediais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "O Butantã mistura áreas residenciais consolidadas, eixos comerciais e novos empreendimentos, com obras que pedem planejamento de acesso de máquinas.",
+  },
+  "santana": {
+    title: "Terraplanagem em Santana para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem em Santana para obras comerciais, prediais e terrenos urbanos na Zona Norte. Limpeza, demolição, nivelamento e preparo de solo.",
+    firstSentence: "Terraplanagem em Santana para obras comerciais, prediais e adequação de terrenos urbanos na Zona Norte é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "Santana é polo comercial e residencial da Zona Norte, com obras que pedem cronograma firme e logística de caminhões em vias movimentadas.",
+  },
+  "ipiranga": {
+    title: "Terraplanagem no Ipiranga para Obras Comerciais | SMS",
+    metaDescription: "Terraplanagem no Ipiranga para obras comerciais, prediais e terrenos urbanos. Limpeza de terreno, demolição, nivelamento e preparo de solo com frota própria.",
+    firstSentence: "Terraplanagem no Ipiranga para obras comerciais, prediais e adequação de terrenos urbanos é com a SMS Terraplenagem, que atua com frota própria em movimentação de terra, limpeza de terreno, nivelamento, demolição e preparo de solo.",
+    introSentence: "O Ipiranga mistura áreas comerciais, galpões antigos em retrofit e prédios residenciais novos, com obras frequentes de demolição parcial e preparação de lote.",
+  },
+};
+
+export function getLocationOverride(slug: string): LocationOverride {
+  return LOCATION_OVERRIDES[slug] || {};
+}
