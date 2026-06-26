@@ -39,7 +39,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <IntroLoader />
         <ScrollToTop />
+        <GlobalReveal />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/servicos" element={<Servicos />} />
