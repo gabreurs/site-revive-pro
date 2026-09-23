@@ -1,73 +1,24 @@
-# Welcome to your Lovable project
+# Site Revive Pro
 
-## Project info
+Recentemente eu fiz um site para um cliente que eu fiquei dois dias construindo ele com várias páginas, né? Aí boa parte das páginas duplicadas, basicamente duplicar a estrutura. Era home, né? Página home, a tela inicial ali, né? Aí dentro dessa tela inicial a gente tem, eu até tenho essa home aqui subido na internet. Eu subi ela e com o backup que eu consegui, eu consegui recuperar só a home. Mesmo assim, eu tinha feito alterações nessa home, eu tinha feito mudanças, né? Que eu não vou conseguir te passar porque não foi a forma como o meu sócio prototipou. Ele prototipou no Figma de outra maneira e eu subi de uma maneira diferente, que foi mais viável lá na hora da construção. Só que eu perdi, né? Então eu só consegui recuperar a versão antiga, que é o que o meu sócio fez e é essa home que eu tenho. Bom, mas daí da home a gente tinha o quem somos, a página de contato, a gente tinha a página de serviços, a gente tinha também, é... Acho que era isso. Home, serviços sobre nós e contatos, né? Só que aí dentro da página de serviços, a gente tinha diversas outras páginas relacionadas ao serviço, que é uma empresa de terraplanagem, né? É o nome da empresa SMS Terraplenagem. E... eram tipo limpeza de terreno, perfuração, demolição, tal tal tal, tudo dentro de serviços. Tinha a página de serviço, você clicava, essa página realmente existia ali, só que ela tinha sub-itens, né? Que eram um de fato serviços. E dentro da página de serviços também, sempre sempre trabalhando com blocos ali, com sessões, ligando aquela página aos serviços em questão, né? Sempre com bastante botão pro WhatsApp, pras pessoas que entrarem do ADS já conseguirem entrar em contato com a empresa direto ali, sempre focando bastante no ADS, no CEO do site e tal. Agora o que eu preciso é que você construa um prompt pra mim, na verdade, não um prompt, eu vou pegar e vou copiar esse texto aqui e eu vou enviar direto pro Lovable. Lovable, você vai criar pra mim um site baseado nesse aqui. Vou te mandar o link. É isso, parceiro. Só que aí com tudo o que tinha antes, né? Página de serviço, subpáginas, tudo funcional. https://smsterraplenagem.com.br/
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+This project was built with [Lovable](https://lovable.dev).
 
-## How can I edit this code?
+## Build with Lovable
 
-There are several ways of editing your application.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/59d7974b-a8cb-4ca0-8fee-65f150ddc60a).
 
-**Use Lovable**
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Development
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
